@@ -10,9 +10,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0 
+- task: NodeTool@0
   inputs:
-    versionSpec: 12.0
+    versionSpec: '6.x'
 
 - task: Npm@1
   inputs:
@@ -31,3 +31,13 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(f27eb659-e8f9-4ab4-9156-ae8401cae510)'
+    appType: 'webAppLinux'
+    WebAppName: 'shavesandfades'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+    RuntimeStack: 'NODE|12-lts'
+    StartupCommand: 'npm start'
