@@ -12,7 +12,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '6.x'
+    versionSpec: '12.x'
 
 - task: Npm@1
   inputs:
@@ -40,4 +40,4 @@ steps:
     WebAppName: 'shavesandfades'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     RuntimeStack: 'NODE|12-lts'
-    StartupCommand: 'npm start'
+    StartupCommand: 'node ./bin/www'
