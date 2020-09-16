@@ -14,7 +14,9 @@ steps:
   inputs:
     command: 'install'
 
-- task: Npm@1
+- task: AzureRmWebAppDeployment@4
   inputs:
-    command: 'custom'
-    customCommand: 'start'
+    ConnectionType: 'AzureRM'
+    appType: 'webAppLinux'
+    WebAppName: 'shavesandfades'
+    packageForLinux: '$(System.DefaultWorkingDirectory)'
