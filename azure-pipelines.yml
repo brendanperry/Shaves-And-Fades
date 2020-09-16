@@ -14,9 +14,8 @@ steps:
   inputs:
     command: 'install'
 
-- task: AzureRmWebAppDeployment@4
+- task: PublishBuildArtifacts@1
   inputs:
-    ConnectionType: 'AzureRM'
-    appType: 'webAppLinux'
-    WebAppName: 'shavesandfades'
-    packageForLinux: '$(System.DefaultWorkingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
