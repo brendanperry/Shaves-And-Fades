@@ -38,6 +38,6 @@ steps:
     azureSubscription: 'Azure subscription 1(f27eb659-e8f9-4ab4-9156-ae8401cae510)'
     appType: 'webAppLinux'
     WebAppName: 'shavesandfades'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     RuntimeStack: 'NODE|12-lts'
     StartupCommand: 'npm start'
