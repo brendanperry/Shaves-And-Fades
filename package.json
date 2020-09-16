@@ -2,7 +2,7 @@
   "name": "cs372-project-fall-2020",
   "version": "0.0.0",
   "private": true,
-  "manin": "index.js",
+  "main": "app.js",
   "engines": {
     "node": ">=10.0.0",
     "npm": ">=6.0.0"
