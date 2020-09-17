@@ -24,6 +24,6 @@ module.exports = {
     },
 
     testFunction: function(a, b) {
-        return a - b
+        return a + b
     }
 }
