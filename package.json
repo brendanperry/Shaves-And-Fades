@@ -4,7 +4,7 @@
   "private": true,
   "main": "app.js",
   "engines": {
-    "node": ">=10.0.0",
+    "node": ">=12.18.3",
     "npm": ">=6.0.0"
   },
   "scripts": {
@@ -18,8 +18,5 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mongodb": "~3.6.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.4"
   }
 }
