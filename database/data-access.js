@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient
 
 module.exports = {
-    GetData: function() {
+    getData: function() {
 
         // I made a new mongodb local database by typing the command mongod
         // then in another terminal window, I used the command mongo to access the server
@@ -21,5 +21,9 @@ module.exports = {
         // })
 
         console.log("yay data")
+    },
+
+    testFunction: function(a, b) {
+        return a - b
     }
 }

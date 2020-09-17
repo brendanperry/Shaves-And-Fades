@@ -6,7 +6,7 @@ var data = require('../database/data-access')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
-  data.GetData()
+  data.getData()
 });
 
 module.exports = router;
