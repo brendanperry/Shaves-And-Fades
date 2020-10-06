@@ -1,16 +1,78 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>This is working I guess :)</p>
-    <p>You can run the server with npm start</p>
-    <p>Then you view the site at localhost:3000</p>
-    <p>When you make changes to the site, just reload to see it update.</p>
-    <p>Testing deployment process</p>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type ="text/css" href="stylesheets/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <title>Shaves and Fades</title>
+</head>
+<body>
+    <div id="menu-mobile">
+      <nav class="navbar navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+              <a class="menu-mobile-item" href="#place">Welcome</a>
+              <a class="menu-mobile-item" href="#place">About Us</a>
+              <a class="menu-mobile-item" href="#place">Services</a>
+              <a class="menu-mobile-item" href="#place">Appointments</a>
+              <a class="menu-mobile-item" href="#place">Find Us</a>
+              <a class="menu-mobile-item" href="#place">Follow Us</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div id="welcome">
+      <div id="logo-container">
+        <img src="../images/logo.png" alt="logo" id="logo" />
+      </div>
+
+      <div id="menu">
+        <a href="#place">Welcome</a>
+        <a href="#place">About Us</a>
+        <a href="#place">Services</a>
+        <a href="#place">Appointments</a>
+        <a href="#place">Find Us</a>
+        <a href="#place">Follow Us</a>
+      </div>
+
+      <h1>Your real deal local barber shop</h1>
+
+      <h2>Warsaw, IN</h2>
+    </div>
+
+    <div id="about">
+      <div id="about-description">
+        <h1>Look Good. Feel Good.</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac est in neque mattis blandit. Morbi luctus turpis sed odio efficitur, a sodales elit ultrices. Etiam ac libero ac nunc eleifend sagittis. Quisque eu semper magna. Mauris venenatis eget lectus ac fermentum. Proin venenatis tincidunt viverra. Duis pulvinar ligula arcu, eu laoreet ipsum convallis ut. Ut eget mattis quam. Vivamus mauris lacus, auctor sed interdum sed, tempor eu sapien.</p>
+        <p>Ut ac est in neque mattis blandit. </p>
+        <div id="about-appointment-button">
+          <a class="btn btn-primary" href="appointment">Make your appointment today!</a>
+        </div>
+        <p>Phasellus rhoncus nulla erat, vel malesuada ante consectetur at. Nunc non nunc laoreet, pharetra mi non, convallis quam. Praesent fermentum, sapien quis sollicitudin tempor, nunc nunc blandit risus, quis gravida neque enim in ex. Morbi suscipit facilisis urna, porta pretium quam varius in. Aliquam erat volutpat.</p>
+
+        <img src="../images/car.jpeg" alt="car" width=400 />
+      </div>
+      <div id="about-information">
+        <h4>Location</h4>
+        <p>808 North Somewhere</p>
+        <p>Warsaw, IN 46580</p>
+
+        <h4>Hours</h4>
+        <p>Open 6 days a week by</p>
+        <p>ONLINE APPOINTMENT ONLY</p>
+
+        <h4>Shop</h4>
+        <p>View our selection of products</p>
+        <p>Available for purchase in store</p>
+      </div>
+    </div>
+</body>
 </html>
