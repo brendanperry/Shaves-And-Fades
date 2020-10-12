@@ -4,6 +4,11 @@ html, body {
   padding: 0;
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 62.5%;
 }
 
 #logo-container {
@@ -14,7 +19,7 @@ html, body {
   width: 200px;
   margin: 40px;
   padding-bottom: 100px;
-  margin-bottom: 200px;
+  margin-bottom: 150px;
 }
 
 #menu-mobile {
@@ -22,7 +27,7 @@ html, body {
 }
 
 .menu-mobile-item {
-  font-size: 16px;
+  font-size: 1.6rem;
   text-transform: uppercase;
   font-weight: bold;
   color: rgba(0, 0, 0, .75);
@@ -43,7 +48,7 @@ html, body {
 
 #menu a {
   padding: 25px;
-  font-size: 16px;
+  font-size: 1.6rem;
   text-transform: uppercase;
   font-weight: bold;
   color: rgba(255, 255, 255, .75);
@@ -58,21 +63,22 @@ html, body {
   text-align: center;
   margin: 50px;
   font-weight: bold;
-  font-size: calc(40px + 1vw);
+  font-size: calc(4rem + 1vw);
   color: white;
   text-transform: uppercase;
 }
 
 #welcome h2 {
+  margin-bottom: 2rem;
   text-align: center;
   color: white;
   text-transform: uppercase;
-  font-size: calc(10px + 1vw);
+  font-size: calc(1rem + 1vw);
 }
 
 #welcome {
   background-image: url("../images/background.jpg");
-  padding: 75px;
+  padding: 25px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -82,9 +88,11 @@ html, body {
 #about {
   display: flex;
   flex-wrap: wrap;
+  align-self: center;
+  justify-content: center;
   margin: 50px;
   font-weight: 300;
-  color: rgba(0, 0, 0, .5);
+  color: rgba(0, 0, 0, .75);
 }
 
 #about h1 {
@@ -102,7 +110,9 @@ html, body {
 
 #about-description {
   padding: 20px;
-  flex: 2;
+  flex: 1;
+  min-width: 250px;
+  font-size: 1.6rem;
 }
 
 #about-description a {
@@ -110,14 +120,37 @@ html, body {
   margin: 10px;
 }
 
+#about-image {
+  width: 50%;
+  min-width: 200px;
+  max-width: 400px;
+}
+
 #about-information {
   padding: 20px;
-  flex: 1;
+  font-size: 1.6rem;
+}
+
+#about-information h4 {
+  font-size: 1.8rem;
 }
 
 #about-appointment-button {
   text-align: center;
   margin: 20px;
+}
+
+#about-appointment-button a {
+  font-size: 1.6rem;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: #D8B03F !important;
+    border-color: #D8B03F !important;
 }
 
 @media only screen and (max-width: 600px) {
@@ -128,7 +161,6 @@ html, body {
   #menu-mobile {
     display: block;
   }
-
 }
 
 #services {
@@ -144,15 +176,17 @@ html, body {
 }
 
 #services-description {
-  font-size: 20px;
+  font-size: 2rem;
   padding: 50px;
   padding-top: 0px;
   padding-bottom: 50px;
   text-align: center;
 }
+
 #services h4 {
   color: rgba(0, 0, 0, .75);
 }
+
 #header {
   display: flex;
   flex-wrap: wrap;
@@ -163,7 +197,7 @@ html, body {
   padding-top: 50px;
   padding-bottom: 10px;
   font-weight: 300;
-  color: rgba(0, 0, 0, .5);
+  color: rgba(0, 0, 0, .75);
   background-color:rgb(212,175,55);
   text-align: center;
 }
@@ -173,8 +207,6 @@ html, body {
   flex: 2;
   color: rgba(0, 0, 0, 1);
 }
-
-
 
 #thick {
   font-weight: 500;
@@ -234,10 +266,10 @@ html, body {
   #column-mobile{
     display: block;
   }
-
 }
 
 #bottom {
+  font-size: 1.6rem;
   display: flex;
   flex-wrap: wrap;
   padding: 50px;
@@ -257,7 +289,7 @@ html, body {
 
 .gallery{
   text-align: center;
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: bold;
   padding-left: 23%;
   padding-right: 23%;
