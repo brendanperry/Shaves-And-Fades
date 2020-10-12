@@ -168,25 +168,26 @@ html {
   flex-wrap: wrap;
   margin-top: 0px;
   font-weight: bold;
-  color: rgba(0, 0, 0, .65);
-  background-color:rgb(212,175,55);
+  color: rgba(0, 0, 0, .55);
+  background-color:white;
+  justify-content: center;
+  align-items: center;
+}
+
+#services-description {
+  font-size: 20px;
+  padding: 50px;
+  padding-top: 0px;
+  padding-bottom: 50px;
+  margin-top: 0px;
+  text-align: center;
   justify-content: center;
   align-items: center;
 
 }
-
-#services-description {
-  font-size: 2rem;
-  padding: 50px;
-  padding-top: 0px;
-  padding-bottom: 50px;
-  text-align: center;
-}
-
 #services h4 {
   color: rgba(0, 0, 0, .75);
 }
-
 #header {
   display: flex;
   flex-wrap: wrap;
@@ -195,10 +196,10 @@ html {
   padding: 30px;
   padding-left: 10px;
   padding-top: 50px;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
   font-weight: 300;
-  color: rgba(0, 0, 0, .75);
-  background-color:rgb(212,175,55);
+  color: rgba(0, 0, 0, .5);
+  background-color:white;
   text-align: center;
 }
 
@@ -208,9 +209,30 @@ html {
   color: rgba(0, 0, 0, 1);
 }
 
+#column p {
+  margin-bottom: 30px;
+}
+#column #thick {
+  margin-bottom: 0px;
+}
+
+#column-mobile p {
+  margin-bottom: 50px;
+}
+#column-mobile #thick {
+  margin-bottom: 0px;
+}
+
+#column-mobile-horizontal p {
+  margin-bottom: 40px;
+}
+#column-mobile-horizontal #thick {
+  margin-bottom: 0px;
+}
+
 #thick {
   font-weight: 500;
-  color: rgba(0, 0, 0, 1);
+  color: rgba(0, 0, 0, .65);
   margin-bottom: 0px;
 }
 
@@ -244,15 +266,35 @@ html {
   
 }
 #column {
-  margin: 20px;
+  margin: 40px;
 }
 #column-mobile{
+  padding: 20px;
+  display: none;
+}
+#column-mobile-horizontal{
   display: none;
 }
 
 
 
-@media only screen and (max-width: 600px) {
+
+
+@media only screen and (max-width: 1665px) {
+
+  #column {
+    display: none;
+  }
+  #column-mobile {
+    display: none;
+  }
+  #column-mobile-horizontal{
+    display: block;
+  }
+
+}
+
+@media only screen and (max-width: 865px) {
   #location-gps {
     display: none;
   }
@@ -263,13 +305,17 @@ html {
   #column {
     display: none;
   }
+  #column-mobile-horizontal{
+    display: none;
+  }
   #column-mobile{
     display: block;
+    margin-bottom: 100px;
   }
+
 }
 
 #bottom {
-  font-size: 1.6rem;
   display: flex;
   flex-wrap: wrap;
   padding: 50px;
@@ -281,6 +327,7 @@ html {
   text-decoration: none;
 }
 #bottomcolumn {
+  font-size: 15px;
   text-align: center;
 }
 #copyright {
@@ -289,7 +336,7 @@ html {
 
 .gallery{
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 22px;
   font-weight: bold;
   padding-left: 23%;
   padding-right: 23%;
