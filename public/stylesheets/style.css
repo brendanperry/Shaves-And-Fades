@@ -342,15 +342,19 @@ html {
   padding-right: 23%;
   padding-top: 40px;
   padding-bottom: 100px;
-  background-color:rgb(212,175,55);
+  background-color:rgba(212, 175, 55);
+}
+.card-deck{
+  margin: 15px;
 }
 
 .card-img-top{
   width: 100%;
-  height: 13vw;
-  object-fit: cover;
+  height: 100%;
 }
 
-.card-deck{
-  margin: 15px;
+#productHeader{
+  font-size: 32px;
+  margin-top: 40px;
+  text-align: center;
 }
