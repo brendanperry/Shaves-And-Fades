@@ -7,6 +7,8 @@
     <link rel="stylesheet" type ="text/css" href="stylesheets/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -16,14 +18,14 @@
     <div id="menu-mobile">
       <nav class="navbar navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon" style="font-size: 2rem !important;"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-              <a class="menu-mobile-item" href="#place">Welcome</a>
+              <a class="menu-mobile-item" href="#welcome">Welcome</a>
               <a class="menu-mobile-item" href="#about">About Us</a>
-              <a class="menu-mobile-item" href="#header">Services</a>
-              <a class="menu-mobile-item" href="#about">Appointments</a>
+              <a class="menu-mobile-item" href="#services">Services</a>
+              <a class="menu-mobile-item" href="#nowhere">Appointments</a>
               <a class="menu-mobile-item" href="#location">Find Us</a>
               <a class="menu-mobile-item" href="#follow">Follow Us</a>
           </div>
@@ -32,14 +34,14 @@
     </div>
     <div id="welcome">
       <div id="logo-container">
-        <img src="../images/logo.png" alt="logo" id="logo" />
+        <img src="../images/Shaves_And_Fades_Logo.PNG" alt="logo" id="logo" />
       </div>
 
       <div id="menu">
-        <a href="#place">Welcome</a>
+        <a href="#welcome">Welcome</a>
         <a href="#about">About Us</a>
-        <a href="#header">Services</a>
-        <a href="#about">Appointments</a>
+        <a href="#services">Services</a>
+        <a href="#nowhere">Appointments</a>
         <a href="#location">Find Us</a>
         <a href="#follow">Follow Us</a>
       </div>
@@ -48,33 +50,67 @@
 
       <h2>Warsaw, IN</h2>
     </div>
-
-    <div id="about">
-      <div id="about-description">
-        <h1>Look Good. Feel Good.</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac est in neque mattis blandit. Morbi luctus turpis sed odio efficitur, a sodales elit ultrices. Etiam ac libero ac nunc eleifend sagittis. Quisque eu semper magna. Mauris venenatis eget lectus ac fermentum. Proin venenatis tincidunt viverra. Duis pulvinar ligula arcu, eu laoreet ipsum convallis ut. Ut eget mattis quam. Vivamus mauris lacus, auctor sed interdum sed, tempor eu sapien.</p>
-        <p>Ut ac est in neque mattis blandit. </p>
-        <div id="about-appointment-button">
-          <a class="btn btn-primary" href="appointment">Make your appointment today!</a>
+    <div id="about-container">
+      <div id="about">
+        <div id="about-description">
+          <h1>Look Your Best. Feel Your Best.</h1>
+          <p>Shaves and Fades is a top-tier barber shop dedicated to detailing and customizing hairstyles. We offer a wide variety of cuts and styles to fit you. We have confidence in our services and strongly believe that you will too.</p>
+          <div id="button-container">
+            <div class="button">
+              <a href="appointment">MAKE APPOINTMENT</a>
+            </div>
+          </div>
         </div>
-        <p>Phasellus rhoncus nulla erat, vel malesuada ante consectetur at. Nunc non nunc laoreet, pharetra mi non, convallis quam. Praesent fermentum, sapien quis sollicitudin tempor, nunc nunc blandit risus, quis gravida neque enim in ex. Morbi suscipit facilisis urna, porta pretium quam varius in. Aliquam erat volutpat.</p>
-        
-        <div style="text-align: center; width: 100%">
-          <img src="../images/car.jpeg" alt="car" id="about-image" />
+        <div id="about-information">
+          <h4 id="location-side-bar">
+            <a href="#location">Location
+              <span class="material-icons link-icon">link</span>
+            </a>
+          </h4>
+          <span>2200 E Winona Ave Ln</span><br />
+          <span>Warsaw, IN 46580</span><br />
+
+          <h4 id="hours-side-bar">Hours</h4>
+          <span><b>Monday - Friday:</b></span><br />
+          <span>Online Appointment Only</span><br />
+          <span><b>Saturday:</b> Walk In</span><br />
+          <span><b>Sunday:</b> Closed</span><br />
+
+          <h4 id="shop-side-bar">
+            <a href="products">Shop
+              <span class="material-icons link-icon">link</span>
+            </a>
+          </h4>
+          <span>View our selection of products</span><br />
+          <span>Available for purchase in store</span><br />
         </div>
       </div>
-      <div id="about-information">
-        <h4>Location</h4>
-        <p>808 North Somewhere</p>
-        <p>Warsaw, IN 46580</p>
+    </div>
+    <div id="review-container">
+      <div id="review-section">
+        <p style="text-align: center; font-size: 1.6rem;">Don't just take it from us. Here are what real customers have to say.</p>
+        <div id="review-cards"> 
+          <div class="card review-card">
+            <div class="card-body">
+              <h5 class="card-title review-card-title">Cole F.</h5>
+              <p class="card-text">Best fade I’ve gotten in a long time.</p>
+            </div>
+          </div>
 
-        <h4>Hours</h4>
-        <p>Open 6 days a week by</p>
-        <p>ONLINE APPOINTMENT ONLY</p>
+          <div class="card review-card">
+            <div class="card-body">
+              <h5 class="card-title review-card-title">Junior V.</h5>
+              <p class="card-text">Best fades in the county!</p>
+            </div>
+          </div>
 
-        <h4>Shop</h4>
-        <p>View our selection of products</p>
-        <p>Available for purchase in store</p>
+          <div class="card review-card">
+            <div class="card-body">
+              <h5 class="card-title review-card-title">Tejas B.</h5>
+              <p class="card-text">Excellent experience! The best in Warsaw!</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
