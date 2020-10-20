@@ -10,7 +10,6 @@ const inputFolder = './public/images/';
 const processedFolder = './public/compressed-images/';
 const fs = require('fs');
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const { AUTO } = require('jimp');
