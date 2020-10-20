@@ -5,8 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var favicon = require('serve-favicon');
 
+var Jimp = require("jimp");
+const inputFolder = './public/images/';
+const processedFolder = './public/compressed-images/';
+const fs = require('fs');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { AUTO } = require('jimp');
 
 var app = express();
 
@@ -38,5 +44,29 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// By default, all .png and .jpg images will be scaled to 1920xY and compressed to 70%.
+// If you want an image to be skipped, make the file extension in all caps (.PNG instead of .png)
+// Images smaller than 1080p may want to be skipped (the logo)
+
+fs.readdir(inputFolder, (err, files) => {
+  files.forEach(file => {
+    if (file.endsWith(".jpg") || file.endsWith(".png")) {
+      resizeImage(file);
+    }
+  });
+});
+
+function resizeImage(fileName) {
+  Jimp.read(inputFolder + fileName).then(function (image) {
+    if(image.scale)
+    image
+        .resize(1920, Jimp.AUTO)
+        .quality(70)
+        .write(processedFolder + fileName);
+  })
+
+  console.log("Image compressed: " + processedFolder + fileName)
+}
 
 module.exports = app;
