@@ -1,471 +1,480 @@
-html, body {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  overflow-x: hidden;
-  font-size: 1.6rem;
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    overflow-x: hidden;
+    font-size: 1.6rem;
 }
 
 html {
-  font-size: 62.5%;
+    font-size: 62.5%;
 }
 
 #logo-container {
-  text-align: center;
+    text-align: center;
 }
 
 #logo {
-  width: 200px;
-  margin: 40px;
-  margin-bottom: 150px;
-  border-radius: 10px;
+    width: 200px;
+    margin: 40px;
+    margin-bottom: 150px;
+    border-radius: 10px;
 }
 
 #menu-mobile {
-  display: none;
+    display: none;
 }
 
 .menu-mobile-item {
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: rgba(0, 0, 0, .75);
-  text-decoration: none;
-  padding: 5px;
-  margin: 5px;
-  border: 2px solid black;
-  text-align: center;
-  border-radius: 5px;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.75);
+    text-decoration: none;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid black;
+    text-align: center;
+    border-radius: 5px;
 }
 
 .menu-mobile-item:first-child {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .menu-mobile-item:hover {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 #menu {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 #menu a {
-  padding: 25px;
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: rgba(255, 255, 255, .75);
-  text-decoration: none;
-  transition: .5s;
+    padding: 25px;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: 0.5s;
 }
 
 #menu a:hover {
-  color: white;
+    color: white;
 }
 
 #welcome h1 {
-  text-align: center;
-  margin: 50px;
-  font-weight: bold;
-  font-size: calc(4rem + 1vw);
-  color: white;
-  text-transform: uppercase;
+    text-align: center;
+    margin: 50px;
+    font-weight: bold;
+    font-size: calc(4rem + 1vw);
+    color: white;
+    text-transform: uppercase;
 }
 
 #welcome h2 {
-  margin-bottom: 2rem;
-  text-align: center;
-  color: white;
-  text-transform: uppercase;
-  font-size: calc(1rem + 1vw);
+    margin-bottom: 2rem;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: calc(1rem + 1vw);
 }
 
 #welcome {
-  background-image: url("../images/background.jpg");
-  padding: 25px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  letter-spacing: 2px;
+    background-image: url("../compressed-images/background.jpg");
+    background-size: 1920px 1080px;
+    padding: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    letter-spacing: 2px;
 }
 
 #about-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 #about {
-  display: flex;
-  flex-wrap: wrap;
-  align-self: center;
-  justify-content: center;
-  max-width: 1000px;
-  margin: 40px;
-  font-weight: 300;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.6rem;
-  color: rgba(0, 0, 0, .75);
-  min-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 40px;
+    font-weight: 300;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+    color: rgba(0, 0, 0, 0.75);
+    min-width: 300px;
 }
 
 #about h1 {
-  color: rgba(0, 0, 0, 1);
+    color: rgba(0, 0, 0, 1);
 }
 
 #about h4 {
-  color: rgba(0, 0, 0, .75);
-  text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.75);
+    text-transform: uppercase;
 }
 
 #about img {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 #about-description {
-  padding: 20px;
-  flex: 1;
-  min-width: 250px;
-  font-size: 1.6rem;
-  font-family: 'Roboto', sans-serif;
-  font-weight: normal;
+    padding: 20px;
+    flex: 1;
+    min-width: 250px;
+    font-size: 1.6rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
 }
 
 #about-image {
-  width: 50%;
-  min-width: 200px;
-  max-width: 400px;
+    width: 50%;
+    min-width: 200px;
+    max-width: 400px;
 }
 
 #about-information {
-  padding: 20px;
-  font-size: 1.6rem;
-  font-family: 'Roboto', sans-serif;
-  font-weight: normal;
+    padding: 20px;
+    font-size: 1.6rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
 }
 
 #about-information h4 {
-  font-size: 2rem;
-  color: black;
+    font-size: 2rem;
+    color: black;
 }
 
 #hours-side-bar,
 #shop-side-bar {
-  padding-top: 20px;
+    padding-top: 20px;
 }
 
 #location-side-bar a,
 #shop-side-bar a {
-  color: black;
-  transition: .5s;
-  text-decoration: none;
+    color: black;
+    transition: 0.5s;
+    text-decoration: none;
 }
 
 #location-side-bar a:hover,
 #shop-side-bar a:hover {
-  color: rgb(212,175,55);
-  text-decoration: none;
+    color: rgb(212, 175, 55);
+    text-decoration: none;
 }
 
 .link-icon {
-  font-size: 1.7rem !important; 
-  color: rgb(212,175,55) !important;
+    font-size: 1.7rem !important;
+    color: rgb(212, 175, 55) !important;
 }
 
 .review-card {
-  width: 18rem; 
-  margin: 20px; 
-  border-color: black !important; 
-  border-width: 2px !important;
-  box-shadow: 10px 10px lightgray;
-  padding: 15px;
-  border-radius: 10px !important;
+    width: 18rem;
+    margin: 20px;
+    border-color: black !important;
+    border-width: 2px !important;
+    box-shadow: 10px 10px lightgray;
+    padding: 15px;
+    border-radius: 10px !important;
 }
 
 .review-card-title {
-  font-size: 2rem !important; 
-  color: black;
-  text-decoration: underline;
-  text-decoration-color: rgb(212,175,55);
+    font-size: 2rem !important;
+    color: black;
+    text-decoration: underline;
+    text-decoration-color: rgb(212, 175, 55);
 }
 
 #review-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  font-size: 1.6rem;
-  color: rgba(0, 0, 0, .75);
-  font-family: 'Roboto', sans-serif;
-  font-weight: normal;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-size: 1.6rem;
+    color: rgba(0, 0, 0, 0.75);
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
 }
 
 #review-cards {
-  display: flex; 
-  flex-wrap: wrap; 
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #button-container {
-  margin: 0 auto;
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button {
-  text-align: center;
-  margin: 50px;
-  background-color: black;
-  border-width: 5px;
-  padding: 20px;
-  color: white;
-  border-radius: 5px;
-  font-size: 1.6rem;
-  transition: .5s;
-  font-weight: 600;
-  width: 300px;
+    text-align: center;
+    margin: 50px;
+    background-color: black;
+    border-width: 5px;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.6rem;
+    transition: 0.5s;
+    font-weight: 600;
+    width: 300px;
 }
 
 .button a,
 .button a:hover {
-  color: white;
-  text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
 
 .button:hover {
-  text-decoration: none;
-  color: white;
-  background-color: rgb(212,175,55);
+    text-decoration: none;
+    color: white;
+    background-color: rgb(212, 175, 55);
 }
 
 @media only screen and (max-width: 600px) {
-  #menu {
-    display: none;
-  }
+    #menu {
+        display: none;
+    }
 
-  #menu-mobile {
-    display: block;
-  }
+    #menu-mobile {
+        display: block;
+    }
 
-  #about-information {
-    text-align: center;
-  }
+    #about-information {
+        text-align: center;
+    }
 
-  #about-description {
-    text-align: center;
-  }
+    #about-description {
+        text-align: center;
+    }
 }
 
 @media only screen and (min-width: 2000px) {
-  #about,
-  #review-container {
-    max-width: 50%;
-  }
+    #about,
+    #review-container {
+        max-width: 50%;
+    }
 }
- 
+
 @media only screen and (min-width: 3000px) {
-  html {
-    font-size: 90%;
-  }
+    html {
+        font-size: 90%;
+    }
 }
 
 #services {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 0px;
-  font-weight: bold;
-  color: rgba(0, 0, 0, .55);
-  background-color:white;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.55);
+    background-color: white;
+    justify-content: center;
+    align-items: center;
 }
 
 #services-description {
-  font-size: 20px;
-  padding: 50px;
-  padding-top: 0px;
-  padding-bottom: 50px;
-  margin-top: 0px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+    font-size: 20px;
+    padding: 50px;
+    padding-top: 0px;
+    padding-bottom: 50px;
+    margin-top: 0px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
 
-}
 #services h4 {
-  color: rgba(0, 0, 0, .75);
+    color: rgba(0, 0, 0, 0.75);
 }
+
 #header {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 10px;
-  margin-bottom: 0px;
-  padding: 30px;
-  padding-left: 10px;
-  padding-top: 50px;
-  padding-bottom: 0px;
-  font-weight: 300;
-  color: rgba(0, 0, 0, .5);
-  background-color:white;
-  text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding: 30px;
+    padding-left: 10px;
+    padding-top: 50px;
+    padding-bottom: 0px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.5);
+    background-color: white;
+    text-align: center;
 }
 
 #header h1 {
-  padding: 20px;
-  flex: 2;
-  color: rgba(0, 0, 0, 1);
+    padding: 20px;
+    flex: 2;
+    color: rgba(0, 0, 0, 1);
 }
 
 #column p {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
+
 #column #thick {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 #column-mobile p {
-  margin-bottom: 50px;
+    margin-bottom: 50px;
 }
+
 #column-mobile #thick {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 #column-mobile-horizontal p {
-  margin-bottom: 40px;
+    margin-bottom: 40px;
 }
+
 #column-mobile-horizontal #thick {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 #thick {
-  font-weight: 500;
-  color: rgba(0, 0, 0, .65);
-  margin-bottom: 0px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.65);
+    margin-bottom: 0px;
 }
 
 #location {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 50px;
-  font-weight: 300;
-  color: rgba(0, 0, 0, 1);
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-} 
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 1);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
 
 #location-info {
-  padding: 50px;
-  flex: 0 0 2;
+    padding: 50px;
+    flex: 0 0 2;
 }
 
 #location-gps {
-  margin: 10px; 
-  padding: 50px;
-  flex: 0 0 2;
+    margin: 10px;
+    padding: 50px;
+    flex: 0 0 2;
 }
 
 #location-gps-mobile {
-  display: flex;
-  flex-wrap: wrap;
-  display: none; 
-  padding: 50px;
-  
+    display: flex;
+    flex-wrap: wrap;
+    display: none;
+    padding: 50px;
 }
+
 #column {
-  margin: 40px;
-}
-#column-mobile{
-  padding: 20px;
-  display: none;
-}
-#column-mobile-horizontal{
-  display: none;
+    margin: 40px;
 }
 
+#column-mobile {
+    padding: 20px;
+    display: none;
+}
 
-
-
+#column-mobile-horizontal {
+    display: none;
+}
 
 @media only screen and (max-width: 1665px) {
-
-  #column {
-    display: none;
-  }
-  #column-mobile {
-    display: none;
-  }
-  #column-mobile-horizontal{
-    display: block;
-  }
-
+    #column {
+        display: none;
+    }
+  
+    #column-mobile {
+        display: none;
+    }
+  
+    #column-mobile-horizontal {
+        display: block;
+    }
 }
 
 @media only screen and (max-width: 865px) {
-  #location-gps {
-    display: none;
-  }
-  #location-gps-mobile {
-    display: block;
-  }
+    #location-gps {
+        display: none;
+    }
+  
+    #location-gps-mobile {
+        display: block;
+    }
 
-  #column {
-    display: none;
-  }
-  #column-mobile-horizontal{
-    display: none;
-  }
-  #column-mobile{
-    display: block;
-    margin-bottom: 100px;
-  }
-
+    #column {
+        display: none;
+    }
+  
+    #column-mobile-horizontal {
+        display: none;
+    }
+  
+    #column-mobile {
+        display: block;
+        margin-bottom: 100px;
+    }
 }
 
 #bottom {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 50px;
-  font-weight: 300;
-  color: white;
-  background-color:black;
-  margin: auto;
-  justify-content: center;
-  text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px;
+    font-weight: 300;
+    color: white;
+    background-color: black;
+    margin: auto;
+    justify-content: center;
+    text-decoration: none;
 }
+
 #bottomcolumn {
-  font-size: 15px;
-  text-align: center;
+    font-size: 15px;
+    text-align: center;
 }
+
 #copyright {
-  color:rgb(212,175,55);
+    color: rgb(212, 175, 55);
 }
 
-.gallery{
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-  padding-left: 23%;
-  padding-right: 23%;
-  padding-top: 40px;
-  padding-bottom: 100px;
-  background-color:rgb(212, 175, 55);
-}
-.card-deck{
-  margin: 15px;
+.gallery {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    padding-left: 23%;
+    padding-right: 23%;
+    padding-top: 40px;
+    padding-bottom: 100px;
+    background-color: white;
 }
 
-.card-img-top{
-  width: 100%;
-  height: 100%;
+.card-deck {
+    margin: 15px;
 }
 
-#productHeader{
-  font-size: 32px;
-  margin-top: 40px;
-  text-align: center;
+.card-img-top {
+    width: 100%;
+    height: 100%;
+}
+
+#productHeader {
+    font-size: 32px;
+    margin-top: 40px;
+    text-align: center;
 }
