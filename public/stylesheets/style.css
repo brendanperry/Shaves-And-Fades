@@ -368,6 +368,11 @@ html {
     padding: 50px;
     flex: 0 0 2;
 }
+#location-info-mobile {
+    padding: 50px;
+    flex: 0 0 2;
+    display: none;
+}
 
 #location-gps {
     margin: 10px;
@@ -430,6 +435,16 @@ html {
         display: block;
         margin-bottom: 100px;
     }
+}
+
+@media only screen and (max-width: 525px) {
+    #location-info {
+        display: none;
+    }
+    #location-info-mobile {
+        display: block;
+    }
+
 }
 
 #bottom {
