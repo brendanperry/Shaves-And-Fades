@@ -12,6 +12,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "and": "0.0.3",
+    "build": "^0.1.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
