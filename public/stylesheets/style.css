@@ -404,6 +404,85 @@ html {
 #column-mobile-horizontal {
     display: none;
 }
+#appointmentSection {
+    
+    background-image: 
+        linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+        ),
+        url("../compressed-images/TakeASeat-ConvertImage.PNG");
+    background-size: 1920px 1080px;
+    padding: 350px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    align-items: center;
+    letter-spacing: 2px;
+    
+}
+
+#appointmentHeader{
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    font-size: 80px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    
+}
+#appointmentInfo{
+    display: block;
+    flex-wrap: wrap;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 5px;
+    
+}
+
+#appointmentSection-mobile {
+    display: none;
+    background-image: 
+        linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+        ),
+        url("../compressed-images/TakeASeat-ConvertImage.PNG");
+    background-size: 1000px 865px;
+    padding: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    align-items: center;
+    letter-spacing: 2px;
+    
+}
+
+#appointmentHeader-mobile{
+    display: none;
+    flex-wrap: wrap;
+    color: white;
+    font-size: 60px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    
+}
+#appointmentInfo-mobile{
+    display: none;
+    flex-wrap: wrap;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 5px;
+    
+}
 
 @media only screen and (max-width: 1665px) {
     #column {
@@ -440,6 +519,25 @@ html {
         display: block;
         margin-bottom: 100px;
     }
+    #appointmentSection{
+        display: none;
+    }
+    #appointmentHeader{
+        display: none;
+    }
+    #appointmentInfo-mobile{
+        display: none;
+    }
+
+    #appointmentSection-mobile{
+        display: block;
+    }
+    #appointmentHeader-mobile{
+        display: block;
+    }
+    #appointmentInfo-mobile{
+        display: block;
+    }
 }
 
 @media only screen and (max-width: 525px) {
@@ -451,6 +549,7 @@ html {
     }
 
 }
+
 
 #bottom {
     display: flex;
