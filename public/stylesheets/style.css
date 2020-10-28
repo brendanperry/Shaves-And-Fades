@@ -250,37 +250,6 @@ html {
     background-color: rgb(212, 175, 55);
 }
 
-@media only screen and (max-width: 600px) {
-    #menu {
-        display: none;
-    }
-
-    #menu-mobile {
-        display: block;
-    }
-
-    #about-information {
-        text-align: center;
-    }
-
-    #about-description {
-        text-align: center;
-    }
-}
-
-@media only screen and (min-width: 2000px) {
-    #about,
-    #review-container {
-        max-width: 50%;
-    }
-}
-
-@media only screen and (min-width: 3000px) {
-    html {
-        font-size: 90%;
-    }
-}
-
 #services {
     display: flex;
     flex-wrap: wrap;
@@ -484,6 +453,68 @@ html {
     
 }
 
+#bottom {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px;
+    font-weight: 300;
+    color: white;
+    background-color: black;
+    margin: auto;
+    justify-content: center;
+    text-decoration: none;
+}
+
+#bottomcolumn {
+    font-size: 15px;
+    text-align: center;
+}
+
+#copyright {
+    color: rgb(212, 175, 55);
+}
+
+#gallery {
+    display: grid;
+    padding-left: 18%;
+    padding-right: 18%;
+    padding-top: 40px;
+    padding-bottom: 100px;
+    justify-content: center;
+    gap: 20px;
+    grid-template-columns: 250px 250px 250px 250px;
+}
+
+#gallery img{
+    width:100%;
+  }
+
+#galleryText{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#productHeader {
+    font-size: 32px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+@media only screen and (min-width: 3000px) {
+    html {
+        font-size: 90%;
+    }
+}
+
+@media only screen and (min-width: 2000px) {
+    #about,
+    #review-container {
+        max-width: 50%;
+    }
+}
+
+
 @media only screen and (max-width: 1665px) {
     #column {
         display: none;
@@ -497,6 +528,13 @@ html {
         display: block;
     }
 }
+
+@media only screen and (max-width: 1150px) {
+    #gallery {
+        grid-template-columns: 250px 250px 250px;
+    }
+}
+
 
 @media only screen and (max-width: 865px) {
     #location-gps {
@@ -538,6 +576,32 @@ html {
     #appointmentInfo-mobile{
         display: block;
     }
+    #gallery {
+        grid-template-columns: 185px 185px 185px;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    #menu {
+        display: none;
+    }
+
+    #menu-mobile {
+        display: block;
+    }
+
+    #about-information {
+        text-align: center;
+    }
+
+    #about-description {
+        text-align: center;
+    }
+
+    #gallery {
+        grid-template-columns: 140px 140px 140px;
+    }
 }
 
 @media only screen and (max-width: 525px) {
@@ -548,52 +612,19 @@ html {
         display: block;
     }
 
+    #gallery {
+        grid-template-columns: 100px 100px 100px;
+    }
 }
 
-
-#bottom {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 50px;
-    font-weight: 300;
-    color: white;
-    background-color: black;
-    margin: auto;
-    justify-content: center;
-    text-decoration: none;
+@media only screen and (max-width: 370px) {
+    #gallery {
+        grid-template-columns: 85px 85px 85px;
+    }
 }
 
-#bottomcolumn {
-    font-size: 15px;
-    text-align: center;
-}
-
-#copyright {
-    color: rgb(212, 175, 55);
-}
-
-.gallery {
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    padding-left: 23%;
-    padding-right: 23%;
-    padding-top: 40px;
-    padding-bottom: 100px;
-    background-color: white;
-}
-
-.card-deck {
-    margin: 15px;
-}
-
-.card-img-top {
-    width: 100%;
-    height: 100%;
-}
-
-#productHeader {
-    font-size: 32px;
-    margin-top: 40px;
-    text-align: center;
+@media only screen and (max-width: 300px) {
+    #gallery {
+        grid-template-columns: 75px 75px 75px;
+    }
 }
