@@ -380,7 +380,7 @@ html {
             rgba(0, 0, 0, 0.6),
             rgba(0, 0, 0, 0.6)
         ),
-        url("../compressed-images/TakeASeat-ConvertImage.PNG");
+        url("../compressed-images/TakeASeat-ConvertImage.png");
     background-size: 1920px 1080px;
     padding: 350px;
     background-position: center;
@@ -420,7 +420,7 @@ html {
             rgba(0, 0, 0, 0.6),
             rgba(0, 0, 0, 0.6)
         ),
-        url("../compressed-images/TakeASeat-ConvertImage.PNG");
+        url("../compressed-images/TakeASeat-ConvertImage.png");
     background-size: 1000px 865px;
     padding: 100px;
     background-position: center;
