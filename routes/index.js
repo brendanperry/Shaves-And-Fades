@@ -9,4 +9,10 @@ router.get('/', function(req, res, next) {
   data.getData()
 });
 
+/* GET schedule page. */
+router.get('/schedule', function(req, res, next) {
+  res.render('schedule', { title: 'Express' });
+  data.getData()
+});
+
 module.exports = router;
