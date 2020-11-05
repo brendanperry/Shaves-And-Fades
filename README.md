@@ -9,9 +9,8 @@ Dev:
 - The data-access.js file connects to a local mongodb database with instructions for use in the file (currently only works locally and needs some adjusting so it doesn't crash the whole server)
 - Keep all css files in the public/stylesheets directory because that is where express is looking
 - We have .ejs files instead of html, but you can write html the same and ignore the new features if you want to (keep in views directory)
-- This project has tests using Jest, make tests under the unit-test directory as '[file-name-you-are-testing].test.js'
+- This project has tests using Mocha, make tests under the unit-test directory as '[file-name-you-are-testing].test.js'
 - Tests can be run with 'npm test'
 - I strongly reccomend unit testing any core logic to the system
 - It is best to make a new branch for changes
 - Any pushes to master will trigger the pipeline and go live on the site in minutes
-- The pipeline requires that unit tests are passing otherwise the build will fail

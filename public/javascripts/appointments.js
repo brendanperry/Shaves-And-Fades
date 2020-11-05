@@ -6,41 +6,58 @@ class Appointments extends React.Component {
     constructor(props) {
         super(props);
         this.removeAppointment = this.removeAppointment.bind(this);
+        let firstRef = React.createRef();
         this.state = {
-            appointments: [<Appointment key={0} canRemove={false} />],
-            keyCount: 1
+            appointments: [<Appointment key={1} keyProps={1} canRemove={false} ref={firstRef} />],
+            appointmentRefs: [firstRef],
+            nextKey: 2
         }
     }
 
     addAppointment = () => {
         let apps = [...this.state.appointments];
-        let currentKey = this.state.keyCount;
+        let key = this.state.nextKey;
 
-        apps.push(<Appointment key={currentKey} keyProps={currentKey} canRemove={true} remove={this.removeAppointment} />)
+        let appRefs = [...this.state.appointmentRefs];
+        this.newRef = React.createRef();
+        let nextKey = appRefs[appRefs.length - 1].current.getKey() + 1;
 
-        currentKey += 1;
+        apps.push(<Appointment ref={this.newRef} key={this.state.nextKey} keyProps={nextKey} canRemove={true} remove={this.removeAppointment} />)
+
+        appRefs.push(this.newRef);
+        key++;
 
         this.setState({
             appointments: apps,
-            keyCount: currentKey
+            nextKey: key,
+            appointmentRefs: appRefs,
+            nextKey: this.state.nextKey + 1
         })
     }
 
     removeAppointment = (key) => {
         let apps = [...this.state.appointments]
+        let appRefs = [...this.state.appointmentRefs];
         let indexToRemove = -1;
 
         for (let i = 0; i < apps.length; i++) {
-            if (apps[i].keyProps == key) {
+            if (appRefs[i].current.getKey() == key) {
                 indexToRemove = i;
                 break;
             }
         }
 
-        apps.splice(indexToRemove, 1)
+        for (let j = indexToRemove + 1; j < apps.length; j++) {
+            let key = appRefs[j].current.getKey() - 1;
+            appRefs[j].current.updateKey(key);
+        }
+
+        apps.splice(indexToRemove, 1);
+        appRefs.splice(indexToRemove, 1);
 
         this.setState({
-            appointments: apps
+            appointments: apps,
+            appointmentRefs: appRefs
         })
     }
 
@@ -49,8 +66,8 @@ class Appointments extends React.Component {
             <div>
                 {this.state.appointments}
                 <div>
-                    <button onClick={this.addAppointment}>Add another appointment</button>
-                    <p>Total appointments: {this.state.appointments.length}</p>
+                    <button onClick={this.addAppointment} className="addAppointment">Add New Appointment</button>
+                    <p id="total-appointments">{this.state.appointments.length}</p>
                 </div>
             </div>
         )
@@ -61,12 +78,24 @@ class Appointment extends React.Component {
     constructor(props) {
         super(props);
         this.remove = this.removeApp.bind(this);
+        this.getKey = this.getKey.bind(this);
         this.state = {
+            key: this.props.keyProps,
             barber: "",
             date: "",
             time: "",
             cost: ""
         }
+    }
+
+    updateKey = (newKey) => {
+        this.setState({
+            key: newKey
+        });
+    }
+
+    getKey = () => {
+        return this.state.key;
     }
 
     removeApp = (key) => {
@@ -103,7 +132,7 @@ class Appointment extends React.Component {
                 </div>
                 {this.props.canRemove &&
                     <div style={{"display": "flex", "justifyContent": "center"}}>
-                        <button type="button" onClick={() => this.removeApp(this.props.keyProps)}>Remove</button>
+                        <button type="button" onClick={() => this.removeApp(this.state.key)} className={"remove" + this.state.key}>Remove Appointment {this.state.key}</button>
                     </div>
                 }
             </div>

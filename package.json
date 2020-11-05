@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "test": "jest"
+    "test": "mocha unit-tests/"
   },
   "dependencies": {
     "and": "0.0.3",
@@ -25,6 +25,8 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "jest": "^26.4.2"
+    "mocha": "^8.2.1",
+    "mocha-junit-reporter": "^2.0.0",
+    "zombie": "^6.1.4"
   }
 }
