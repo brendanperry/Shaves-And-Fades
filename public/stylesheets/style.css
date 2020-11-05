@@ -515,7 +515,9 @@ html {
     text-align: center;
     padding: 20px;
 }
-
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    width: 100%;
+}
 .carousel-item{
     height: 1150px;
     max-height: 1150px;
@@ -547,12 +549,26 @@ html {
     #column-mobile-horizontal {
         display: block;
     }
+
+    .carousel-item{
+        height: 1050px;
+        max-height: 1050px;
+    }
+}
+
+@media only screen and (max-width: 1350px) {
+    .carousel-item{
+        height: 750px;
+        max-height: 750px ;
+    }
 }
 
 @media only screen and (max-width: 1150px) {
     #gallery {
         grid-template-columns: 250px 250px 250px;
     }
+
+    
 }
 
 
@@ -599,6 +615,10 @@ html {
     #gallery {
         grid-template-columns: 185px 185px 185px;
     }
+    .carousel-item{
+        height: 600px;
+        max-height: 600px;
+    }
 }
 
 
@@ -622,6 +642,11 @@ html {
     #gallery {
         grid-template-columns: 140px 140px 140px;
     }
+
+    .carousel-item{
+        height: 350px;
+        max-height: 350px;
+    }
 }
 
 @media only screen and (max-width: 525px) {
@@ -640,6 +665,10 @@ html {
 @media only screen and (max-width: 370px) {
     #gallery {
         grid-template-columns: 85px 85px 85px;
+    }
+    .carousel-item{
+        height: 250px;
+        max-height: 250px;
     }
 }
 
