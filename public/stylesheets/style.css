@@ -353,11 +353,6 @@ html {
     padding: 50px;
     flex: 0 0 2;
 }
-#location-info-mobile {
-    padding: 50px;
-    flex: 0 0 2;
-    display: none;
-}
 
 #location-gps {
     margin: 10px;
@@ -423,50 +418,10 @@ html {
     text-align: center;
     align-items: center;
     padding: 5px;
-    
+
 }
 
-#appointmentSection-mobile {
-    display: none;
-    background-image: 
-        linear-gradient(
-            rgba(0, 0, 0, 0.6),
-            rgba(0, 0, 0, 0.6)
-        ),
-        url("../compressed-images/TakeASeat-ConvertImage.png");
-    background-size: 1000px 865px;
-    padding: 100px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    text-align: center;
-    align-items: center;
-    letter-spacing: 2px;
-    
-}
 
-#appointmentHeader-mobile{
-    display: none;
-    flex-wrap: wrap;
-    color: white;
-    font-weight: bold;
-    font-size: calc(4rem + 1vw);
-    text-transform: uppercase;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    
-}
-#appointmentInfo-mobile{
-    display: none;
-    flex-wrap: wrap;
-    color: white;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    padding: 5px;
-    
-}
 
 #bottom {
     display: flex;
@@ -573,12 +528,9 @@ html {
 
 
 @media only screen and (max-width: 865px) {
-    #location-gps {
-        display: none;
-    }
-  
-    #location-gps-mobile {
-        display: block;
+    #location-gps-image{
+        width: 350px;
+        height: 300px;
     }
 
     #column {
@@ -594,24 +546,11 @@ html {
         margin-bottom: 100px;
     }
     #appointmentSection{
-        display: none;
+        background-size: 1000px 865px;
+        padding: 100px;
     }
-    #appointmentHeader{
-        display: none;
-    }
-    #appointmentInfo-mobile{
-        display: none;
-    }
+    
 
-    #appointmentSection-mobile{
-        display: block;
-    }
-    #appointmentHeader-mobile{
-        display: block;
-    }
-    #appointmentInfo-mobile{
-        display: block;
-    }
     #gallery {
         grid-template-columns: 185px 185px 185px;
     }
@@ -650,13 +589,10 @@ html {
 }
 
 @media only screen and (max-width: 525px) {
-    #location-info {
-        display: none;
+    #location-image {
+        width: 350px;
+        max-width: 350px;
     }
-    #location-info-mobile {
-        display: block;
-    }
-
     #gallery {
         grid-template-columns: 100px 100px 100px;
     }
@@ -676,4 +612,9 @@ html {
     #gallery {
         grid-template-columns: 75px 75px 75px;
     }
+}
+
+#thickblack{
+    color: black;
+    font-weight: 600;
 }
