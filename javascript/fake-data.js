@@ -1,3 +1,5 @@
+// this class should mimic the real database for testing
+
 let barbers = [
     {
         name: "Mixio Gaytan",
@@ -122,3 +124,16 @@ let services = [
         cost: 13
     }
 ]
+
+module.exports = 
+{
+    getBarbers: function() 
+    {
+        return barbers;
+    },
+
+    getServices: function() 
+    {
+        return services;
+    },
+}

@@ -1,32 +1,39 @@
 {
-  "name": "cs372-project-fall-2020",
+  "name": "react-express",
   "version": "1.0.0",
-  "private": true,
-  "main": "app.js",
-  "engines": {
-    "node": ">=12.18.3",
-    "npm": ">=6.0.0"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www",
-    "test": "mocha unit-tests/"
+    "start": "nodemon server.js",
+    "build": "node server.js",
+    "webpack": "./node_modules/.bin/webpack",
+    "test": "mocha ./unit-tests/"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "and": "0.0.3",
-    "build": "^0.1.4",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "ejs": "~2.6.1",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jimp": "^0.16.1",
-    "mongodb": "~3.6.2",
-    "morgan": "~1.9.1",
-    "serve-favicon": "^2.5.0"
+    "babel-loader": "8.0.4",
+    "express": "4.16.4",
+    "jimp": "0.16.1",
+    "nodemon": "1.18.9",
+    "react": "16.7.0",
+    "react-dom": "16.7.0",
+    "serve-favicon": "2.5.0",
+    "webpack": "4.28.3",
+    "webpack-cli": "3.1.2",
+    "zombie": "6.1.4"
   },
   "devDependencies": {
-    "mocha": "^8.2.1",
-    "mocha-junit-reporter": "^2.0.0",
-    "zombie": "^6.1.4"
+    "@babel/core": "7.2.2",
+    "@babel/plugin-proposal-class-properties": "7.12.1",
+    "@babel/preset-react": "7.0.0",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "image-minimizer-webpack-plugin": "1.0.0",
+    "image-webpack-loader": "7.0.1",
+    "imagemin-gifsicle": "7.0.0",
+    "imagemin-mozjpeg": "9.0.0",
+    "imagemin-pngquant": "9.0.1",
+    "imagemin-svgo": "8.0.0",
+    "mocha": "8.2.1"
   }
 }

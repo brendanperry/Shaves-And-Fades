@@ -1,20 +1,23 @@
-'use strict';
+const React = require('react');
 
-const e = React.createElement;
-
-class Appointments extends React.Component {
-    constructor(props) {
+class Appointments extends React.Component 
+{
+    constructor(props) 
+    {
         super(props);
         this.removeAppointment = this.removeAppointment.bind(this);
         let firstRef = React.createRef();
-        this.state = {
+
+        this.state = 
+        {
             appointments: [<Appointment key={1} keyProps={1} canRemove={false} ref={firstRef} />],
             appointmentRefs: [firstRef],
             nextKey: 2
         }
     }
 
-    addAppointment = () => {
+    addAppointment = () => 
+    {
         let apps = [...this.state.appointments];
         let key = this.state.nextKey;
 
@@ -27,7 +30,8 @@ class Appointments extends React.Component {
         appRefs.push(this.newRef);
         key++;
 
-        this.setState({
+        this.setState(
+        {
             appointments: apps,
             nextKey: key,
             appointmentRefs: appRefs,
@@ -35,19 +39,23 @@ class Appointments extends React.Component {
         })
     }
 
-    removeAppointment = (key) => {
+    removeAppointment = (key) => 
+    {
         let apps = [...this.state.appointments]
         let appRefs = [...this.state.appointmentRefs];
         let indexToRemove = -1;
 
-        for (let i = 0; i < apps.length; i++) {
-            if (appRefs[i].current.getKey() == key) {
+        for (let i = 0; i < apps.length; i++) 
+        {
+            if (appRefs[i].current.getKey() == key) 
+            {
                 indexToRemove = i;
                 break;
             }
         }
 
-        for (let j = indexToRemove + 1; j < apps.length; j++) {
+        for (let j = indexToRemove + 1; j < apps.length; j++) 
+        {
             let key = appRefs[j].current.getKey() - 1;
             appRefs[j].current.updateKey(key);
         }
@@ -55,13 +63,15 @@ class Appointments extends React.Component {
         apps.splice(indexToRemove, 1);
         appRefs.splice(indexToRemove, 1);
 
-        this.setState({
+        this.setState(
+        {
             appointments: apps,
             appointmentRefs: appRefs
         })
     }
 
-    render() {
+    render() 
+    {
         return (
             <div>
                 {this.state.appointments}
@@ -74,8 +84,10 @@ class Appointments extends React.Component {
     }
 }
 
-class Appointment extends React.Component {
-    constructor(props) {
+class Appointment extends React.Component 
+{
+    constructor(props) 
+    {
         super(props);
         this.remove = this.removeApp.bind(this);
         this.getKey = this.getKey.bind(this);
@@ -86,23 +98,39 @@ class Appointment extends React.Component {
             time: "",
             cost: ""
         }
+
+        this.getBarberNames();
     }
 
-    updateKey = (newKey) => {
+    updateKey = (newKey) => 
+    {
         this.setState({
             key: newKey
         });
     }
 
-    getKey = () => {
+    getKey = () => 
+    {
         return this.state.key;
     }
 
-    removeApp = (key) => {
+    removeApp = (key) => 
+    {
         this.props.remove(key);
     }
 
-    render() {
+    getServices = (barber) => 
+    {
+        console.log(repo.getBarberNames());
+    }
+
+    getBarberNames = () => 
+    {
+        console.log(repo.getBarberNames());
+    }
+
+    render() 
+    {
         return (
             <div>
                 <div style={{"textAlign" :"center","marginTop":"25px"}}>
@@ -125,9 +153,7 @@ class Appointment extends React.Component {
                 </main>
                 <div>
                     <select>
-                        <option>One</option>
-                        <option>Two</option>
-                        <option>Three</option>
+                        
                     </select>
                 </div>
                 {this.props.canRemove &&
@@ -140,5 +166,4 @@ class Appointment extends React.Component {
     }
 }
 
-const domContainer = document.querySelector('#appointments');
-ReactDOM.render(e(Appointments), domContainer)
+module.exports = Appointments;

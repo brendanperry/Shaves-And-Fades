@@ -379,6 +379,7 @@ html {
 #column-mobile-horizontal {
     display: none;
 }
+
 #appointmentSection {
     
     background-image: 
@@ -398,7 +399,7 @@ html {
     
 }
 
-#appointmentHeader{
+#appointmentHeader {
     display: flex;
     flex-wrap: wrap;
     color: white;
@@ -410,7 +411,8 @@ html {
     align-items: center;
     
 }
-#appointmentInfo{
+
+#appointmentInfo {
     display: block;
     flex-wrap: wrap;
     color: white;
@@ -420,8 +422,6 @@ html {
     padding: 5px;
 
 }
-
-
 
 #bottom {
     display: flex;
@@ -491,7 +491,6 @@ html {
     }
 }
 
-
 @media only screen and (max-width: 1665px) {
     #column {
         display: none;
@@ -525,7 +524,6 @@ html {
 
     
 }
-
 
 @media only screen and (max-width: 865px) {
     #location-gps-image{
