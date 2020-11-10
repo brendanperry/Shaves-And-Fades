@@ -25,8 +25,8 @@ steps:
     customCommand: 'test'
 
 - task: PublishBuildArtifacts@1
-    displayName: 'send the build off to release'
-    inputs:
+	displayName: 'send the build off to release'
+	inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
