@@ -4,7 +4,7 @@
     margin: 0;
 }
 
-header {
+.header {
     background-image: 
         linear-gradient(
             rgba(0, 0, 0, 0.6),
@@ -18,27 +18,19 @@ header {
     align-items: center;
 }
 
-.headshot {
-    padding: 20px;
-}
-
-.headshot:hover {
-    box-shadow: 1px 1px 1px 1px black;
+#logo {
+    border-radius: 10px;
 }
 
 .barber {
     text-align: center;
     text-transform: uppercase;
     font-weight: 300;
-    padding: 10px;
-}
-
-#logo {
-    border-radius: 10px;
 }
 
 #bar {
     margin: 0 auto;
+    margin-top: 20px;
     width: 100px;
     height: 10px;
     background-color: rgb(212, 175, 55);
@@ -49,10 +41,152 @@ h1 {
     margin: 20px;
 }
 
-main {
+.main {
     display: flex; 
-    justify-content: center; 
-    align-items: center; 
     flex-wrap: wrap;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    min-width: 300px;
+}
+
+.customMargin {
+    margin: 5px;
+}
+
+.topForm {
+    display: flex;
+    margin: 0 auto;
+}
+
+.barberAndCut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dateAndTime {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 3px solid white;
+}
+
+.btn 
+.btn-primary {
+    background-color: rgb(212, 175, 55);
+    border-color: rgb(212, 175, 55);
+}
+
+.button-container {
+    margin-left: 10px;
+}
+
+.button {
+    text-align: center;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    transition: 0.5s;
+    font-weight: 600;
+    padding: 5px;
+    border: none;
+}
+
+.button:hover {
+    color: white;
+    background-color: rgb(212, 175, 55);
+    text-decoration: none;
+}
+
+.add-button-container {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.addAppointment {
+    text-align: center;
+    margin: 50px;
+    margin-bottom: 100px;
+    background-color: black;
+    border-width: 5px;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: 0.5s;
+    font-weight: 600;
+    width: 250px;
+    border: none;
+}
+
+.addAppointment:hover {
+    text-decoration: none;
+    color: white;
+    background-color: rgb(212, 175, 55);
+    border: none;
+}
+
+hr {
+    width: 50%;   
+    margin: 0 auto; 
+    background-color: rgb(212, 175, 55);
+    height: 1px;
+}
+
+.remove-button-container {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.removeAppointment {
+    text-align: center;
     margin: 10px;
+    margin-bottom: 50px;
+    background-color: black;
+    border-width: 5px;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: 0.5s;
+    font-weight: 600;
+    width: 100px;
+    border: none;
+}
+
+.removeAppointment:hover {
+    text-decoration: none;
+    color: white;
+    background-color: rgb(212, 175, 55);
+    border: none;
+}
+
+.first-appointment-spacer {
+    margin-bottom: 60px;
 }

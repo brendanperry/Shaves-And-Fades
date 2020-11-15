@@ -14,9 +14,33 @@ class Repository
         return this.data.getBarbers();
     }
 
-    getServices()
+    getServices(barberName)
     {
-        return this.data.getBarbers();
+        let barberData;
+        let formattedServicesList = []
+
+        let barbers = this.data.getBarbers();
+
+        if (barbers != undefined || barbers != null)
+        {
+            barbers.forEach(barber => 
+            {
+                if (barber.name === barberName)
+                {
+                    barberData = barber.services;
+                }
+            });
+            
+            if (barberData != null || barberData != undefined)
+            {
+                barberData.forEach(service => {
+                    let item = '$' + (service.cost / 1.0).toFixed(2) + ' - ' + service.name;
+                    formattedServicesList.push(item);
+                });
+            }
+        }
+
+        return formattedServicesList;
     }
 
     getBarberNames()

@@ -4,8 +4,18 @@ let barbers = [
     {
         name: "Mixio Gaytan",
         services: [
-            "Regular Haircut",
-            "Zero Fade/Taper"
+            {
+                name: "Regular Haircut",
+                cost: 17.00
+            },
+            {
+                name: "Zero Fade/Taper",
+                cost: 20.00
+            },
+            {
+                name: "Resting Facial",
+                cost: 13.00
+            }
         ],
         daysWorking: [
             {
@@ -39,9 +49,18 @@ let barbers = [
     {
         name: "David Nakasen",
         services: [
-            "Regular Haircut",
-            "Zero Fade/Taper",
-            "Resting Facial"
+            {
+                name: "Regular Haircut",
+                cost: 17.00
+            },
+            {
+                name: "Zero Fade/Taper",
+                cost: 20.00
+            },
+            {
+                name: "Resting Facial",
+                cost: 13.00
+            }
         ],
         daysWorking: [
             {
@@ -75,9 +94,18 @@ let barbers = [
     {
         name: "Jeffrey Ortega",
         services: [
-            "Regular Haircut",
-            "Zero Fade/Taper",
-            "Resting Facial"
+            {
+                name: "Regular Haircut",
+                cost: 17.00
+            },
+            {
+                name: "Zero Fade/Taper",
+                cost: 20.00
+            },
+            {
+                name: "Resting Facial",
+                cost: 13.00
+            }
         ],
         daysWorking: [
             {
@@ -110,20 +138,20 @@ let barbers = [
     }
 ]
 
-let services = [
-    {
-        name: "Regular Haircut",
-        cost: 17
-    },
-    {
-        name: "Zero Fade/Taper",
-        cost: 20
-    },
-    {
-        name: "Resting Facial",
-        cost: 13
-    }
-]
+// let services = [
+//     {
+//         name: "Regular Haircut",
+//         cost: 17
+//     },
+//     {
+//         name: "Zero Fade/Taper",
+//         cost: 20
+//     },
+//     {
+//         name: "Resting Facial",
+//         cost: 13
+//     }
+// ]
 
 module.exports = 
 {
@@ -132,8 +160,8 @@ module.exports =
         return barbers;
     },
 
-    getServices: function() 
-    {
-        return services;
-    },
+    // getServices: function() 
+    // {
+    //     return services;
+    // },
 }
