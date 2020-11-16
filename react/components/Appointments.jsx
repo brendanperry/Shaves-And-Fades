@@ -142,7 +142,7 @@ export default class Appointments extends React.Component {
                 </div>
                 <div className="footer">
                     <div style={{"marginRight": "10px"}}>
-                        <span>Your total is: $<span id="total" style={{"fontWeight":"bold"}}>{this.state.totalCost}</span></span>
+                        <span>Your total is: <span id="total" style={{"fontWeight":"bold"}}>${this.state.totalCost}</span></span>
                     </div>
                     <div className="button-container">
                         <button className="button">CONTINUE</button>
@@ -247,12 +247,12 @@ class Appointment extends React.Component {
                         </div>
                         <div>
                             <div className="customMargin">
-                                <select class="custom-select" onChange={this.barberChanged} id={"barber" + this.props.keyProps}>
+                                <select className="custom-select" onChange={this.barberChanged} id={"barber" + this.props.keyProps}>
                                     <option>Select a barber</option>
                                 </select>
                             </div>
                                 <div className="customMargin">
-                                    <select type="select" class="custom-select" onChange={this.calculateTotal} id={"select" + this.props.keyProps}>
+                                    <select type="select" className="custom-select" onChange={this.calculateTotal} id={"select" + this.props.keyProps}>
                                         <option value="0">Select a service</option>
                                         
                                     </select>
@@ -261,14 +261,14 @@ class Appointment extends React.Component {
                         </div> 
                         <div className="barberAndCut">
                             <div className="customMargin">
-                                <select class="custom-select">
+                                <select className="custom-select">
                                     <option>Oct 22 2020</option>
                                     <option>Oct 23 2020</option>
                                     <option>Oct 24 2020</option>
                                 </select>
                             </div>
                             <div className="customMargin">
-                                <select class="custom-select">
+                                <select className="custom-select">
                                     <option>10:00 AM - 10:30 AM</option>
                                     <option>10:00 AM - 10:30 AM</option>
                                     <option>10:00 AM - 10:30 AM</option>

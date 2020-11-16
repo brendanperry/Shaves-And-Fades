@@ -54,16 +54,19 @@ describe('Schedule Page', () =>
     })
 
     it("Given page start, the total cost is 0", (done) => {
-        assert.strictEqual(browser.text("#total"), '0')
+        assert.strictEqual(browser.text("#total"), "$0")
 
         done();
     })
 
-    it("Select two two services, the total cost is 35", (done) => {
-        browser.select("#select1", "$17.00 - Regular Haircut")
-        browser.select("#select2", "$18.00 - Fade")
+    it("Select two services, the total cost is 35", (done) => {
+        browser.select("#barber1", "Mixio Gaytan")
+        browser.select("#barber2", "Jeffrey Ortega")
 
-        assert.strictEqual(browser.text("#total"), '35')
+        browser.select("#select1", "$17.00 - Regular Haircut")
+        browser.select("#select2", "$20.00 - Zero Fade/Taper")
+
+        assert.strictEqual(browser.text("#total"), "$37")
 
         done();
     })

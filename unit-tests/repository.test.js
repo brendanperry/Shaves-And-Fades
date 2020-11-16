@@ -27,16 +27,17 @@ describe('Repository', () =>
     })
 
     it('Given a correct barber, get correct services list', () => {
-      assert.deepStrictEqual(repository.getServices('Mixio Gaytan'), 
+      assert.deepStrictEqual(repository.getServiceNames('Mixio Gaytan'), 
       [
         '$17.00 - Regular Haircut',
         '$20.00 - Zero Fade/Taper',
         '$13.00 - Resting Facial',
+        '$12.00 - Beard Trim'
       ])
     })
 
     it('Given an incorrect barber, get blank services list', () => {
-      assert.deepStrictEqual(repository.getServices('Mixio Mixio'), [])
+      assert.deepStrictEqual(repository.getServiceNames('Mixio Mixio'), [])
     })
   })
 });
