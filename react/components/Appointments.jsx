@@ -1,4 +1,5 @@
 const React = require('react');
+import { useLoading, Audio } from '@agney/react-loading';
 import Repository from '../../javascript/repository';
 import fakeData from '../../javascript/fake-data';
 
@@ -7,9 +8,23 @@ export default class Appointments extends React.Component {
         super(props);
         this.removeAppointment = this.removeAppointment.bind(this);
         this.calculateTotal = this.calculateTotal.bind(this);
-        //let theRepo = await this.getRepo();
-        let firstRef = React.createRef();
+        
         this.state = {
+            appointments: [],
+            appointmentRefs: [],
+            nextKey: 2,
+            totalCost: 0,
+            repo: null
+        }
+    }
+
+    // load in the database information async
+    componentDidMount = async () => {
+        console.log("here")
+        let theRepo = await this.getRepo();
+        let firstRef = React.createRef();
+
+        this.setState({
             appointments: [
                 <Appointment 
                     key={1} 
@@ -20,14 +35,18 @@ export default class Appointments extends React.Component {
                     repo={theRepo}
                 />],
             appointmentRefs: [firstRef],
-            nextKey: 2,
-            totalCost: 0,
-            //repo: theRepo
-        }
+            repo: theRepo
+        })
+    }
+
+    // this is used to simulate loading time
+    timeout = (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     getDatabase = async () => {
         if (location.hostname === "localhost") {
+            await this.timeout(3000);
             return fakeData;
         }
         else {
@@ -38,7 +57,7 @@ export default class Appointments extends React.Component {
     getRepo = async () => {
         let repo = new Repository(await this.getDatabase());
 
-        return repo.getBarbers();
+        return repo;
     }
 
     addAppointment = () => {
@@ -147,8 +166,11 @@ class Appointment extends React.Component {
             time: "",
             cost: 0
         }
+    }
 
-        this.getBarbers();
+    // once the appointment is loaded, update the info
+    componentDidMount = () => {
+        this.getBarberNames();
     }
 
     updateKey = (newKey) => {
@@ -177,8 +199,27 @@ class Appointment extends React.Component {
         })
     }
 
-    updateAllInfo = () => {
+    barberChanged = () => {
+        let select = document.getElementById('barber' + this.props.keyProps);
+        let barberName = select[select.selectedIndex].text;
+        console.log(barberName)
+        this.updateServices(barberName);
+        // update schedule
+    }
 
+    updateServices = (barberName) => {
+        let serviceNames = this.props.repo.getServiceNames(barberName);
+        let serviceCosts = this.props.repo.getServiceCosts(barberName);
+
+        let select = document.getElementById('select' + this.props.keyProps)
+        select.length = 1;
+
+        for (let i = 0; i < serviceCosts.length; i++) {
+            let option = document.createElement('option');
+            option.innerHTML = serviceNames[i];
+            option.value = serviceCosts[i]
+            select.appendChild(option);
+        }
     }
 
     getCost = () => {
@@ -187,7 +228,7 @@ class Appointment extends React.Component {
 
     getBarberNames = () => {
         let names = this.props.repo.getBarberNames();
-        let select = document.getElementById('select' + this.props.keyProps)
+        let select = document.getElementById('barber' + this.props.keyProps)
 
         names.forEach(name => {
             let option = document.createElement('option');
@@ -206,7 +247,7 @@ class Appointment extends React.Component {
                         </div>
                         <div>
                             <div className="customMargin">
-                                <select class="custom-select" onChange={this.updateAllInfo}>
+                                <select class="custom-select" onChange={this.barberChanged} id={"barber" + this.props.keyProps}>
                                     <option>Select a barber</option>
                                 </select>
                             </div>

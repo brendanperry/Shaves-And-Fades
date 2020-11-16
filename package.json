@@ -7,12 +7,13 @@
   "scripts": {
     "start": "nodemon server.js",
     "build": "node server.js",
-    "webpack": "./node_modules/.bin/webpack",
+    "webpack": "./node_modules/.bin/webpack -w",
     "test": "mocha ./unit-tests/ --timeout 30000 --exit"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@agney/react-loading": "0.1.2",
     "@stripe/react-stripe-js": "1.1.2",
     "@stripe/stripe-js": "1.11.0",
     "babel-loader": "8.0.4",

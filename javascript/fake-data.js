@@ -15,6 +15,10 @@ let barbers = [
             {
                 name: "Resting Facial",
                 cost: 13.00
+            },
+            {
+                name: "Beard Trim",
+                cost: 12.00
             }
         ],
         daysWorking: [

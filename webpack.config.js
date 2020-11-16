@@ -4,7 +4,8 @@ const APP_DIR = path.resolve(__dirname, './react');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
+  devtool: 'source-map',
   
   // To add a new page using react, define an entry point here
   entry: {
