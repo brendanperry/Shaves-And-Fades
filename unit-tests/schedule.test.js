@@ -70,4 +70,12 @@ describe('Schedule Page', () =>
 
         done();
     })
+
+    it("Remove an appointment, the total cost is subtracted", (done) => {
+        browser.pressButton("#remove2")
+
+        assert.strictEqual(browser.text("#total"), "$17")
+
+        done();
+    })
 })

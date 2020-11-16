@@ -1,7 +1,8 @@
 const React = require('react');
-import { useLoading, Audio } from '@agney/react-loading';
 import Repository from '../../javascript/repository';
 import fakeData from '../../javascript/fake-data';
+import Appointment from './Appointment.jsx';
+import Loading from './Loading.jsx';
 
 export default class Appointments extends React.Component {
     constructor(props) {
@@ -14,29 +15,33 @@ export default class Appointments extends React.Component {
             appointmentRefs: [],
             nextKey: 2,
             totalCost: 0,
-            repo: null
+            repo: null,
+            loading: true
         }
     }
 
     // load in the database information async
     componentDidMount = async () => {
-        console.log("here")
         let theRepo = await this.getRepo();
-        let firstRef = React.createRef();
 
-        this.setState({
-            appointments: [
-                <Appointment 
-                    key={1} 
-                    keyProps={1} 
-                    canRemove={false} 
-                    calculateTotal={this.calculateTotal} 
-                    ref={firstRef} 
-                    repo={theRepo}
-                />],
-            appointmentRefs: [firstRef],
-            repo: theRepo
-        })
+        if (theRepo != null) {
+            let firstRef = React.createRef();
+
+            this.setState({
+                appointments: [
+                    <Appointment 
+                        key={1} 
+                        keyProps={1} 
+                        canRemove={false} 
+                        calculateTotal={this.calculateTotal} 
+                        ref={firstRef} 
+                        repo={theRepo}
+                    />],
+                appointmentRefs: [firstRef],
+                repo: theRepo,
+                loading: false
+            })
+        }
     }
 
     // this is used to simulate loading time
@@ -47,7 +52,22 @@ export default class Appointments extends React.Component {
     getDatabase = async () => {
         if (location.hostname === "localhost") {
             await this.timeout(3000);
-            return fakeData;
+            let data;
+
+            try {
+                data = fakeData;
+            } catch (error) {
+                console.log(error);
+                alert("The website failed to load. Please refresh the page or try again later.");
+                return;
+            }
+
+            if (data == null || data == undefined) {
+                alert("The website failed to load. Please refresh the page or try again later.");
+                return;
+            }
+
+            return data;
         }
         else {
             // will ping database for data
@@ -55,9 +75,16 @@ export default class Appointments extends React.Component {
     }
 
     getRepo = async () => {
-        let repo = new Repository(await this.getDatabase());
+        let data = await this.getDatabase()
 
-        return repo;
+        if (data != undefined) {
+            let repo = new Repository(data);
+
+            return repo;
+        } 
+        else {
+            return null;
+        }
     }
 
     addAppointment = () => {
@@ -113,6 +140,8 @@ export default class Appointments extends React.Component {
         this.setState({
             appointments: apps,
             appointmentRefs: appRefs
+        }, () => {
+            this.calculateTotal();
         })
     }
 
@@ -132,161 +161,31 @@ export default class Appointments extends React.Component {
     render() {
         return (
             <div>
-                <div style={{"textAlign" :"center","marginTop":"25px"}}>
-                    <h1>Schedule Your Time</h1>
-                    <div id="bar" />
-                </div>
-                {this.state.appointments}
-                <div className="add-button-container">
-                    <button onClick={this.addAppointment} className="addAppointment">Add New Appointment</button>
-                </div>
-                <div className="footer">
-                    <div style={{"marginRight": "10px"}}>
-                        <span>Your total is: <span id="total" style={{"fontWeight":"bold"}}>${this.state.totalCost}</span></span>
+                {this.state.loading === true && 
+                    <Loading />
+                }
+                {this.state.loading === false &&
+                    <div>
+                        <div style={{"textAlign" :"center","marginTop":"25px"}}>
+                            <h1>Schedule Your Time</h1>
+                        <div id="bar" />
+                        </div>
+                            {this.state.appointments}
+                        <div className="add-button-container">
+                            <button onClick={this.addAppointment} className="addAppointment">Add New Appointment</button>
+                        </div>
+                        <div className="footer">
+                            <div style={{"marginRight": "10px"}}>
+                                <span>Your total is: <span id="total" style={{"fontWeight":"bold"}}>${this.state.totalCost}</span></span>
+                            </div>
+                            <div className="button-container">
+                                <button className="button">CONTINUE</button>
+                            </div>
+                        </div>
+                        <p id="total-appointments" style={{"display":"none"}}>{this.state.appointments.length}</p>
                     </div>
-                    <div className="button-container">
-                        <button className="button">CONTINUE</button>
-                    </div>
-                </div>
-                <p id="total-appointments" style={{"display":"none"}}>{this.state.appointments.length}</p>
+                }
             </div>
         )
-    }
-}
-
-class Appointment extends React.Component {
-    constructor(props) {
-        super(props);
-        this.remove = this.removeApp.bind(this);
-        this.getKey = this.getKey.bind(this);
-        this.state = {
-            key: this.props.keyProps,
-            barber: "",
-            date: "",
-            time: "",
-            cost: 0
-        }
-    }
-
-    // once the appointment is loaded, update the info
-    componentDidMount = () => {
-        this.getBarberNames();
-    }
-
-    updateKey = (newKey) => {
-        this.setState({
-            key: newKey
-        });
-    }
-
-    getKey = () => {
-        return this.state.key;
-    }
-
-    removeApp = (key) => {
-        this.props.remove(key);
-    }
-
-    calculateTotal = () => {
-        let id = this.props.keyProps;
-        let cost = parseFloat(document.getElementById("select" + id).value);
-
-        // setState is async, so we call calculate total in the callback to make sure the state is up to date
-        this.setState({
-            cost: cost
-        }, () => {
-            this.props.calculateTotal();
-        })
-    }
-
-    barberChanged = () => {
-        let select = document.getElementById('barber' + this.props.keyProps);
-        let barberName = select[select.selectedIndex].text;
-        console.log(barberName)
-        this.updateServices(barberName);
-        // update schedule
-    }
-
-    updateServices = (barberName) => {
-        let serviceNames = this.props.repo.getServiceNames(barberName);
-        let serviceCosts = this.props.repo.getServiceCosts(barberName);
-
-        let select = document.getElementById('select' + this.props.keyProps)
-        select.length = 1;
-
-        for (let i = 0; i < serviceCosts.length; i++) {
-            let option = document.createElement('option');
-            option.innerHTML = serviceNames[i];
-            option.value = serviceCosts[i]
-            select.appendChild(option);
-        }
-    }
-
-    getCost = () => {
-        return this.state.cost;
-    }
-
-    getBarberNames = () => {
-        let names = this.props.repo.getBarberNames();
-        let select = document.getElementById('barber' + this.props.keyProps)
-
-        names.forEach(name => {
-            let option = document.createElement('option');
-            option.innerHTML = name;
-            select.appendChild(option);
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="main">
-                    <div className="topForm">
-                        <div className="barber">
-                            <img src="../images/jeff.PNG" alt="jeff" width={100} className="headshot" />
-                        </div>
-                        <div>
-                            <div className="customMargin">
-                                <select className="custom-select" onChange={this.barberChanged} id={"barber" + this.props.keyProps}>
-                                    <option>Select a barber</option>
-                                </select>
-                            </div>
-                                <div className="customMargin">
-                                    <select type="select" className="custom-select" onChange={this.calculateTotal} id={"select" + this.props.keyProps}>
-                                        <option value="0">Select a service</option>
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                        </div> 
-                        <div className="barberAndCut">
-                            <div className="customMargin">
-                                <select className="custom-select">
-                                    <option>Oct 22 2020</option>
-                                    <option>Oct 23 2020</option>
-                                    <option>Oct 24 2020</option>
-                                </select>
-                            </div>
-                            <div className="customMargin">
-                                <select className="custom-select">
-                                    <option>10:00 AM - 10:30 AM</option>
-                                    <option>10:00 AM - 10:30 AM</option>
-                                    <option>10:00 AM - 10:30 AM</option>
-                                </select>
-                            </div>
-                        </div>
-
-                    {this.props.canRemove &&
-                        <div className="remove-button-container">
-                            <button type="button" onClick={() => this.removeApp(this.state.key)} id={"remove" + this.state.key} className={"removeAppointment"}>Remove</button>
-                        </div>
-                    }
-                </div>
-                {!this.props.canRemove &&
-                        <div className="first-appointment-spacer"></div>
-                }
-                <hr/>
-            </div>
-        );
     }
 }
