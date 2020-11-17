@@ -10,6 +10,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'sudo kill -9 $(lsof -i tcp: 3000 -t)'
+    
 - task: Npm@1
   inputs:
     command: 'install'
