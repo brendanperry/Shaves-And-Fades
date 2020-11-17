@@ -2,9 +2,7 @@
   "name": "react-express",
   "version": "1.0.1",
   "description": "",
-  //"main": "index.js",
   "scripts": {
-    //"start": "nodemon server.js",
     "build": "node server.js",
     "webpack": "./node_modules/.bin/webpack",
     "test": "mocha ./unit-tests/ --timeout 30000 --exit"
