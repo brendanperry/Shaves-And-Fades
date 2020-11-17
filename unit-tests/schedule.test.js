@@ -1,10 +1,15 @@
-const Browser = require('zombie')
-let assert = require('assert')
+const Browser = require('zombie');
+let assert = require('assert');
+let app = require('../server');
+let request = require('supertest');
 
 describe('Schedule Page', () => 
 {
     var url = "http://localhost:3000/schedule"
     let browser = new Browser();
+
+    // this will start the server so the test can access the UI *only for zombie*
+    request(app);
 
     before((done) => 
     {

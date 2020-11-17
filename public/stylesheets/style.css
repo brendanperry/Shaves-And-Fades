@@ -27,8 +27,9 @@ html {
 
 #logo {
     width: 200px;
+    height:200px;
     margin: 40px;
-    margin-bottom: 150px;
+    margin-top: 350px;
     border-radius: 10px;
 }
 
@@ -101,10 +102,12 @@ html {
             rgba(0, 0, 0, 0.6),
             rgba(0, 0, 0, 0.6)
         ),
-        url("../compressed-images/background.jpg");
+        url("../compressed-images/welcome2.jpg");
+    
     background-size: 1920px 1080px;
     padding: 25px;
-    background-position: center;
+    padding-top: 35px;
+    background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
     letter-spacing: 2px;
@@ -387,7 +390,7 @@ html {
             rgba(0, 0, 0, 0.6),
             rgba(0, 0, 0, 0.6)
         ),
-        url("../compressed-images/TakeASeat-ConvertImage.png");
+        url("../compressed-images/TakeASeat2.jpg");
     background-size: 1920px 1080px;
     padding: 350px;
     background-position: center;
@@ -453,6 +456,19 @@ html {
     justify-content: center;
     gap: 20px;
     grid-template-columns: 250px 250px 250px 250px;
+    background-image: 
+        linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+        ),
+        url("../compressed-images/work-BW.jpg");
+    
+    background-size: 1920px 1080px;
+    padding: 25px;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    letter-spacing: 2px;
 }
 
 #gallery img{
@@ -522,6 +538,22 @@ html {
         grid-template-columns: 250px 250px 250px;
     }
 
+    #welcome{
+        background-image: 
+        linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+        ),
+        url("../compressed-images/welcome3.jpg");
+        
+    }
+
+    #logo{
+        width: 135px;
+        height:135px;
+        margin-top: 165px;
+        margin-bottom: 0px;
+    }
     
 }
 
@@ -530,6 +562,8 @@ html {
         width: 350px;
         height: 300px;
     }
+
+    
 
     #column {
         display: none;
@@ -544,7 +578,7 @@ html {
         margin-bottom: 100px;
     }
     #appointmentSection{
-        background-size: 1000px 865px;
+        background-size: 865px 865px;
         padding: 100px;
     }
     
@@ -567,6 +601,13 @@ html {
     #menu-mobile {
         display: block;
     }
+
+    #appointmentSection{
+        background-size: 600px 600px;
+        padding: 100px;
+    }
+
+    
 
     #about-information {
         text-align: center;
@@ -616,3 +657,6 @@ html {
     color: black;
     font-weight: 600;
 }
+img {
+    border: 5px solid white;
+  }

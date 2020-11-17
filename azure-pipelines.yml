@@ -4,28 +4,25 @@
 # # https://aka.ms/yaml
 
 trigger:
-- master
+- production
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
 - task: Npm@1
-  displayName: 'install npm packages'
   inputs:
     command: 'install'
 
-# - task: Npm@2
-#   displayName: 'run tests - will fail if tests are not passing'
-#   inputs:
-#     command: 'custom'
-#     customCommand: 'test'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'run webpack'
 
- - task: Npm@3
-   displayName: 'run the webpack script'
-   inputs:
-     command: 'custom'
-     customCommand: 'run webpack'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'test'
 
 - task: PublishBuildArtifacts@1
   displayName: 'send the build off to release'
