@@ -9,6 +9,10 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+- task: CmdLine@2
+  inputs:
+    script: 'sudo kill -9 $(lsof -i tcp: 8080 -t)'
+
 steps:
 - task: Npm@1
   inputs:
