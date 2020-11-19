@@ -5,7 +5,7 @@ let request = require('supertest');
 
 describe('Schedule Page', () => 
 {
-    var url = "http://localhost:3000/schedule"
+    var url = "http://localhost:8080/schedule"
     let browser = new Browser();
 
     // this will start the server so the test can access the UI *only for zombie*

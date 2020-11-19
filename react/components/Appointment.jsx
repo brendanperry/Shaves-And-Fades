@@ -67,7 +67,7 @@ export default class Appointment extends React.Component {
     }
 
     updateServices = (barberName) => {
-        let serviceNames = this.props.repo.getServiceNames(barberName);
+        let serviceNames = this.props.repo.getServiceNamesWithCost(barberName);
         let serviceCosts = this.props.repo.getServiceCosts(barberName);
 
         let select = document.getElementById('select' + this.props.keyProps)

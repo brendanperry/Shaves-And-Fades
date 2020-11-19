@@ -142,30 +142,4 @@ let barbers = [
     }
 ]
 
-// let services = [
-//     {
-//         name: "Regular Haircut",
-//         cost: 17
-//     },
-//     {
-//         name: "Zero Fade/Taper",
-//         cost: 20
-//     },
-//     {
-//         name: "Resting Facial",
-//         cost: 13
-//     }
-// ]
-
-module.exports = 
-{
-    getBarbers: function() 
-    {
-        return barbers;
-    },
-
-    // getServices: function() 
-    // {
-    //     return services;
-    // },
-}
+module.exports = barbers;

@@ -1,6 +1,6 @@
 const React = require('react');
 import Repository from '../../javascript/repository';
-import fakeData from '../../javascript/fake-data';
+import Api from '../../javascript/api';
 import Appointment from './Appointment.jsx';
 import Loading from './Loading.jsx';
 
@@ -44,47 +44,17 @@ export default class Appointments extends React.Component {
         }
     }
 
-    // this is used to simulate loading time
-    timeout = (ms) => {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    getDatabase = async () => {
-        if (location.hostname === "localhost") {
-            await this.timeout(3000);
-            let data;
-
-            try {
-                data = fakeData;
-            } catch (error) {
-                console.log(error);
-                alert("The website failed to load. Please refresh the page or try again later.");
-                return;
-            }
-
-            if (data == null || data == undefined) {
-                alert("The website failed to load. Please refresh the page or try again later.");
-                return;
-            }
-
-            return data;
-        }
-        else {
-            // will ping database for data
-        }
-    }
-
     getRepo = async () => {
-        let data = await this.getDatabase()
+        let api = new Api();
 
-        if (data != undefined) {
-            let repo = new Repository(data);
+        let response = await api.get('barbers');
 
-            return repo;
-        } 
-        else {
+        if (response[0] != 200) {
+            alert("An error has occured. Please try again.");
             return null;
         }
+
+        return new Repository(response[1]);
     }
 
     addAppointment = () => {

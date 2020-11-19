@@ -8,7 +8,7 @@ describe('Repository', () =>
     
   before(() => 
   {
-    repository = new Repository();
+    repository = new Repository(fakeData);
   })
 
   describe('Can get all data', () => 
@@ -27,7 +27,7 @@ describe('Repository', () =>
     })
 
     it('Given a correct barber, get correct services list', () => {
-      assert.deepStrictEqual(repository.getServiceNames('Mixio Gaytan'), 
+      assert.deepStrictEqual(repository.getServiceNamesWithCost('Mixio Gaytan'), 
       [
         '$17.00 - Regular Haircut',
         '$20.00 - Zero Fade/Taper',
