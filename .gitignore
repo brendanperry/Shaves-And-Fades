@@ -6,4 +6,4 @@ npm-debug.log
 test/*.log
 public/build/
 .deployment
-.DS_STORE
+.DS_Store
