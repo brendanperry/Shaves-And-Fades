@@ -1,16 +1,60 @@
 const React = require('react');
-import Repository from '../../javascript/repository'
+import Repository from '../../javascript/repository';
+import Api from '../../javascript/api';
+import Appointment from './Appointment.jsx';
+import Loading from './Loading.jsx';
 
-class Appointments extends React.Component {
+export default class Appointments extends React.Component {
     constructor(props) {
         super(props);
         this.removeAppointment = this.removeAppointment.bind(this);
-        let firstRef = React.createRef();
+        this.calculateTotal = this.calculateTotal.bind(this);
+        
         this.state = {
-            appointments: [<Appointment key={1} keyProps={1} canRemove={false} ref={firstRef} />],
-            appointmentRefs: [firstRef],
-            nextKey: 2
+            appointments: [],
+            appointmentRefs: [],
+            nextKey: 2,
+            totalCost: 0,
+            repo: null,
+            loading: true
         }
+    }
+
+    // load in the database information async
+    componentDidMount = async () => {
+        let theRepo = await this.getRepo();
+
+        if (theRepo != null) {
+            let firstRef = React.createRef();
+
+            this.setState({
+                appointments: [
+                    <Appointment 
+                        key={1} 
+                        keyProps={1} 
+                        canRemove={false} 
+                        calculateTotal={this.calculateTotal} 
+                        ref={firstRef} 
+                        repo={theRepo}
+                    />],
+                appointmentRefs: [firstRef],
+                repo: theRepo,
+                loading: false
+            })
+        }
+    }
+
+    getRepo = async () => {
+        let api = new Api();
+
+        let response = await api.get('barbers');
+
+        if (response[0] != 200) {
+            alert("An error has occured. Please try again.");
+            return null;
+        }
+
+        return new Repository(response[1]);
     }
 
     addAppointment = () => {
@@ -21,7 +65,16 @@ class Appointments extends React.Component {
         this.newRef = React.createRef();
         let nextKey = appRefs[appRefs.length - 1].current.getKey() + 1;
 
-        apps.push(<Appointment ref={this.newRef} key={this.state.nextKey} keyProps={nextKey} canRemove={true} remove={this.removeAppointment} />)
+        apps.push(
+        <Appointment 
+            ref={this.newRef} 
+            key={this.state.nextKey} 
+            keyProps={nextKey} 
+            canRemove={true} 
+            remove={this.removeAppointment} 
+            calculateTotal={this.calculateTotal} 
+            repo={this.state.repo}
+        />)
 
         appRefs.push(this.newRef);
         key++;
@@ -35,7 +88,7 @@ class Appointments extends React.Component {
     }
 
     removeAppointment = (key) => {
-        let apps = [...this.state.appointments]
+        let apps = [...this.state.appointments];
         let appRefs = [...this.state.appointmentRefs];
         let indexToRemove = -1;
 
@@ -57,93 +110,52 @@ class Appointments extends React.Component {
         this.setState({
             appointments: apps,
             appointmentRefs: appRefs
+        }, () => {
+            this.calculateTotal();
+        })
+    }
+
+    calculateTotal = () => {
+        let apps = [...this.state.appointmentRefs]
+        let sum = 0;
+
+        apps.forEach(appointment => {
+            sum += appointment.current.getCost()
+        });
+
+        this.setState({
+            totalCost: sum
         })
     }
 
     render() {
         return (
             <div>
-                {this.state.appointments}
-                <div>
-                    <button onClick={this.addAppointment} className="addAppointment">Add New Appointment</button>
-                    <p id="total-appointments">{this.state.appointments.length}</p>
-                </div>
+                {this.state.loading === true && 
+                    <Loading />
+                }
+                {this.state.loading === false &&
+                    <div>
+                        <div style={{"textAlign" :"center","marginTop":"25px"}}>
+                            <h1>Schedule Your Time</h1>
+                        <div id="bar" />
+                        </div>
+                            {this.state.appointments}
+                        <div className="add-button-container">
+                            <button onClick={this.addAppointment} className="addAppointment">Add New Appointment</button>
+                        </div>
+                        <div className="footer">
+                            <div style={{"marginRight": "10px"}}>
+                                <span>Your total is: <span id="total" style={{"fontWeight":"bold"}}>${this.state.totalCost}</span></span>
+                            </div>
+                            <div className="button-container">
+                                <button className="button">CONTINUE</button>
+                            </div>
+                        </div>
+                        <p id="total-appointments" style={{"display":"none"}}>{this.state.appointments.length}</p>
+                    </div>
+                }
             </div>
         )
     }
 }
-
-class Appointment extends React.Component {
-    constructor(props) {
-        super(props);
-        this.remove = this.removeApp.bind(this);
-        this.getKey = this.getKey.bind(this);
-        this.state = {
-            key: this.props.keyProps,
-            barber: "",
-            date: "",
-            time: "",
-            cost: ""
-        }
-
-        this.getBarbers();
-    }
-
-    updateKey = (newKey) => {
-        this.setState({
-            key: newKey
-        });
-    }
-
-    getKey = () => {
-        return this.state.key;
-    }
-
-    removeApp = (key) => {
-        this.props.remove(key);
-    }
-
-    getBarbers = () => {
-        let repo = new Repository();
-        console.log(repo.getBarbers());
-    }
-
-    render() {
-        return (
-            <div>
-                <div style={{"textAlign" :"center","marginTop":"25px"}}>
-                    <h1>Select a barber</h1>
-                    <div id="bar" />
-                </div>
-                <main>
-                    <div className="barber">
-                        <img src="../images/jeff.PNG" alt="jeff" width={100} className="headshot" />
-                        <p>Jeffrey Ortega</p>
-                    </div>
-                    <div className="barber">
-                        <img src="../images/mixio.PNG" alt="mixio" width={100} className="headshot" />
-                        <p>Mixio Gaytan</p>
-                    </div>
-                    <div className="barber">
-                        <img src="../images/david.PNG" alt="david" width={100} className="headshot" />
-                        <p>David Nakasen</p>
-                    </div>
-                </main>
-                <div>
-                    <select>
-                        <option>One</option>
-                        <option>Two</option>
-                        <option>Three</option>
-                    </select>
-                </div>
-                {this.props.canRemove &&
-                    <div style={{"display": "flex", "justifyContent": "center"}}>
-                        <button type="button" onClick={() => this.removeApp(this.state.key)} className={"remove" + this.state.key}>Remove Appointment {this.state.key}</button>
-                    </div>
-                }
-            </div>
-        );
-    }
-}
-
-export default Appointments;

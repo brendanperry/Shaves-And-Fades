@@ -15,3 +15,5 @@ Dev:
 - It is best to make a new branch for changes
 - Changes are merged to master
 - Production builds are pushed to the production branch with CI
+
+note: loading indicator from https://loading.io/
