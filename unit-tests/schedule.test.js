@@ -34,7 +34,7 @@ describe('Schedule Page', () =>
 
     it("Given two appointments and remove appointment button is clicked, appointment count is 1", (done) => 
     {
-        browser.pressButton("Remove Appointment 2")
+        browser.pressButton("#remove2")
 
         assert.strictEqual(browser.text("p#total-appointments"), "1")
 
@@ -45,9 +45,36 @@ describe('Schedule Page', () =>
     {
         browser.pressButton("Add New Appointment")
         browser.pressButton("Add New Appointment")
-        browser.pressButton("Remove Appointment 2")
+        browser.pressButton("#remove3")
 
-        browser.assert.element(".remove2")
+        // the id of 3 will be updated to remove2 when state refreshes
+        browser.assert.element("#remove2")
+
+        done();
+    })
+
+    it("Given page start, the total cost is 0", (done) => {
+        assert.strictEqual(browser.text("#total"), "$0")
+
+        done();
+    })
+
+    it("Select two services, the total cost is 35", (done) => {
+        browser.select("#barber1", "Mixio Gaytan")
+        browser.select("#barber2", "Jeffrey Ortega")
+
+        browser.select("#select1", "$17.00 - Regular Haircut")
+        browser.select("#select2", "$20.00 - Zero Fade/Taper")
+
+        assert.strictEqual(browser.text("#total"), "$37")
+
+        done();
+    })
+
+    it("Remove an appointment, the total cost is subtracted", (done) => {
+        browser.pressButton("#remove2")
+
+        assert.strictEqual(browser.text("#total"), "$17")
 
         done();
     })
