@@ -1,4 +1,5 @@
 const React = require('react');
+const daysjs = require('dayjs');
 
 export default class Appointment extends React.Component {
     constructor(props) {
@@ -10,32 +11,33 @@ export default class Appointment extends React.Component {
             barber: "",
             date: "",
             time: "",
+            service: "",
             cost: 0
         }
     }
 
     // once the appointment is loaded, update the info
-    componentDidMount = () => {
+    componentDidMount() {
         this.getBarberNames();
     }
 
-    updateKey = (newKey) => {
+    updateKey(newKey) {
         this.setState({
             key: newKey
         });
     }
 
-    getKey = () => {
+    getKey() {
         return this.state.key;
     }
 
-    removeApp = (key) => {
+    removeApp(key) {
         this.props.remove(key);
     }
 
-    calculateTotal = () => {
+    calculateTotal() {
         let id = this.props.keyProps;
-        let cost = parseFloat(document.getElementById("select" + id).value);
+        let cost = parseFloat(document.getElementById("service" + id).value);
 
         // setState is async, so we call calculate total in the callback to make sure the state is up to date
         this.setState({
@@ -45,20 +47,25 @@ export default class Appointment extends React.Component {
         })
     }
 
-    barberChanged = () => {
-        let select = document.getElementById('barber' + this.props.keyProps);
-        let barberName = select[select.selectedIndex].text;
+    barberChanged(event) {
+        let select = event.srcElement;
+        let barberName = select.value;
 
-        this.updateServices(barberName);
-        this.updateBarberPhoto(barberName);
-        // update schedule
+        this.setState({
+            barber: barberName
+        }, () => {
+            this.updateServices(barberName);
+            this.updateBarberPhoto(barberName);
+            this.updateDates(barberName);
+            this.updateTimes(null);
+        })
     }
 
-    updateBarberPhoto = (barberName) => {
+    updateBarberPhoto(barber) {
         let photo = document.getElementById("headshot" + this.props.keyProps);
-        photo.src = "../images/" + barberName.replace(/ /g,'') + ".PNG";
+        photo.src = "../images/" + barber.replace(/ /g,'') + ".PNG";
 
-        if (barberName == "Select a barber") {
+        if (barber == "Select a barber") {
             photo.style.display = "none";
         }
         else {
@@ -66,11 +73,11 @@ export default class Appointment extends React.Component {
         }
     }
 
-    updateServices = (barberName) => {
-        let serviceNames = this.props.repo.getServiceNamesWithCost(barberName);
-        let serviceCosts = this.props.repo.getServiceCosts(barberName);
+    updateServices(barber) {
+        let serviceNames = this.props.repo.getServiceNamesWithCost(barber);
+        let serviceCosts = this.props.repo.getServiceCosts(barber);
 
-        let select = document.getElementById('select' + this.props.keyProps)
+        let select = document.getElementById('service' + this.props.keyProps)
         select.length = 1;
 
         for (let i = 0; i < serviceCosts.length; i++) {
@@ -81,11 +88,81 @@ export default class Appointment extends React.Component {
         }
     }
 
-    getCost = () => {
+    serviceChanged(event) {
+        let serviceText = event.srcElement[event.srcElement.selectedIndex].innerText.replace(/[^A-Za-z\s/]/g,'').trim();
+
+        this.setState({
+            service: serviceText
+        }, () => {
+            this.calculateTotal();
+            this.updateDates();
+            this.updateTimes(null);
+        })
+    }
+
+    dateChanged(event) {
+        let date = event.srcElement.value;
+
+        this.setState({
+            date: date
+        }, () => {
+            this.updateTimes(date);
+        })
+    }
+
+    updateDates() {
+        let dates = this.props.repo.getDates(this.state.barber);
+
+        let select = document.getElementById('date' + this.props.keyProps)
+        select.length = 1;
+
+        dates.forEach(date => {
+            let option = document.createElement('option');
+            option.innerHTML = date;
+            select.appendChild(option);
+        });
+    }
+
+    updateTimes(date) {
+        // used to reset the select
+        if (date == null) {
+            let select = document.getElementById('time' + this.props.keyProps)
+            select.length = 1;
+            return;
+        }
+
+        let hours = this.props.repo.getWorkingHours(this.state.barber, date);
+        let service = this.props.repo.getService(this.state.barber, this.state.service)
+
+        let slots = this.props.repo.getTimeSlots(hours, service);
+        let select = document.getElementById('time' + this.props.keyProps)
+        select.length = 1;
+
+        slots.forEach(slot => {
+            slot.forEach(time => {
+                let apptointmentSlot = this.convertToLocalTime(time[0]) + " - " + this.convertToLocalTime(time[1]);
+                let option = document.createElement('option');
+                option.innerHTML = apptointmentSlot;
+                select.appendChild(option);
+            });
+        });
+    }
+
+    convertToLocalTime(time24) {
+        let time = time24;
+        let H = +time.substr(0, 2);
+        let h = (H % 12) || 12;
+        h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
+        let ampm = H < 12 ? " AM" : " PM";
+        time = h + time.substr(2, 3) + ampm;
+        return time;
+    };
+
+    getCost() {
         return this.state.cost;
     }
 
-    getBarberNames = () => {
+    getBarberNames() {
         let names = this.props.repo.getBarberNames();
         let select = document.getElementById('barber' + this.props.keyProps)
 
@@ -106,31 +183,26 @@ export default class Appointment extends React.Component {
                         </div>
                         <div>
                             <div className="customMargin">
-                                <select className="custom-select" onChange={this.barberChanged} id={"barber" + this.props.keyProps}>
+                                <select type="select" className="custom-select" onChange={() => this.barberChanged(event)} id={"barber" + this.props.keyProps}>
                                     <option>Select a barber</option>
                                 </select>
                             </div>
                                 <div className="customMargin">
-                                    <select type="select" className="custom-select" onChange={this.calculateTotal} id={"select" + this.props.keyProps}>
+                                    <select type="select" className="custom-select" onChange={() => this.serviceChanged(event)} id={"service" + this.props.keyProps}>
                                         <option value="0">Select a service</option>
-                                        
                                     </select>
                                 </div>
                             </div>
                         </div> 
                         <div className="barberAndCut">
                             <div className="customMargin">
-                                <select className="custom-select">
-                                    <option>Oct 22 2020</option>
-                                    <option>Oct 23 2020</option>
-                                    <option>Oct 24 2020</option>
+                                <select type="select" className="custom-select" id={"date" + this.props.keyProps} onChange={() => this.dateChanged(event)}>
+                                    <option value="0">Select a date</option>
                                 </select>
                             </div>
                             <div className="customMargin">
-                                <select className="custom-select">
-                                    <option>10:00 AM - 10:30 AM</option>
-                                    <option>10:00 AM - 10:30 AM</option>
-                                    <option>10:00 AM - 10:30 AM</option>
+                                <select type="select" className="custom-select" id={"time" + this.props.keyProps}>
+                                    <option value="0">Select a time</option>
                                 </select>
                             </div>
                         </div>

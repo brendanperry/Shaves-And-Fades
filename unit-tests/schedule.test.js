@@ -63,9 +63,10 @@ describe('Schedule Page', () =>
         browser.select("#barber1", "Mixio Gaytan")
         browser.select("#barber2", "Jeffrey Ortega")
 
-        browser.select("#select1", "$17.00 - Regular Haircut")
-        browser.select("#select2", "$20.00 - Zero Fade/Taper")
+        browser.select("#service1", "$17.00 - Regular Haircut")
+        browser.select("#service2", "$20.00 - Zero Fade/Taper")
 
+        browser.wait = '10s'
         assert.strictEqual(browser.text("#total"), "$37")
 
         done();
@@ -74,7 +75,21 @@ describe('Schedule Page', () =>
     it("Remove an appointment, the total cost is subtracted", (done) => {
         browser.pressButton("#remove2")
 
-        assert.strictEqual(browser.text("#total"), "$17")
+        setTimeout(() => {
+            assert.strictEqual(browser.text("#total"), "$17")
+
+            done();
+        }, 0)
+    })
+
+    it("Select barber, show correct dates", (done) => {
+        browser.select("#barber1", "Mixio Gaytan")
+        browser.select("#service1", "$17.00 - Regular Haircut")
+        browser.select("#date1", "02 Nov 2020")
+
+        browser.select("#time1", "8:00 AM - 8:45 AM")
+
+        //browser.assert.element("#time1")
 
         done();
     })
