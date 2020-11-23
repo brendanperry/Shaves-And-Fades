@@ -1,5 +1,4 @@
 const React = require('react');
-const daysjs = require('dayjs');
 
 export default class Appointment extends React.Component {
     constructor(props) {
@@ -89,24 +88,24 @@ export default class Appointment extends React.Component {
     }
 
     serviceChanged(event) {
+        // update cost and reset the selects
+        this.calculateTotal();
+        this.updateDates();
+        this.updateTimes(null);
+
         let serviceText = event.srcElement[event.srcElement.selectedIndex].innerText.replace(/[^A-Za-z\s/]/g,'').trim();
 
         this.setState({
             service: serviceText
-        }, () => {
-            this.calculateTotal();
-            this.updateDates();
-            this.updateTimes(null);
-        })
+        });
     }
 
     dateChanged(event) {
         let date = event.srcElement.value;
+        this.updateTimes(date);
 
         this.setState({
             date: date
-        }, () => {
-            this.updateTimes(date);
         })
     }
 
@@ -152,7 +151,6 @@ export default class Appointment extends React.Component {
         let time = time24;
         let H = +time.substr(0, 2);
         let h = (H % 12) || 12;
-        h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
         let ampm = H < 12 ? " AM" : " PM";
         time = h + time.substr(2, 3) + ampm;
         return time;
