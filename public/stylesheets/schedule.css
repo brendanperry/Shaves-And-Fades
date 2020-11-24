@@ -190,3 +190,17 @@ hr {
 .first-appointment-spacer {
     margin-bottom: 60px;
 }
+
+.modal-header {
+    display: block !important;
+}
+
+.modal-header p{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.modal-body {
+    display: block !important;
+    white-space: pre !important;
+}

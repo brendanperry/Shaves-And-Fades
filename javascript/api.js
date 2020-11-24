@@ -29,6 +29,27 @@ class Api
             return [error.status, error.response];
         }
     }
+
+    async post(uri, body)
+    {
+        try 
+        {
+            const response = await axios.post(this.domain + uri, body, {
+                headers: {
+                  // Overwrite Axios's automatically set Content-Type
+                  'Content-Type': 'application/json'
+                }
+              });
+
+            return response.status;
+        }
+        catch (error)
+        {
+            console.log(error);
+            
+            return error.status;
+        }
+    }
 }
 
 module.exports = Api;

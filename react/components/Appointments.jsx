@@ -3,6 +3,9 @@ import Repository from '../../javascript/repository';
 import Api from '../../javascript/api';
 import Appointment from './Appointment.jsx';
 import Loading from './Loading.jsx';
+import Popup from './Popup.jsx';
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe('pk_test_51HBLUsDGxKT2NkYgVHvoExpjT6UP7ECQf0ZNRSfDLD1u2jQk3VPoJrj3bFqM70gqu9NZM2bdjzC2u6CDNItk2t0i00bTgBKg2R');
 
 export default class Appointments extends React.Component {
     constructor(props) {
@@ -16,7 +19,7 @@ export default class Appointments extends React.Component {
             nextKey: 2,
             totalCost: 0,
             repo: null,
-            loading: true
+            loading: true,
         }
     }
 
@@ -128,6 +131,66 @@ export default class Appointments extends React.Component {
         })
     }
 
+    continue = () => {
+        let summary = "";
+
+        let apps = [...this.state.appointmentRefs]
+
+        apps.forEach(app => {
+            summary += app.current.getSummary() + "--------------\n"
+        });
+
+        summary += "Total Cost: $" + this.state.totalCost;
+
+        document.getElementById("modal-text").innerHTML = summary;
+
+        return summary;
+    }
+
+    getAppointmentData = (sessionId) => {
+        let apps = [...this.state.appointmentRefs]
+        let data = [];
+
+        apps.forEach(app => {
+            data.push(app.current.getData(sessionId));
+        });
+
+        return JSON.stringify(data);
+    }
+
+    addPayment = async () => {
+        let api = new Api();
+        let checkoutResponse = await api.get('checkout');
+        
+        if (checkoutResponse[0] != 200) {
+            alert("Something went wrong. Please try again.");
+            console.log("Something went wrong. Please try again.");
+            return;
+        }
+
+        const sessionId = checkoutResponse[1].id;
+
+        let data = this.getAppointmentData(sessionId);
+
+        // success, now we need to mark the time slots as pending
+        let markPendingResponse = await api.post('pendingappointment', data);
+
+        if (markPendingResponse != 200) {
+            alert("Something went wrong. Please try again.");
+            console.log(markPendingResponse);
+            return;
+        }
+
+        // When the customer clicks on the button, redirect them to Checkout.
+        const stripe = await stripePromise;
+        const { error } = await stripe.redirectToCheckout({
+            sessionId,
+        });
+
+        // private key: sk_test_51HBLUsDGxKT2NkYgUU4esEBYQdoRjrjcu6Lx0jQCcP3QFYAcDsz0lF7bypIFxDPVoW2NGffiYbNR9NbTeIMHYHWT00dXSKyY8k
+        // public key: pk_test_51HBLUsDGxKT2NkYgVHvoExpjT6UP7ECQf0ZNRSfDLD1u2jQk3VPoJrj3bFqM70gqu9NZM2bdjzC2u6CDNItk2t0i00bTgBKg2R
+    }
+
     render() {
         return (
             <div>
@@ -149,12 +212,14 @@ export default class Appointments extends React.Component {
                                 <span>Your total is: <span id="total" style={{"fontWeight":"bold"}}>${this.state.totalCost}</span></span>
                             </div>
                             <div className="button-container">
-                                <button className="button">CONTINUE</button>
+                                <button className="button" data-toggle="modal" data-target="#exampleModal" onClick={this.continue}>CONTINUE</button>
                             </div>
                         </div>
                         <p id="total-appointments" style={{"display":"none"}}>{this.state.appointments.length}</p>
                     </div>
                 }
+                <Popup payButton={this.addPayment} />
+
             </div>
         )
     }

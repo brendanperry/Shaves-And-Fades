@@ -1,5 +1,5 @@
 var assert = require('assert');
-const fakeData = require('../javascript/fake-data');
+const fakeData = require('../javascript/barber-data');
 const Repository = require('../javascript/repository');
 
 describe('Repository', () => 
@@ -73,6 +73,13 @@ describe('Repository', () =>
       ]];
 
       assert.deepStrictEqual(slots, testSlots);
+    })
+
+    it('Given test slots, remove any that overlap with scheduled and pending appointments', () => {
+      let hours = repository.getWorkingHours('Mixio Gaytan', '2020-11-02');
+      let service = repository.getService('Mixio Gaytan', 'Zero Fade/Taper')
+
+      let slots = repository.getTimeSlots(hours, service);
     })
   })
 });

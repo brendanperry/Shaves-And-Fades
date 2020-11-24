@@ -21,6 +21,29 @@ export default class Appointment extends React.Component {
         this.getBarberNames();
     }
 
+    getSummary = () => {
+        let summary = "";
+        summary += this.state.barber + "\n";
+        summary += this.state.date + " " + this.state.time + "\n";
+        summary += this.state.service + "\n";
+        summary += "$" + this.state.cost + "\n";
+
+        return summary;
+    }
+
+    getData = (sessionId) => {
+        let data = [];
+
+        data.push(this.state.barber);
+        data.push(this.state.date);
+        data.push(this.state.time);
+        data.push(this.state.service);
+        data.push(this.state.cost);
+        data.push(sessionId);
+
+        return data;
+    }
+
     updateKey(newKey) {
         this.setState({
             key: newKey
@@ -173,6 +196,12 @@ export default class Appointment extends React.Component {
         });
     }
 
+    timeChanged(event) {
+        this.setState({
+            time: event.srcElement.value
+        })
+    }
+
     render() {
         return (
             <div>
@@ -201,7 +230,7 @@ export default class Appointment extends React.Component {
                                 </select>
                             </div>
                             <div className="customMargin">
-                                <select type="select" className="custom-select" id={"time" + this.props.keyProps}>
+                                <select type="select" className="custom-select" id={"time" + this.props.keyProps} onChange={() => this.timeChanged(event)}>
                                     <option value="0">Select a time</option>
                                 </select>
                             </div>
