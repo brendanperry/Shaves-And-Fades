@@ -63,8 +63,8 @@ describe('Schedule Page', () =>
         browser.select("#barber1", "Mixio Gaytan")
         browser.select("#barber2", "Jeffrey Ortega")
 
-        browser.select("#select1", "$17.00 - Regular Haircut")
-        browser.select("#select2", "$20.00 - Zero Fade/Taper")
+        browser.select("#service1", "$17.00 - Regular Haircut")
+        browser.select("#service2", "$20.00 - Zero Fade/Taper")
 
         assert.strictEqual(browser.text("#total"), "$37")
 
