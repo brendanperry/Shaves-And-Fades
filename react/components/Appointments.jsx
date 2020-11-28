@@ -135,14 +135,26 @@ export default class Appointments extends React.Component {
         let summary = "";
 
         let apps = [...this.state.appointmentRefs]
+        let isComplete = true;
 
         apps.forEach(app => {
+            if (!app.current.isFormComplete()) {
+                isComplete = false;
+            }
+
             summary += app.current.getSummary() + "--------------\n"
         });
 
         summary += "Total Cost: $" + this.state.totalCost;
 
-        document.getElementById("modal-text").innerHTML = summary;
+        if (isComplete) {
+            document.getElementById("modal-text").innerHTML = summary;
+            document.getElementById("addPayment").style = "display: block";
+        }
+        else {
+            document.getElementById("modal-text").innerHTML = "Please complete all form fields and try again.";
+            document.getElementById("addPayment").style = "display: none";
+        }
 
         return summary;
     }

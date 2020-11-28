@@ -149,6 +149,10 @@ class Repository
 
     getTimeSlots(workingHours, service)
     {
+        if (!service) {
+            return;
+        }
+        
         let slots = [];
         let serviceLength = service.length;
 

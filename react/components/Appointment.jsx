@@ -43,6 +43,27 @@ export default class Appointment extends React.Component {
         return data;
     }
 
+    isFormComplete = () => {
+        let barber = parseFloat(document.getElementById("barber" + this.props.keyProps).innerHTML);
+        let cost = parseFloat(document.getElementById("service" + this.props.keyProps).value);
+        let date = parseFloat(document.getElementById("date" + this.props.keyProps).value);
+        let time = parseFloat(document.getElementById("time" + this.props.keyProps).value);
+
+        if (barber == "Select a barber")
+            return false;
+
+        if (cost == 0)
+            return false;
+
+        if (date == 0) 
+            return false;
+
+        if (time === 0)
+            return false;
+
+        return true;
+    }
+
     updateKey(newKey) {
         this.setState({
             key: newKey
@@ -70,17 +91,19 @@ export default class Appointment extends React.Component {
     }
 
     barberChanged(event) {
-        let select = event.srcElement;
-        let barberName = select.value;
+        if (event.srcElement) {
+            let select = event.srcElement;
+            let barberName = select.value;
 
-        this.setState({
-            barber: barberName
-        }, () => {
-            this.updateServices(barberName);
-            this.updateBarberPhoto(barberName);
-            this.updateDates(barberName);
-            this.updateTimes(null);
-        })
+            this.setState({
+                barber: barberName
+            }, () => {
+                this.updateServices(barberName);
+                this.updateBarberPhoto(barberName);
+                this.updateDates(barberName);
+                this.updateTimes(null);
+            })
+        }
     }
 
     updateBarberPhoto(barber) {
@@ -116,20 +139,24 @@ export default class Appointment extends React.Component {
         this.updateDates();
         this.updateTimes(null);
 
-        let serviceText = event.srcElement[event.srcElement.selectedIndex].innerText.replace(/[^A-Za-z\s/]/g,'').trim();
+        if (event.srcElement[event.srcElement.selectedIndex].innerText) {
+            let serviceText = event.srcElement[event.srcElement.selectedIndex].innerText.replace(/[^A-Za-z\s/]/g,'').trim();
 
-        this.setState({
-            service: serviceText
-        });
+            this.setState({
+                service: serviceText
+            });
+        } 
     }
 
     dateChanged(event) {
-        let date = event.srcElement.value;
-        this.updateTimes(date);
+        if (event.srcElement) {
+            let date = event.srcElement.value;
+            this.updateTimes(date);
 
-        this.setState({
-            date: date
-        })
+            this.setState({
+                date: date
+            })
+        }
     }
 
     updateDates() {
@@ -149,6 +176,11 @@ export default class Appointment extends React.Component {
         // used to reset the select
         if (date == null) {
             let select = document.getElementById('time' + this.props.keyProps)
+
+            if (!select) {
+                return;
+            }
+
             select.length = 1;
             return;
         }
@@ -158,13 +190,18 @@ export default class Appointment extends React.Component {
 
         let slots = this.props.repo.getTimeSlots(hours, service);
         let select = document.getElementById('time' + this.props.keyProps)
+
+        if (!slots) {
+            return;
+        }
+
         select.length = 1;
 
         slots.forEach(slot => {
             slot.forEach(time => {
-                let apptointmentSlot = this.convertToLocalTime(time[0]) + " - " + this.convertToLocalTime(time[1]);
+                let appointmentSlot = this.convertToLocalTime(time[0]) + " - " + this.convertToLocalTime(time[1]);
                 let option = document.createElement('option');
-                option.innerHTML = apptointmentSlot;
+                option.innerHTML = appointmentSlot;
                 select.appendChild(option);
             });
         });
@@ -195,9 +232,11 @@ export default class Appointment extends React.Component {
     }
 
     timeChanged(event) {
-        this.setState({
-            time: event.srcElement.value
-        })
+        if (event.srcElement) {
+            this.setState({
+                time: event.srcElement.value
+            })
+        }
     }
 
     render() {

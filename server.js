@@ -31,10 +31,41 @@ app.get('/checkout', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/public/checkout.html'))
 })
 
-app.get('/success', (req, res) => {
-  let sessionId = req.query.session_id;
+app.get('/success', async (req, res) => {
+  try {
+    const stripe = require('stripe')('sk_test_51HBLUsDGxKT2NkYgUU4esEBYQdoRjrjcu6Lx0jQCcP3QFYAcDsz0lF7bypIFxDPVoW2NGffiYbNR9NbTeIMHYHWT00dXSKyY8k');
 
-  res.sendFile(path.resolve(__dirname + '/public/success.html'))
+    let sessionId = req.query.session_id;
+
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    const key = session.setup_intent;
+
+    const intent = await stripe.setupIntents.retrieve(key);
+
+    const payment_method = intent.payment_method;
+
+    const customer = await stripe.customers.create({
+      payment_method: payment_method,
+      invoice_settings: {
+        default_payment_method: payment_method,
+      },
+    });
+
+    console.log(customer)
+
+    /*
+
+    Now we need to find the customer in pending appointments by session_id, then grab that info, and create a new entry in the booked appointments db with the 
+    payment method and customer id
+
+    */
+
+    res.sendFile(path.resolve(__dirname + '/public/success.html'))
+  }
+  catch(error) {
+    console.log(error)
+  }
 })
 
 // this will need to be changed to handle real data when that time comes
