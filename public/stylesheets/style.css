@@ -431,8 +431,8 @@ html {
     flex-wrap: wrap;
     padding: 50px;
     font-weight: 300;
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
     margin: auto;
     justify-content: center;
     text-decoration: none;
