@@ -103,6 +103,7 @@ export default class Appointment extends React.Component {
                 this.updateDates(barberName);
                 this.updateTimes(null);
             })
+
         }
     }
 
@@ -172,7 +173,7 @@ export default class Appointment extends React.Component {
         });
     }
 
-    updateTimes(date) {
+    async updateTimes (date) {
         // used to reset the select
         if (date == null) {
             let select = document.getElementById('time' + this.props.keyProps)
@@ -188,7 +189,8 @@ export default class Appointment extends React.Component {
         let hours = this.props.repo.getWorkingHours(this.state.barber, date);
         let service = this.props.repo.getService(this.state.barber, this.state.service)
 
-        let slots = this.props.repo.getTimeSlots(hours, service);
+        let slots = await this.props.repo.getTimeSlots(this.state.barber, hours, service);
+
         let select = document.getElementById('time' + this.props.keyProps)
 
         if (!slots) {

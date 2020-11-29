@@ -5,7 +5,7 @@ import Appointment from './Appointment.jsx';
 import Loading from './Loading.jsx';
 import Popup from './Popup.jsx';
 import { loadStripe } from '@stripe/stripe-js';
-const stripePromise = loadStripe('pk_test_51HBLUsDGxKT2NkYgVHvoExpjT6UP7ECQf0ZNRSfDLD1u2jQk3VPoJrj3bFqM70gqu9NZM2bdjzC2u6CDNItk2t0i00bTgBKg2R');
+const stripePromise = loadStripe('pk_test_51HsZ8ND4ypkbyKIte9muIIOiUaKJxrKzXeooYSnf0CCq8LKfDHhmH2LzePf29oGTDKPEgi5ryXpz8H8CJBr91Oi200eZiE1XAu');
 
 export default class Appointments extends React.Component {
     constructor(props) {
@@ -192,6 +192,8 @@ export default class Appointments extends React.Component {
             console.log(markPendingResponse);
             return;
         }
+
+        window.onbeforeunload = function () {}
 
         // When the customer clicks on the button, redirect them to Checkout.
         const stripe = await stripePromise;

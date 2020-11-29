@@ -4,13 +4,16 @@ class Api
 {
     constructor() 
     {
-        if (location.hostname === "localhost") 
+        try 
+        {
+            if (location.hostname === "localhost") 
+                this.domain = 'http://localhost:8080/api/';
+            else 
+                this.domain = 'https://shavesandfades.com/api/';
+        }   
+        catch(e)
         {
             this.domain = 'http://localhost:8080/api/';
-        }
-        else 
-        {
-            this.domain = 'https://shavesandfades.com/api/'
         }
     }
 

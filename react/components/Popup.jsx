@@ -11,7 +11,7 @@ export default class Popup extends React.Component {
         <div>
           {/* Modal */}
           <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
+            <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
                 <div className="modal-header">
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">

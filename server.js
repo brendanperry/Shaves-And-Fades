@@ -6,7 +6,9 @@ const inputFolder = './public/images/';
 const processedFolder = './public/compressed-images/';
 let bodyParser = require('body-parser')
 const fs = require('fs');
-const fakeData = require('./javascript/barber-data');
+const barberData = require('./javascript/barber-data');
+const pendingData = require('./javascript/pending-appointments-data');
+const scheduledData = require('./javascript/scheduled-appointments-data');
 
 const PORT = 8080;
 const app = express();
@@ -70,19 +72,28 @@ app.get('/success', async (req, res) => {
 
 // this will need to be changed to handle real data when that time comes
 app.get('/api/barbers', async (req, res) => {
-  res.json(fakeData);
+  res.json(barberData);
+})
+
+app.get('/api/pendingappointments', (req, res) => {
+  console.log(pendingData)
+  res.json(pendingData)
+})
+
+app.get('/api/scheduledappointments', (req, res) => {
+  res.json(scheduledData)
 })
 
 app.get('/api/checkout', async (req, res) => {
   try 
   {
-    const stripe = require('stripe')('sk_test_51HBLUsDGxKT2NkYgUU4esEBYQdoRjrjcu6Lx0jQCcP3QFYAcDsz0lF7bypIFxDPVoW2NGffiYbNR9NbTeIMHYHWT00dXSKyY8k');
+    const stripe = require('stripe')('sk_test_51HsZ8ND4ypkbyKItVIuZGst4qJomJ4yb7P03zNOjv0gJm6XSlOvNIXTUYwy9xQ4KWFlwkfhTdzHiMMkoiYs56olv001o6kkat8');
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'setup',
       success_url: 'http://localhost:8080/success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:8080/success',
+      cancel_url: 'http://localhost:8080/schedule',
     });
 
     res.send(session)

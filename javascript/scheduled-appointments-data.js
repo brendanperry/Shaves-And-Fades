@@ -2,7 +2,7 @@ let appointments = [
     [
         'Mixio Gaytan',
         '02 Nov 2020',
-        '08:00 PM - 08:45 PM',
+        '08:00 AM - 08:45 AM',
         'Regular Haircut',
         17,
         'cs_test_c17V2LbsrH6DyowaJVmHGyQdoCDlZEJgh6FwIdynET1ZbiLK9gKLVJf5YW'
