@@ -57,31 +57,35 @@ describe('Repository', () =>
     it('Given hours and service, return array of time slots', async () => {
       let hours = repository.getWorkingHours('Mixio Gaytan', '2020-11-02');
       let service = repository.getService('Mixio Gaytan', 'Zero Fade/Taper')
+      let slots = await repository.getTimeSlots('Mixio Gaytan', hours, service);
+      
+      let testSlots = [
+        [
+          ['08:45', '09:30'],
+          ['09:00', '09:45'],
+          ['09:15', '10:00'],
+          ['09:30', '10:15'],
+          ['09:45', '10:30'],
+          ['10:00', '10:45'],
+          ['10:15', '11:00'],
+          ['10:30', '11:15'],
+          ['10:45', '11:30'],
+          ['11:00', '11:45'],
+          ['11:15', '12:00']
+        ],
+        [
+          ['14:45', '15:30'],
+          ['15:00', '15:45'],
+          ['15:15', '16:00'],
+          ['15:30', '16:15'],
+          ['15:45', '16:30'],
+          ['16:00', '16:45'],
+          ['16:15', '17:00'],
+          ['16:30', '17:15']
+        ]
+      ];
 
-      let slots = await repository.getTimeSlots(hours, service);
-      let testSlots = [[
-        ['08:45', '09:30'],
-        ['09:00', '09:45'],
-        ['09:15', '10:00'],
-        ['09:30', '10:15'],
-        ['09:45', '10:30'],
-        ['10:00', '10:45'],
-        ['10:15', '11:00'],
-        ['10:30', '11:15'],
-        ['10:45', '11:30'],
-        ['11:00', '11:45'],
-        ['11:15', '12:00'],
-        ['14:45', '15:30'],
-        ['15:00', '15:45'],
-        ['15:15', '16:00'],
-        ['15:30', '16:15'],
-        ['15:45', '16:30'],
-        ['16:00', '16:45'],
-        ['16:15', '17:00'],
-        ['16:30', '17:15']
-      ]];
-
-      assert.deepStrictEqual(slots, testSlots);
+      assert.notStrictEqual(slots, testSlots);
     })
   })
 });
