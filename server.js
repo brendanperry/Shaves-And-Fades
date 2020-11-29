@@ -1,11 +1,6 @@
 const express = require('express');
 const path = require('path');
-const Jimp = require("jimp");
-const { AUTO } = require('jimp');
-const inputFolder = './public/images/';
-const processedFolder = './public/compressed-images/';
 let bodyParser = require('body-parser')
-const fs = require('fs');
 const barberData = require('./javascript/barber-data');
 const pendingData = require('./javascript/pending-appointments-data');
 const scheduledData = require('./javascript/scheduled-appointments-data');
@@ -33,9 +28,18 @@ app.get('/checkout', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/public/checkout.html'))
 })
 
+app.get('/cancelled', async (req, res) => {
+  let sessionId = req.query.session_id;
+  console.log(sessionId);
+
+  // remove the appointment from the pending collection in the database
+
+  res.redirect('/');
+})
+
 app.get('/success', async (req, res) => {
   try {
-    const stripe = require('stripe')('sk_test_51HBLUsDGxKT2NkYgUU4esEBYQdoRjrjcu6Lx0jQCcP3QFYAcDsz0lF7bypIFxDPVoW2NGffiYbNR9NbTeIMHYHWT00dXSKyY8k');
+    const stripe = require('stripe')('sk_test_51HsZ8ND4ypkbyKItVIuZGst4qJomJ4yb7P03zNOjv0gJm6XSlOvNIXTUYwy9xQ4KWFlwkfhTdzHiMMkoiYs56olv001o6kkat8');
 
     let sessionId = req.query.session_id;
 
@@ -54,12 +58,12 @@ app.get('/success', async (req, res) => {
       },
     });
 
-    console.log(customer)
-
     /*
 
     Now we need to find the customer in pending appointments by session_id, then grab that info, and create a new entry in the booked appointments db with the 
-    payment method and customer id
+    payment method and customer id, then remove it from pending.
+
+    If the appointment is not found in pending, then we need to show that the transaction failed instead of displaying the success page.
 
     */
 
@@ -76,7 +80,6 @@ app.get('/api/barbers', async (req, res) => {
 })
 
 app.get('/api/pendingappointments', (req, res) => {
-  console.log(pendingData)
   res.json(pendingData)
 })
 
@@ -93,7 +96,7 @@ app.get('/api/checkout', async (req, res) => {
       payment_method_types: ['card'],
       mode: 'setup',
       success_url: 'http://localhost:8080/success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:8080/schedule',
+      cancel_url: 'http://localhost:8080/cancelled?session_id={CHECKOUT_SESSION_ID}',
     });
 
     res.send(session)
@@ -106,10 +109,9 @@ app.get('/api/checkout', async (req, res) => {
 
 app.post('/api/pendingappointment', async(req, res) => {
   let data = req.body;
-  console.log(data);
 
   res.status(200).send();
-  // mark the time slots pending so they can't be taken 
+  // add the appointment to the pending collection in the database
 })
 
 app.post('/api/scheduledappointment', async(req, res) => {

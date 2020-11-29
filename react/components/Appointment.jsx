@@ -20,6 +20,22 @@ export default class Appointment extends React.Component {
         this.getBarberNames();
     }
 
+    getBarber = () => {
+        return this.state.barber;
+    }
+
+    getService = () => {
+        return this.state.service;
+    }
+
+    getDate = () => {
+        return this.state.date;
+    }
+
+    getTime = () => {
+        return this.state.time;
+    }
+
     getSummary = () => {
         let summary = "";
         summary += this.state.barber + "\n";

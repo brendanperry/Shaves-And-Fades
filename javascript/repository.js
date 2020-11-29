@@ -191,8 +191,6 @@ class Repository
 
         let scheduled = await this.getScheduledSlots(barberName);
         let pending = await this.getPendingSlots(barberName);
-        console.log("WOOOOO")
-
 
         if (scheduled == null || pending == null) return;
 
@@ -211,13 +209,10 @@ class Repository
                 startTime = startTime.add(15, 'minute');
             }
             
-            console.log("here to remove slots");
             slot = this.removeTakenSlots(scheduled, pending, slot, startTime);
 
             slots.push(slot);
         });
-
-        console.log(slots)
 
         return slots;
     }

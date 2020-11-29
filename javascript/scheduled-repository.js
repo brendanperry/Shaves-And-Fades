@@ -13,17 +13,11 @@ class ScheduledRepository
     getAppointments = () => {
         let barberApps = [];
 
-        console.log(this.barberName)
-
         this.appointments.forEach(app => {
-            console.log(app[0] + this.barberName)
             if (app[0] == this.barberName) {
                 barberApps.push(app)
-                console.log("PUSHED")
             }
         });
-
-        console.log(barberApps)
 
         return barberApps;
     }
@@ -41,8 +35,6 @@ class ScheduledRepository
 
             times.push(formattedTime);
         });
-
-        console.log("WOWOWO")
 
         return times;
     }
