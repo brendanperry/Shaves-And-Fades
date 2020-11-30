@@ -24,10 +24,6 @@ app.get('/test', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/public/test.html'))
 })
 
-app.get('/checkout', (req, res) => {
-  res.sendFile(path.resolve(__dirname + '/public/checkout.html'))
-})
-
 app.get('/cancelled', async (req, res) => {
   let sessionId = req.query.session_id;
   console.log(sessionId);

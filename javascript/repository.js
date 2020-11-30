@@ -2,7 +2,6 @@
 const daysjs = require('dayjs')
 const ScheduledRepo = require('./scheduled-repository')
 const Api = require('./api');
-const ScheduledRepository = require('./scheduled-repository');
 
 class Repository 
 {
@@ -175,7 +174,7 @@ class Repository
             return null;
         }
 
-        let pendingRepo = new ScheduledRepository(barberName, response[1]);
+        let pendingRepo = new ScheduledRepo(barberName, response[1]);
 
         return pendingRepo.getAppointmentTimes();
     }
