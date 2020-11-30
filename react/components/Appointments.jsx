@@ -192,6 +192,7 @@ export default class Appointments extends React.Component {
     }
 
     timesAreOverlapping = () => {
+        let isOverlapping = false;
         let apps = [...this.state.appointmentRefs];
         let takenSlots = []
 
@@ -207,8 +208,8 @@ export default class Appointments extends React.Component {
                 if (barberName == slot[0]) {
                     if (endTime.isAfter(slot[1][0]) && startTime.isBefore(slot[1][1]))
                     {
-                        alert("You have overlapping appointment slots. Please choose a different time.")
-                        return true;
+                        alert("You have overlapping appointments. Please choose a different time.")
+                        isOverlapping = true;
                     }
                 }
             });
@@ -216,7 +217,7 @@ export default class Appointments extends React.Component {
             takenSlots.push([barberName, [startTime, endTime]]);
         });
 
-        return false;
+        return isOverlapping;
     }
 
     slotsAreStillAvailable = async () => {
