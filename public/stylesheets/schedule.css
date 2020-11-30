@@ -47,7 +47,7 @@ h1 {
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 500px;
+    max-width: 400px;
     min-width: 300px;
 }
 
@@ -189,4 +189,18 @@ hr {
 
 .first-appointment-spacer {
     margin-bottom: 60px;
+}
+
+.modal-header {
+    display: block !important;
+}
+
+.modal-header p{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.modal-body {
+    display: block !important;
+    white-space: pre !important;
 }

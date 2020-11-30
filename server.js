@@ -1,42 +1,16 @@
 const express = require('express');
 const path = require('path');
-const Jimp = require("jimp");
-const { AUTO } = require('jimp');
-const inputFolder = './public/images/';
-const processedFolder = './public/compressed-images/';
-const fs = require('fs');
-const fakeData = require('./javascript/fake-data');
+let bodyParser = require('body-parser')
+const barberData = require('./javascript/barber-data');
+const pendingData = require('./javascript/pending-appointments-data');
+const scheduledData = require('./javascript/scheduled-appointments-data');
 
 const PORT = 8080;
 const app = express();
 
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
 app.listen(PORT);
-
-// By default, all .png and .jpg images will be scaled to 1920xY and compressed to 70%.
-// If you want an image to be skipped, make the file extension in all caps (.PNG instead of .png)
-// Images smaller than 1080p may want to be skipped (the logo)
-// This is being temporarily removed due to performance issues
-
-// fs.readdir(inputFolder, (err, files) => {
-//   files.forEach(file => {
-//     if (file.endsWith(".jpg") || file.endsWith(".png")) {
-//       resizeImage(file);
-//     }
-//   });
-// });
-
-// function resizeImage(fileName) {
-//   Jimp.read(inputFolder + fileName).then(function (image) {
-//     if(image.scale)
-//     image
-//         .resize(1920, Jimp.AUTO)
-//         .quality(70)
-//         .write(processedFolder + fileName);
-//   })
-
-//   console.log("Image compressed: " + processedFolder + fileName)
-// }
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/public/index.html'))
@@ -50,7 +24,96 @@ app.get('/test', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/public/test.html'))
 })
 
+app.get('/cancelled', async (req, res) => {
+  let sessionId = req.query.session_id;
+  console.log(sessionId);
+
+  // remove the appointment from the pending collection in the database
+
+  res.redirect('/');
+})
+
+app.get('/success', async (req, res) => {
+  try {
+    const stripe = require('stripe')('sk_test_51HsZ8ND4ypkbyKItVIuZGst4qJomJ4yb7P03zNOjv0gJm6XSlOvNIXTUYwy9xQ4KWFlwkfhTdzHiMMkoiYs56olv001o6kkat8');
+
+    let sessionId = req.query.session_id;
+
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    const key = session.setup_intent;
+
+    const intent = await stripe.setupIntents.retrieve(key);
+
+    const payment_method = intent.payment_method;
+
+    const customer = await stripe.customers.create({
+      payment_method: payment_method,
+      invoice_settings: {
+        default_payment_method: payment_method,
+      },
+    });
+
+    /*
+
+    Now we need to find the customer in pending appointments by session_id, then grab that info, and create a new entry in the booked appointments db with the 
+    payment method and customer id, then remove it from pending.
+
+    If the appointment is not found in pending, then we need to show that the transaction failed instead of displaying the success page.
+
+    */
+
+    res.sendFile(path.resolve(__dirname + '/public/success.html'))
+  }
+  catch(error) {
+    console.log(error)
+  }
+})
+
 // this will need to be changed to handle real data when that time comes
-app.get('/api/barbers', (req, res) => {
-  res.json(fakeData);
+app.get('/api/barbers', async (req, res) => {
+  res.json(barberData);
+})
+
+app.get('/api/pendingappointments', (req, res) => {
+  res.json(pendingData)
+})
+
+app.get('/api/scheduledappointments', (req, res) => {
+  res.json(scheduledData)
+})
+
+app.get('/api/checkout', async (req, res) => {
+  try 
+  {
+    const stripe = require('stripe')('sk_test_51HsZ8ND4ypkbyKItVIuZGst4qJomJ4yb7P03zNOjv0gJm6XSlOvNIXTUYwy9xQ4KWFlwkfhTdzHiMMkoiYs56olv001o6kkat8');
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      mode: 'setup',
+      success_url: 'http://localhost:8080/success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'http://localhost:8080/cancelled?session_id={CHECKOUT_SESSION_ID}',
+    });
+
+    res.send(session)
+  }
+  catch(error)
+  {
+    console.log(error)
+  }
+})
+
+app.post('/api/pendingappointment', async(req, res) => {
+  let data = req.body;
+
+  res.status(200).send();
+  // add the appointment to the pending collection in the database
+})
+
+app.post('/api/scheduledappointment', async(req, res) => {
+  // move from pending to scheduled
+})
+
+app.post('/api/failedappointment', async(req, res) => {
+  // clear the pending mark on those times
 })

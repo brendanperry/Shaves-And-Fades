@@ -20,6 +20,66 @@ export default class Appointment extends React.Component {
         this.getBarberNames();
     }
 
+    getBarber = () => {
+        return this.state.barber;
+    }
+
+    getService = () => {
+        return this.state.service;
+    }
+
+    getDate = () => {
+        return this.state.date;
+    }
+
+    getTime = () => {
+        return this.state.time;
+    }
+
+    getSummary = () => {
+        let summary = "";
+        summary += this.state.barber + "\n";
+        summary += this.state.date + " " + this.state.time + "\n";
+        summary += this.state.service + "\n";
+        summary += "$" + this.state.cost + "\n";
+
+        return summary;
+    }
+
+    getData = (sessionId) => {
+        let data = [];
+
+        data.push(this.state.barber);
+        data.push(this.state.date);
+        data.push(this.state.time);
+        data.push(this.state.service);
+        data.push(this.state.cost);
+        data.push(sessionId);
+
+        return data;
+    }
+
+    isFormComplete = () => {
+        let barber = parseFloat(document.getElementById("barber" + this.props.keyProps).innerHTML);
+        let cost = parseFloat(document.getElementById("service" + this.props.keyProps).value);
+        let date = parseFloat(document.getElementById("date" + this.props.keyProps).value);
+        let time = parseFloat(document.getElementById("time" + this.props.keyProps).value);
+
+        if (barber == "Select a barber")
+            return false;
+
+        if (cost == 0)
+            return false;
+
+        if (date == 0) 
+            return false;
+
+        if (time === 0)
+            return false;
+
+        return true;
+    }
+
     updateKey(newKey) {
         this.setState({
             key: newKey
@@ -47,17 +107,20 @@ export default class Appointment extends React.Component {
     }
 
     barberChanged(event) {
-        let select = event.srcElement;
-        let barberName = select.value;
+        if (event.srcElement) {
+            let select = event.srcElement;
+            let barberName = select.value;
 
-        this.setState({
-            barber: barberName
-        }, () => {
-            this.updateServices(barberName);
-            this.updateBarberPhoto(barberName);
-            this.updateDates(barberName);
-            this.updateTimes(null);
-        })
+            this.setState({
+                barber: barberName
+            }, () => {
+                this.updateServices(barberName);
+                this.updateBarberPhoto(barberName);
+                this.updateDates(barberName);
+                this.updateTimes(null);
+            })
+
+        }
     }
 
     updateBarberPhoto(barber) {
@@ -93,20 +156,24 @@ export default class Appointment extends React.Component {
         this.updateDates();
         this.updateTimes(null);
 
-        let serviceText = event.srcElement[event.srcElement.selectedIndex].innerText.replace(/[^A-Za-z\s/]/g,'').trim();
+        if (event.srcElement[event.srcElement.selectedIndex].innerText) {
+            let serviceText = event.srcElement[event.srcElement.selectedIndex].innerText.replace(/[^A-Za-z\s/]/g,'').trim();
 
-        this.setState({
-            service: serviceText
-        });
+            this.setState({
+                service: serviceText
+            });
+        } 
     }
 
     dateChanged(event) {
-        let date = event.srcElement.value;
-        this.updateTimes(date);
+        if (event.srcElement) {
+            let date = event.srcElement.value;
+            this.updateTimes(date);
 
-        this.setState({
-            date: date
-        })
+            this.setState({
+                date: date
+            })
+        }
     }
 
     updateDates() {
@@ -122,10 +189,15 @@ export default class Appointment extends React.Component {
         });
     }
 
-    updateTimes(date) {
+    async updateTimes (date) {
         // used to reset the select
         if (date == null) {
             let select = document.getElementById('time' + this.props.keyProps)
+
+            if (!select) {
+                return;
+            }
+
             select.length = 1;
             return;
         }
@@ -133,15 +205,21 @@ export default class Appointment extends React.Component {
         let hours = this.props.repo.getWorkingHours(this.state.barber, date);
         let service = this.props.repo.getService(this.state.barber, this.state.service)
 
-        let slots = this.props.repo.getTimeSlots(hours, service);
+        let slots = await this.props.repo.getTimeSlots(this.state.barber, hours, service);
+
         let select = document.getElementById('time' + this.props.keyProps)
+
+        if (!slots) {
+            return;
+        }
+
         select.length = 1;
 
         slots.forEach(slot => {
             slot.forEach(time => {
-                let apptointmentSlot = this.convertToLocalTime(time[0]) + " - " + this.convertToLocalTime(time[1]);
+                let appointmentSlot = this.convertToLocalTime(time[0]) + " - " + this.convertToLocalTime(time[1]);
                 let option = document.createElement('option');
-                option.innerHTML = apptointmentSlot;
+                option.innerHTML = appointmentSlot;
                 select.appendChild(option);
             });
         });
@@ -169,6 +247,14 @@ export default class Appointment extends React.Component {
             option.innerHTML = name;
             select.appendChild(option);
         });
+    }
+
+    timeChanged(event) {
+        if (event.srcElement) {
+            this.setState({
+                time: event.srcElement.value
+            })
+        }
     }
 
     render() {
@@ -199,7 +285,7 @@ export default class Appointment extends React.Component {
                                 </select>
                             </div>
                             <div className="customMargin">
-                                <select type="select" className="custom-select" id={"time" + this.props.keyProps}>
+                                <select type="select" className="custom-select" id={"time" + this.props.keyProps} onChange={() => this.timeChanged(event)}>
                                     <option value="0">Select a time</option>
                                 </select>
                             </div>
