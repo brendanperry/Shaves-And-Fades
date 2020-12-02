@@ -1,8 +1,8 @@
-a<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <title>Shaves And Fades</title>
+  <title>Shaves and Fades</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -29,17 +29,20 @@ a<!doctype html>
         <a href="http://www.shavesandfades.com" class="simple-text logo-normal">
           ADMIN PAGE
         </a>
+        <form action="/logout?_method=DELETE" method="POST" class="simple-text logo-normal">
+          <button class="no-outline" type="submit" style="background:none; border:none; margin:0; padding:0; cursor: pointer;">LOG OUT</button>
+      </form>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active  ">
             <br>
-            <a class="nav-link" href="/public/admin-barbers.html">
-                <i class="material-icons">dashboard</i>
-                <p>Barbers</p>
-              </a>
-              <br>
-              <a class="nav-link" href="/public/admin-appointment.html">
+            <a class="nav-link" href="/admin-barbers">
+              <i class="material-icons">dashboard</i>
+              <p>Barbers</p>
+            </a>
+            <br>
+            <a class="nav-link" href="/admin-appointment">
               <i class="material-icons">dashboard</i>
               <p>Appointments</p>
             </a>
@@ -98,7 +101,7 @@ a<!doctype html>
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Shaves and Fades Appointments</h4>
+                  <h4 class="card-title ">Shaves and Fades Barbers</h4>
                   <p class="card-category"> </p>
                 </div>
                 <div class="card-body">
@@ -106,76 +109,66 @@ a<!doctype html>
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                          Date
+                          ID
                         </th>
                         <th>
-                          Description
+                          Name
                         </th>
                         <th>
-                            Name
+                          Status
                         </th>
                         <th>
-                          Start Time
+
                         </th>
-                        <th>
-                            End Time
-                        </th>
+
                       </thead>
                       <tbody>
                         <tr>
                           <td>
-                            11/18/2020
+                            1
                           </td>
                           <td>
-                            Haircut
+                            Jeffrey Ortega
                           </td>
                           <td>
-                            Ivan Ramirez
+                            Active
                           </td>
                           <td>
-                            1:25 PM
-                          </td>
-                          <td>
-                            2:30 PM
+                            <i class="material-icons">clear</i>
                           </td>
                         </tr>
                         <tr>
-                            <td>
-                              11/18/2020
-                            </td>
-                            <td>
-                              Haircut+Eyebrows
-                            </td>
-                            <td>
-                              Seth Snider
-                            </td>
-                            <td>
-                              2:30 PM
-                            </td>
-                            <td>
-                              3:30 PM
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              11/18/2020
-                            </td>
-                            <td>
-                              Eyebrows
-                            </td>
-                            <td>
-                              Brenden Perry
-                            </td>
-                            <td>
-                              3:30 PM
-                            </td>
-                            <td>
-                              4:00 PM
-                            </td>
-                          </tr>
+                          <td>
+                            2
+                          </td>
+                          <td>
+                            Mixio Gaytan
+                          </td>
+                          <td>
+                            Active
+                          </td>
+                          <td>
+                            <i class="material-icons">clear</i>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            3
+                          </td>
+                          <td>
+                            David Nakasen
+                          </td>
+                          <td>
+                            Active
+                          </td>
+                          <td>
+                            <i class="material-icons">clear</i>
+                          </td>
+                        </tr>
 
                       </tbody>
                     </table>
+
                   </div>
                 </div>
               </div>

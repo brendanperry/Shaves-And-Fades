@@ -1,0 +1,102 @@
+.background {
+    height: 100%;
+    width: 100%;
+    opacity: 50%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-position: center;
+}
+
+
+#bg-pic{
+    content:url("../compressed-images/work-BW.jpg")
+}
+
+#login-menu {
+    font-family: "Lato", sans-serif;
+    z-index: 1;
+    height: 100%;
+}
+
+.card{
+    box-shadow: 10px 10px 20px 2px black;
+}
+
+.btn-dark{
+    background-color: #000 !important;
+}
+
+@media screen and (max-width: 800px) {
+    #bg-pic{
+        content:url("../compressed-images/login-mobile.jpg")
+    }
+    .background {
+        top: -150;
+        left: -100;
+    }
+
+    #login-menu {
+        padding-top: 15%;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    #bg-pic{
+        content:url("../compressed-images/login-mobile.jpg")
+    }
+    .background {
+        left: -140;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #bg-pic{
+        content:url("../compressed-images/login-mobile.jpg")
+    }
+    .background {
+        left: -170;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    #bg-pic{
+        content:url("../compressed-images/login-mobile2.jpg")
+    }
+    .background {
+        top: 0;
+        left: 0;
+    }
+
+    #login-menu {
+        padding-top: 30%;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    #bg-pic{
+        content:url("../compressed-images/login-mobile2.jpg")
+    }
+    .background {
+        left: -65;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    #bg-pic{
+        content:url("../compressed-images/login-mobile2.jpg")
+    }
+    .background {
+        left: -85;
+    }
+}
+
+    @media screen and (max-width: 300px) {
+        #bg-pic{
+            content:url("../compressed-images/login-mobile2.jpg")
+        }
+        .background {
+            left: -115;
+        }
+}
