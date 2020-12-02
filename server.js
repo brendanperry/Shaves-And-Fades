@@ -3,6 +3,7 @@ if(process.env.NODE_ENV !== 'Production'){
 }
 
 const express = require('express');
+const connectDB = require('./DB/Connection');
 const path = require('path');
 let bodyParser = require('body-parser');
 const barberData = require('./javascript/barber-data');
@@ -17,6 +18,9 @@ const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 const { stringify } = require('querystring');
 const { request } = require('http');
+
+
+
 initializePassport(
   passport, 
   userName => testUser.find(user => user.name === userName),
@@ -51,6 +55,9 @@ bcrypt.genSalt(saltRounds, function (err, salt){
 const PORT = 8080;
 const app = express();
 
+connectDB();
+app.use(express.json({extended:false}));
+app.use('/api/userModel', require('./API/User'));
 
 
 app.use(express.static(__dirname + '/public'));
