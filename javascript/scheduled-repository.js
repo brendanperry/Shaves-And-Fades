@@ -14,7 +14,7 @@ class ScheduledRepository
         let barberApps = [];
 
         this.appointments.forEach(app => {
-            if (app[0] == this.barberName) {
+            if (app.barber == this.barberName) {
                 barberApps.push(app)
             }
         });
@@ -28,8 +28,8 @@ class ScheduledRepository
         let apps = this.getAppointments();
 
         apps.forEach(app => {
-            let time = app[2];
-            let date = app[1];
+            let time = app.time;
+            let date = app.date;
 
             let formattedTime = this.hourAndMinutesToDateTime(time, date);
 
