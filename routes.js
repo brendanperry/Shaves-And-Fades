@@ -2,6 +2,7 @@ module.exports = function(passport){
     const express = require('express');
     const router = express.Router();
     const path = require('path');
+    const connectDB = require('./DB/Connection');
 
     router.get('/', (req, res) => {
         res.sendFile(path.resolve(__dirname + '/public/index.html'))
@@ -12,7 +13,8 @@ module.exports = function(passport){
     })
 
     router.get('/admin', checkAuthentication, (req, res) => {
-        res.sendFile(path.resolve(__dirname + '/private/admin-barbers.html'))
+        res.sendFile(path.resolve(__dirname + '/private/admin-barbers.html'));
+        connectDB();
     })
 
     router.get('/admin-barbers', checkAuthentication, (req, res) => {
