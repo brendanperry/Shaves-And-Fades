@@ -16,25 +16,25 @@ describe('PendingRepository', () =>
   {
     it('Returns all appointments', () => {
         let appointments = [
-          [
-              'Mixio Gaytan',
-              '02 Nov 2020',
-              '08:00 AM - 08:45 AM',
-              'Regular Haircut',
-              17,
-              'cs_test_c17V2LbsrH6DyowaJVmHGyQdoCDlZEJgh6FwIdynET1ZbiLK9gKLVJf5YW'
-          ],
-          [
-              'Mixio Gaytan',
-              '02 Nov 2020',
-              '05:15 PM - 06:00 PM',
-              'Regular Haircut',
-              17,
-              'cs_test_c1UMoxInCDm6foou4YwBoBnyLEoCDA0vgJxkXrqBvIrhSCkTaNzdtiDDpn'
-          ],
+          {
+              barber: 'Mixio Gaytan',
+              cost: 17,
+              date: '02 Nov 2020',
+              service: 'Regular Haircut',
+              stripeId: 'cs_test_c17V2LbsrH6DyowaJVmHGyQdoCDlZEJgh6FwIdynET1ZbiLK9gKLVJf5YW',
+              time: '08:00 AM - 08:45 AM',
+          },
+          {
+              barber: 'Mixio Gaytan',
+              cost: 17,
+              date: '02 Nov 2020',
+              service: 'Regular Haircut',
+              stripeId: 'cs_test_c1UMoxInCDm6foou4YwBoBnyLEoCDA0vgJxkXrqBvIrhSCkTaNzdtiDDpn',
+              time: '05:15 PM - 06:00 PM',
+          },
         ]
 
-        assert.notStrictEqual(repository.getAppointments(), appointments);
+        assert.deepStrictEqual(repository.getAppointments(), appointments);
     })
 
     it('Returns appointment times', () => {
@@ -46,7 +46,7 @@ describe('PendingRepository', () =>
 
       let dates = [[startOne, endOne], [startTwo, endTwo]];
 
-      assert.notStrictEqual(repository.getAppointmentTimes(), dates);
+      assert.deepStrictEqual(repository.getAppointmentTimes(), dates);
     })
   })
 
