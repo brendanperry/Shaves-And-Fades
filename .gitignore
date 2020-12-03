@@ -7,4 +7,3 @@ test/*.log
 public/build/
 .deployment
 .DS_Store
-.env
