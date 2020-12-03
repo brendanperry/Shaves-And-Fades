@@ -45,7 +45,10 @@ describe('PendingRepository', () =>
       let endTwo = daysjs(new Date('2020-11-02T23:00:00.000Z'));
 
       let dates = [[startOne, endOne], [startTwo, endTwo]];
+      let datesMixed = [[endOne, startOne], [endTwo, startTwo]];
       let datesReversed = [[startTwo, endTwo], [startOne, endOne]];
+
+      console.log(repository.getAppointmentTimes())
 
       assert.deepStrictEqual(repository.getAppointmentTimes(), dates || datesReversed);
     })
