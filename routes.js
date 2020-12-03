@@ -21,8 +21,8 @@ module.exports = function(passport){
         res.sendFile(path.resolve(__dirname + '/private/admin-barbers.html'))
     })
 
-    router.get('/admin-routerointment', checkAuthentication, (req, res) => {
-        res.sendFile(path.resolve(__dirname + '/private/admin-routerointment.html'))
+    router.get('/admin-appointment', checkAuthentication, (req, res) => {
+        res.sendFile(path.resolve(__dirname + '/private/admin-appointment.html'))
     })
 
     router.get('/login', checkAlreadyAuthenticated, (req, res) => {
