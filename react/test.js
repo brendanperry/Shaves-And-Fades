@@ -1,6 +1,6 @@
-import React from 'react';
-import Repository from '../javascript/repository';
-import Api from '../javascript/api';
+const React = require('react');
+import Repository from '../../javascript/repository';
+import Api from '../../javascript/api';
 
 class Test extends React.Component {
    constructor (props){
