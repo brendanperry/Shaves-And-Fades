@@ -1,20 +1,20 @@
 let appointments = [
-    [
-        'Mixio Gaytan',
-        '02 Nov 2020',
-        '08:00 AM - 08:45 AM',
-        'Regular Haircut',
-        17,
-        'cs_test_c17V2LbsrH6DyowaJVmHGyQdoCDlZEJgh6FwIdynET1ZbiLK9gKLVJf5YW'
-    ],
-    [
-        'Mixio Gaytan',
-        '02 Nov 2020',
-        '05:15 PM - 06:00 PM',
-        'Regular Haircut',
-        17,
-        'cs_test_c1UMoxInCDm6foou4YwBoBnyLEoCDA0vgJxkXrqBvIrhSCkTaNzdtiDDpn'
-    ],
+    {
+        barber: 'Mixio Gaytan',
+        date: '02 Nov 2020',
+        time: '08:00 AM - 08:45 AM',
+        service: 'Regular Haircut',
+        cost: 17,
+        stripeId: 'cs_test_c17V2LbsrH6DyowaJVmHGyQdoCDlZEJgh6FwIdynET1ZbiLK9gKLVJf5YW'
+    },
+    {
+        barber: 'Mixio Gaytan',
+        date: '02 Nov 2020',
+        time: '05:15 PM - 06:00 PM',
+        service: 'Regular Haircut',
+        cost: 17,
+        stripeId: 'cs_test_c1UMoxInCDm6foou4YwBoBnyLEoCDA0vgJxkXrqBvIrhSCkTaNzdtiDDpn'
+    },
 ]
 
 module.exports = appointments;
