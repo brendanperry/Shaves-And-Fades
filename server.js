@@ -17,6 +17,9 @@ const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 const { stringify } = require('querystring');
 const { request } = require('http');
+
+
+
 initializePassport(
   passport, 
   userName => testUser.find(user => user.name === userName),
@@ -50,8 +53,6 @@ bcrypt.genSalt(saltRounds, function (err, salt){
 
 const PORT = 8080;
 const app = express();
-
-
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({extended: false}));
