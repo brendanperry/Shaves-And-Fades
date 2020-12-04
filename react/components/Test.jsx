@@ -1,5 +1,6 @@
 const React = require('react');
 import Repository from '../../javascript/repository';
+import ScheduledRepository from '../../javascript/scheduled-repository';
 import Api from '../../javascript/api';
 
 class Test extends React.Component {
@@ -9,6 +10,7 @@ class Test extends React.Component {
     super(props)
     console.log("hello:");
     this.barberL = this.barberLoad.bind(this);
+    this.appointmentL = this.appointmentLoad.bind(this);
  
 }
   
@@ -29,6 +31,19 @@ class Test extends React.Component {
 
         return new Repository(response[1]);
     }
+
+    getScApp = async () => {
+      let api = new Api();
+
+      let response = await api.get('barbers');
+
+      if (response[0] != 200) {
+          alert("An error has occured. Please try again.");
+          return null;
+      }
+
+      return new ScheduledRepository(response[1]);
+  }
 
     getBarberTable(names) {
         
@@ -53,10 +68,39 @@ class Test extends React.Component {
 
     }
 
+    getAppointmentTable(schedule) {
+        
+
+      let select = document.getElementById('tableBody')
+      for (let i = 0; i < schedule.length; i++){
+          
+          let row = document.createElement('tr');
+          let barber = document.createElement('td');
+          let date = document.createElement('td');
+          
+          barber.innerHTML = schedule[i].barber;
+          date.innerHTML = schedule[i].date;
+         
+          row.appendChild(barber);
+          row.appendChild(date);
+          select.appendChild(row);
+      }
+
+  }
+
     barberLoad = async () => {
+        let select = document.getElementById('tableBody');
+        select.innerHTML = "";
         let theRepo = await this.getRepo();
         this.getBarberTable(theRepo.getBarberNames());
     }
+
+    appointmentLoad = async () => {
+      let select = document.getElementById('tableBody');
+      select.innerHTML = "";
+      let theScRepo = await this.getScApp();
+      this.getAppointmentTable(theScRepo.getAppointments());
+  }
     
 
     
@@ -91,7 +135,7 @@ class Test extends React.Component {
                     <p>Barbers</p>
                   </a>
                   <br />
-                  <a className="nav-link" id="appointmentButton">
+                  <a className="nav-link" id="appointmentButton" onClick={() => this.appointmentLoad()}>
                     <i className="material-icons">dashboard</i>
                     <p>Appointments</p>
                   </a>
