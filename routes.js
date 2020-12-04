@@ -13,16 +13,16 @@ module.exports = function(passport){
     })
 
     router.get('/admin', checkAuthentication, (req, res) => {
-        res.sendFile(path.resolve(__dirname + '/private/admin-barbers.html'));
+        res.sendFile(path.resolve(__dirname + '/private/admin-dash.html'));
         connectDB();
     })
 
     router.get('/admin-barbers', checkAuthentication, (req, res) => {
-        res.sendFile(path.resolve(__dirname + '/private/admin-barbers.html'))
+        res.sendFile(path.resolve(__dirname + '/private/admin-dash.html'))
     })
 
     router.get('/admin-appointment', checkAuthentication, (req, res) => {
-        res.sendFile(path.resolve(__dirname + '/private/admin-appointment.html'))
+        res.sendFile(path.resolve(__dirname + '/private/admin-dash.html'))
     })
 
     router.get('/login', checkAlreadyAuthenticated, (req, res) => {
@@ -39,8 +39,8 @@ module.exports = function(passport){
         res.redirect('/login')
     })
     
-    router.get('/test', (req, res) => {
-        res.sendFile(path.resolve(__dirname + '/private/test.html'))
+    router.get('/admin-dash', (req, res) => {
+        res.sendFile(path.resolve(__dirname + '/private/admin-dash.html'))
     })
     
     function checkAuthentication(req, res, next){

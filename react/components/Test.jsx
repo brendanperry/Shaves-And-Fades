@@ -1,17 +1,32 @@
 const React = require('react');
-import Repository from '../javascript/repository';
-import Api from '../javascript/api';
+import Repository from '../../javascript/repository';
+import Api from '../../javascript/api';
 
 class Test extends React.Component {
+  
+
    constructor (props){
     super(props)
     console.log("hello:");
     let button1 = document.getElementById("barberButton");
+    let button2 = document.getElementById("appointmentButton");
+    let button3 = document.getElementById("timeButton");
     button1.onclick = function(){
         console.log("Button 1 was clicked");
         let select = document.getElementById('tableBody');
         select.innerHTML = "";
     }
+    button2.onclick = function(){
+      console.log("Button 2 was clicked");
+      let select = document.getElementById('tableBody');
+      select.innerHTML = "";
+  }
+  button3.onclick = function(){
+    console.log("Button 3 was clicked");
+    let select = document.getElementById('tableBody');
+    select.innerHTML = "";
+}
+  
 }
     componentDidMount = async () => {
         let theRepo = await this.getRepo();
@@ -61,7 +76,7 @@ class Test extends React.Component {
                     <div className="col-md-12">
                       <div className="card">
                         <div className="card-header card-header-primary">
-                          <h4 className="card-title ">Shaves and Fades Barbers</h4>
+                          <h4 className="card-title ">Shaves and Fades</h4>
                           <p className="card-category"> </p>
                         </div>
                         <div className="card-body">
