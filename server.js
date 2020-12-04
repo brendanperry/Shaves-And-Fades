@@ -17,6 +17,7 @@ const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 const { stringify } = require('querystring');
 const { request } = require('http');
+const connectDB = require('./DB/Connection');
 
 
 
@@ -119,6 +120,7 @@ app.get('/success', async (req, res) => {
 
 // this will need to be changed to handle real data when that time comes
 app.get('/api/barbers', async (req, res) => {
+  let db = connectDB();
   res.json(barberData);
 })
 

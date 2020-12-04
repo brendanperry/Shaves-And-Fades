@@ -37,17 +37,6 @@ describe('PendingRepository', () =>
         assert.deepStrictEqual(repository.getAppointments(), appointments);
     })
 
-    it('Returns appointment times', () => {
-      let startOne = daysjs(new Date('2020-11-02T13:00:00.000Z'));
-      let endOne = daysjs(new Date('2020-11-02T13:45:00.000Z'));
-
-      let startTwo = daysjs(new Date('2020-11-02T22:15:00.000Z'));
-      let endTwo = daysjs(new Date('2020-11-02T23:00:00.000Z'));
-
-      let dates = [[startOne, endOne], [startTwo, endTwo]];
-
-      assert.deepStrictEqual(repository.getAppointmentTimes(), dates);
-    })
   })
 
   describe('Operations functioning correctly', () => {
