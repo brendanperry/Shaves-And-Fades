@@ -6,12 +6,15 @@ class ScheduledRepository
 {
     constructor(barberName, appointments) 
     {
+        console.log("HERE")
         this.appointments = appointments;
         this.barberName = barberName;
     }
 
     getAppointments = () => {
         let barberApps = [];
+
+        console.log(this.appointments)
 
         this.appointments.forEach(app => {
             if (app.barber == this.barberName) {
@@ -29,6 +32,7 @@ class ScheduledRepository
 
         apps.forEach(app => {
             let time = app.time;
+            console.log(app.time)
             let date = app.date;
 
             let formattedTime = this.hourAndMinutesToDateTime(time, date);

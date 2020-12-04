@@ -3,13 +3,15 @@ const daysjs = require('dayjs')
 const fakeData = require('../javascript/scheduled-appointments-data');
 const ScheduledRepository = require('../javascript/scheduled-repository');
 
-describe('PendingRepository', () => 
+describe('Scheduled Repository', () => 
 {
   let repository;
     
   before(() => 
   {
     repository = new ScheduledRepository('Mixio Gaytan', fakeData);
+
+    console.log(fakeData)
   })
 
   describe('Can get all data', () => 
@@ -38,19 +40,19 @@ describe('PendingRepository', () =>
     })
 
     it('Returns appointment times', () => {
-      let startOne = daysjs(new Date('2020-11-02T13:00:00.000Z'));
-      let endOne = daysjs(new Date('2020-11-02T13:45:00.000Z'));
+      let startOne = daysjs(new Date('2020-11-02T08:00:00.000Z'));
+      let endOne = daysjs(new Date('2020-11-02T08:45:00.000Z'));
 
-      let startTwo = daysjs(new Date('2020-11-02T22:15:00.000Z'));
-      let endTwo = daysjs(new Date('2020-11-02T23:00:00.000Z'));
+      let startTwo = daysjs(new Date('2020-11-02T17:15:00.000Z'));
+      let endTwo = daysjs(new Date('2020-11-02T18:00:00.000Z'));
 
       let dates = [[startOne, endOne], [startTwo, endTwo]];
       let datesMixed = [[endOne, startOne], [endTwo, startTwo]];
       let datesReversed = [[startTwo, endTwo], [startOne, endOne]];
 
-      console.log(repository.getAppointmentTimes())
+      //console.log(repository.getAppointmentTimes())
 
-      assert.deepStrictEqual(repository.getAppointmentTimes(), dates || datesReversed);
+      assert.deepStrictEqual(repository.getAppointmentTimes(), dates);
     })
   })
 
