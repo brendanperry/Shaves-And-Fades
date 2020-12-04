@@ -8,26 +8,9 @@ class Test extends React.Component {
    constructor (props){
     super(props)
     console.log("hello:");
-    let button1 = document.getElementById("barberButton");
-    let button2 = document.getElementById("appointmentButton");
-    let button3 = document.getElementById("timeButton");
-    button1.onclick = function(){
-        console.log("Button 1 was clicked");
-        let select = document.getElementById('tableBody');
-        select.innerHTML = "";
-    }
-    button2.onclick = function(){
-      console.log("Button 2 was clicked");
-      let select = document.getElementById('tableBody');
-      select.innerHTML = "";
-  }
-  button3.onclick = function(){
-    console.log("Button 3 was clicked");
-    let select = document.getElementById('tableBody');
-    select.innerHTML = "";
+ 
 }
   
-}
     componentDidMount = async () => {
         let theRepo = await this.getRepo();
         this.getBarberTable(theRepo.getBarberNames());
@@ -60,7 +43,7 @@ class Test extends React.Component {
             let status = document.createElement('td');
             status.innerHTML = "Active";
            
-            
+            console.log(tName);
             row.appendChild(id);
             row.appendChild(tName);
             row.appendChild(status);
@@ -68,8 +51,35 @@ class Test extends React.Component {
         }
 
     }
+
     render() {
         return (
+          <div>
+        <div className="sidebar-wrapper">
+          <ul className="nav">
+            <li className="nav-item active  ">
+              <br />
+              <a className="nav-link" id="barberButton">
+                <i className="material-icons">dashboard</i>
+                <p>Barbers</p>
+              </a>
+              <br />
+              <a className="nav-link" id="appointmentButton">
+                <i className="material-icons">dashboard</i>
+                <p>Appointments</p>
+              </a>
+              <br />
+              <a className="nav-link" id="timeButton">
+                <i className="material-icons">dashboard</i>
+                <p>Time</p>
+              </a>
+            </li>
+            {/* your sidebar here */}
+          </ul>
+        </div>
+        
+        <div className="main-panel">
+          {/* Navbar */}
             <div className="content">
                 <div className="container-fluid">
                   <div className="row">
@@ -107,7 +117,9 @@ class Test extends React.Component {
                       </div>
                       </div>
                       </div>
-        )
+                      </div>
+                      </div>
+        );
     }
 }
 
