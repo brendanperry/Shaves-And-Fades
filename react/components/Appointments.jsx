@@ -53,6 +53,8 @@ export default class Appointments extends React.Component {
 
         let response = await api.get('barbers');
 
+        console.log(response)
+
         if (response[0] != 200) {
             alert("An error has occured. Please try again.");
             return null;

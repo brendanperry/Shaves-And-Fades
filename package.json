@@ -3,8 +3,8 @@
   "version": "1.0.1",
   "description": "",
   "scripts": {
-    "start": "node server.js",
-    "webpack": "./node_modules/.bin/webpack",
+    "start": "nodemon server.js",
+    "webpack": "./node_modules/.bin/webpack -w",
     "test": "mocha ./unit-tests/ --timeout 30000 --exit"
   },
   "author": "",
@@ -23,6 +23,7 @@
     "express-flash": "0.0.2",
     "express-session": "1.17.1",
     "method-override": "3.0.0",
+    "mongodb": "3.6.3",
     "mongoose": "5.11.2",
     "nodemon": "1.18.9",
     "passport": "0.4.1",

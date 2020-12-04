@@ -8,6 +8,8 @@ class Repository
     constructor(data) 
     {
         this.barbers = data;
+        this.scheduledSlots = this.getScheduledSlots();
+        this.pendingSlots = this.getPendingSlots();
     }
 
     getBarbers()
@@ -95,6 +97,7 @@ class Repository
 
     getBarberNames()
     {   
+        console.log(this.barbers)
         let barberNames = [];
 
         this.barbers.forEach(barber => {
@@ -150,6 +153,10 @@ class Repository
     }
 
     getScheduledSlots = async (barberName) => {
+        if (this.scheduledSlots) {
+            return this.scheduledSlots;
+        }
+
         let api = new Api();
 
         let response = await api.get('scheduledappointments');
@@ -160,11 +167,16 @@ class Repository
         }
 
         let scheduledRepo = new ScheduledRepo(barberName, response[1]);
+        this.scheduledSlots = scheduledRepo.getAppointmentTimes();
 
-        return scheduledRepo.getAppointmentTimes();
+        return this.scheduledSlots;
     }
 
     getPendingSlots = async (barberName) => {
+        if (this.pendingSlots) {
+            return this.pendingSlots;
+        }
+
         let api = new Api();
 
         let response = await api.get('pendingappointments');
@@ -175,8 +187,9 @@ class Repository
         }
 
         let pendingRepo = new ScheduledRepo(barberName, response[1]);
+        this.pendingSlots = pendingRepo.getAppointmentTimes();
 
-        return pendingRepo.getAppointmentTimes();
+        return this.pendingSlots;
     }
 
     getTimeSlots = async (barberName, workingHours, service) =>

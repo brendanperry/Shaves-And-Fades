@@ -17,9 +17,9 @@ const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 const { stringify } = require('querystring');
 const { request } = require('http');
-const connectDB = require('./DB/Connection');
+const Connection = require('./DB/Connection');
 
-
+const connection = new Connection();
 
 initializePassport(
   passport, 
@@ -73,62 +73,77 @@ app.use('/', routes);
 app.listen(PORT);
 
 app.get('/cancelled', async (req, res) => {
-  let sessionId = req.query.session_id;
-  console.log(sessionId);
+  const sessionId = req.query.session_id;
 
-  // remove the appointment from the pending collection in the database
+  await connection.deleteData('PendingAppointments', sessionId);
 
-  res.redirect('/');
+  res.sendFile('/private/index.html');
 })
 
-app.get('/success', async (req, res) => {
+app.get('api/charge', async (req, res) => {
   try {
     const stripe = require('stripe')('sk_test_51HsZ8ND4ypkbyKItVIuZGst4qJomJ4yb7P03zNOjv0gJm6XSlOvNIXTUYwy9xQ4KWFlwkfhTdzHiMMkoiYs56olv001o6kkat8');
 
-    let sessionId = req.query.session_id;
-
+    const sessionId = req.query.session_id;
+  
     const session = await stripe.checkout.sessions.retrieve(sessionId);
-
+  
     const key = session.setup_intent;
-
+  
     const intent = await stripe.setupIntents.retrieve(key);
-
+  
     const payment_method = intent.payment_method;
-
+  
     const customer = await stripe.customers.create({
       payment_method: payment_method,
       invoice_settings: {
         default_payment_method: payment_method,
       },
     });
+  
+    const charge = await stripe.charges.create({
+      amount: 15,
+      currency: 'usd',
+      customer: customer.id,
+    });
 
-    /*
-
-    Now we need to find the customer in pending appointments by session_id, then grab that info, and create a new entry in the booked appointments db with the 
-    payment method and customer id, then remove it from pending.
-
-    If the appointment is not found in pending, then we need to show that the transaction failed instead of displaying the success page.
-
-    */
-
-    res.sendFile(path.resolve(__dirname + '/private/success.html'))
-  }
-  catch(error) {
-    console.log(error)
+    return 200;
+  } 
+  catch (error) {
+    return 500;
   }
 })
 
-// this will need to be changed to handle real data when that time comes
+app.get('/success', async (req, res) => {
+   let sessionId = req.query.session_id;
+
+   deleteResult = await connection.deleteData('PendingAppointments', sessionId);
+ 
+   if (deleteResult == 500) {
+      res.sendFile(path.resolve(__dirname + '/private/failure.html'))
+   }
+ 
+   result = await connection.insertData('ScheduledAppointments', deleteResult);
+ 
+   if (result != 200) {
+    res.sendFile(path.resolve(__dirname + '/private/failure.html'))
+   }
+
+    res.sendFile(path.resolve(__dirname + '/private/success.html'))
+})
+
 app.get('/api/barbers', async (req, res) => {
-  let db = connectDB();
+  let barberData = await connection.getData('Barbers');
   res.json(barberData);
 })
 
-app.get('/api/pendingappointments', (req, res) => {
+app.get('/api/pendingappointments', async (req, res) => {
+  let pendingData = await connection.getData('PendingAppointments');
   res.json(pendingData)
 })
 
-app.get('/api/scheduledappointments', (req, res) => {
+app.get('/api/scheduledappointments', async (req, res) => {
+  let scheduledData = await connection.getData('ScheduledAppointments');
   res.json(scheduledData)
 })
 
@@ -155,12 +170,9 @@ app.get('/api/checkout', async (req, res) => {
 app.post('/api/pendingappointment', async(req, res) => {
   let data = req.body;
 
-  res.status(200).send();
-  // add the appointment to the pending collection in the database
-})
+  result = await connection.insertData('PendingAppointments', data);
 
-app.post('/api/scheduledappointment', async(req, res) => {
-  // move from pending to scheduled
+  res.status(result).send();
 })
 
 app.post('/api/failedappointment', async(req, res) => {
