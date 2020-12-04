@@ -53,32 +53,86 @@ class Test extends React.Component {
     }
 
     render() {
-        return (
-          <div>
-        <div className="sidebar-wrapper">
-          <ul className="nav">
-            <li className="nav-item active  ">
-              <br />
-              <a className="nav-link" id="barberButton">
-                <i className="material-icons">dashboard</i>
-                <p>Barbers</p>
+      return (
+
+        <div className="wrapper ">
+          <div className="sidebar" data-color="purple" data-background-color="white">
+            {/*
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+  
+        Tip 2: you can also add an image using data-image tag
+    */}
+            <div className="logo">
+              <a href="http://www.shavesandfades.com" className="simple-text logo-mini">
+                SHAVES AND FADES
               </a>
-              <br />
-              <a className="nav-link" id="appointmentButton">
-                <i className="material-icons">dashboard</i>
-                <p>Appointments</p>
+              <a href="http://www.shavesandfades.com" className="simple-text logo-normal">
+                ADMIN PAGE
               </a>
-              <br />
-              <a className="nav-link" id="timeButton">
-                <i className="material-icons">dashboard</i>
-                <p>Time</p>
-              </a>
-            </li>
-            {/* your sidebar here */}
-          </ul>
-        </div>
-        
-        <div className="main-panel">
+              <form action="/logout?_method=DELETE" method="POST" className="simple-text logo-normal">
+                <button className="no-outline" type="submit" style={{background: 'none', border: 'none', margin: 0, padding: 0, cursor: 'pointer'}}>LOG OUT</button>
+              </form>
+            </div>
+            <div className="sidebar-wrapper">
+              <ul className="nav">
+                <li className="nav-item active  ">
+                  <br />
+                  <a className="nav-link" id="barberButton">
+                    <i className="material-icons">dashboard</i>
+                    <p>Barbers</p>
+                  </a>
+                  <br />
+                  <a className="nav-link" href="appointmentButton">
+                    <i className="material-icons">dashboard</i>
+                    <p>Appointments</p>
+                  </a>
+                  <br />
+                  <a className="nav-link" href="#0">
+                    <i className="material-icons">dashboard</i>
+                    <p>Sales</p>
+                  </a>
+                  <br />
+                  <a className="nav-link" href="#0">
+                    <i className="material-icons">dashboard</i>
+                    <p>Clients</p>
+                  </a>
+                  <br />
+                  <a className="nav-link" href="#0">
+                    <i className="material-icons">dashboard</i>
+                    <p>More</p>
+                  </a>
+                </li>
+                {/* your sidebar here */}
+              </ul>
+            </div>
+          </div>
+          <div className="main-panel">
+            {/* Navbar */}
+            <nav className="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+              <div className="container-fluid">
+                <div className="navbar-wrapper">
+                  <a className="navbar-brand" href="javascript:;">Dashboard</a>
+                </div>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                  <span className="sr-only">Toggle navigation</span>
+                  <span className="navbar-toggler-icon icon-bar" />
+                  <span className="navbar-toggler-icon icon-bar" />
+                  <span className="navbar-toggler-icon icon-bar" />
+                </button>
+                <div className="collapse navbar-collapse justify-content-end">
+                  <ul className="navbar-nav">
+                    <li className="nav-item">
+                      <a className="nav-link" href="javascript:;">
+                        <i className="material-icons">notifications</i> Notifications
+                      </a>
+                    </li>
+                    {/* your navbar here */}
+                  </ul>
+                </div>
+              </div>
+            </nav>
+            {/* End Navbar */}
+            <div className="main-panel">
           {/* Navbar */}
             <div className="content">
                 <div className="container-fluid">
@@ -109,18 +163,31 @@ class Test extends React.Component {
                               <tbody id = "tableBody">
                                 
                               </tbody>
-                            </table>
-                          </div>
+                              </table>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  <footer className="footer">
+                    <div className="container-fluid">
+                      <nav className="float-left">
+                        <ul>
+                          <li>
+                          </li>
+                        </ul>
+                      </nav>
+                      <div className="copyright float-right">
+                        ©
+                        , Shaves and Fades
                       </div>
-                      </div>
-                      </div>
-                      </div>
-                      </div>
-                      </div>
-        );
+                      {/* your footer here */}
+                    </div>
+                  </footer>
+                </div>
+              </div>
+            </div></div></div></div>
+      );
     }
-}
+  }
 
 export default Test;
