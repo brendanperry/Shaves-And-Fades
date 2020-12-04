@@ -3,6 +3,7 @@ import Repository from '../../javascript/repository';
 import ScheduledRepository from '../../javascript/scheduled-repository';
 import Api from '../../javascript/api';
 
+
 class Test extends React.Component {
   
 
@@ -35,7 +36,7 @@ class Test extends React.Component {
     getScApp = async () => {
       let api = new Api();
 
-      let response = await api.get('barbers');
+      let response = await api.get('scheduledappointments');
 
       if (response[0] != 200) {
           alert("An error has occured. Please try again.");
@@ -45,10 +46,30 @@ class Test extends React.Component {
       return new ScheduledRepository(response[1]);
   }
 
+
     getBarberTable(names) {
         
 
         let select = document.getElementById('tableBody')
+        let selecthead = document.getElementById('tableHead');
+          
+        let row = document.createElement('tr');
+        let c1 = document.createElement('th');
+        let c2 = document.createElement('th');
+        let c3 = document.createElement('th');
+
+        c1.innerHTML = "ID";
+        c2.innerHTML = "Name";
+        c3.innerHTML = "Status";
+
+        
+        console.log("test");
+        row.appendChild(c1);
+        row.appendChild(c2);
+        row.appendChild(c3);
+ 
+        selecthead.appendChild(row);
+
         for (let i = 0; i < names.length; i++){
             
             let row = document.createElement('tr');
@@ -69,20 +90,55 @@ class Test extends React.Component {
     }
 
     getAppointmentTable(schedule) {
+      console.log("test");
+      console.log(schedule);
+      let select = document.getElementById('tableBody');
+      let selecthead = document.getElementById('tableHead');
+          
+        let row = document.createElement('tr');
+        let c1 = document.createElement('th');
+        let c2 = document.createElement('th');
+        let c3 = document.createElement('th');
+        let c4 = document.createElement('th');
+        let c5 = document.createElement('th');
         
+        c1.innerHTML = "Barber";
+        c2.innerHTML = "Date";
+        c3.innerHTML = "Time";
+        c4.innerHTML = "Service";
+        c5.innerHTML = "Cost";
+       
+        console.log("test");
+        row.appendChild(c1);
+        row.appendChild(c2);
+        row.appendChild(c3);
+        row.appendChild(c4);
+        row.appendChild(c5);
+        selecthead.appendChild(row);
 
-      let select = document.getElementById('tableBody')
       for (let i = 0; i < schedule.length; i++){
           
           let row = document.createElement('tr');
           let barber = document.createElement('td');
           let date = document.createElement('td');
+          let time = document.createElement('td');
+          let service = document.createElement('td');
+          let cost = document.createElement('td');
+          
           
           barber.innerHTML = schedule[i].barber;
           date.innerHTML = schedule[i].date;
-         
+          time.innerHTML = schedule[i].time;
+          service.innerHTML = schedule[i].service;
+          cost.innerHTML = schedule[i].cost;
+          
+          console.log("test");
           row.appendChild(barber);
           row.appendChild(date);
+          row.appendChild(time);
+          row.appendChild(service);
+          row.appendChild(cost);
+          
           select.appendChild(row);
       }
 
@@ -92,14 +148,18 @@ class Test extends React.Component {
         let select = document.getElementById('tableBody');
         select.innerHTML = "";
         let theRepo = await this.getRepo();
+        let selectHead = document.getElementById('tableHead');
+        selectHead.innerHTML = "";
         this.getBarberTable(theRepo.getBarberNames());
     }
 
     appointmentLoad = async () => {
       let select = document.getElementById('tableBody');
-      select.innerHTML = "";
-      let theScRepo = await this.getScApp();
-      this.getAppointmentTable(theScRepo.getAppointments());
+        select.innerHTML = "";
+        let selectHead = document.getElementById('tableHead');
+        selectHead.innerHTML = "";
+        let theRepo = await this.getRepo();
+        this.getAppointmentTable(theRepo.getScheduledSlots('Mixio Gaytan'));
   }
     
 
@@ -189,19 +249,8 @@ class Test extends React.Component {
                         <div className="card-body">
                           <div className="table-responsive">
                             <table className="table">
-                              <thead className=" text-primary">
-                                <tr><th>
-                                    ID
-                                  </th>
-                                  <th>
-                                    Name
-                                  </th>
-                                  <th>
-                                    Status
-                                  </th>
-                                  <th>
-                                  </th>
-                                </tr>
+                              <thead className=" text-primary" id="tableHead">
+                                
                                 </thead>
                               <tbody id = "tableBody">
                                 
