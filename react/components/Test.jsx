@@ -8,6 +8,7 @@ class Test extends React.Component {
    constructor (props){
     super(props)
     console.log("hello:");
+    this.barberL = this.barberLoad.bind(this);
  
 }
   
@@ -52,6 +53,14 @@ class Test extends React.Component {
 
     }
 
+    barberLoad = async () => {
+        let theRepo = await this.getRepo();
+        this.getBarberTable(theRepo.getBarberNames());
+    }
+    
+
+    
+
     render() {
       return (
 
@@ -77,29 +86,19 @@ class Test extends React.Component {
               <ul className="nav">
                 <li className="nav-item active  ">
                   <br />
-                  <a className="nav-link" id="barberButton">
+                  <a className="nav-link" id="barberButton" onClick={() => this.barberLoad()}>
                     <i className="material-icons">dashboard</i>
                     <p>Barbers</p>
                   </a>
                   <br />
-                  <a className="nav-link" href="appointmentButton">
+                  <a className="nav-link" id="appointmentButton">
                     <i className="material-icons">dashboard</i>
                     <p>Appointments</p>
                   </a>
                   <br />
-                  <a className="nav-link" href="#0">
+                  <a className="nav-link" id="timeButton">
                     <i className="material-icons">dashboard</i>
-                    <p>Sales</p>
-                  </a>
-                  <br />
-                  <a className="nav-link" href="#0">
-                    <i className="material-icons">dashboard</i>
-                    <p>Clients</p>
-                  </a>
-                  <br />
-                  <a className="nav-link" href="#0">
-                    <i className="material-icons">dashboard</i>
-                    <p>More</p>
+                    <p>Time</p>
                   </a>
                 </li>
                 {/* your sidebar here */}
