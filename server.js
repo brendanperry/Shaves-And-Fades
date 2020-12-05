@@ -125,6 +125,7 @@ app.get('/api/barbers', async (req, res) => {
 })
 
 app.get('/api/pendingappointments', (req, res) => {
+  let db = connectDB();
   res.json(pendingData)
 })
 
