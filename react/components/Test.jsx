@@ -144,7 +144,22 @@ class Test extends React.Component {
 
   }
 
+  getTime() {
+    console.log("test");
+    let select = document.getElementById('time');
+        
+      let dropdown = document.createElement('button');
+      
+      
+      dropdown.innerHTML = "Test";
+      
+      select.appendChild(dropdown);
+
+    }
+
     barberLoad = async () => {
+      let selecttime = document.getElementById('time');
+        selecttime.innerHTML = "";
         let select = document.getElementById('tableBody');
         select.innerHTML = "";
         let theRepo = await this.getRepo();
@@ -154,6 +169,8 @@ class Test extends React.Component {
     }
 
     appointmentLoad = async () => {
+      let selecttime = document.getElementById('time');
+        selecttime.innerHTML = "";
       let select = document.getElementById('tableBody');
         select.innerHTML = "";
         let selectHead = document.getElementById('tableHead');
@@ -161,6 +178,17 @@ class Test extends React.Component {
         let theRepo = await this.getRepo();
         this.getAppointmentTable(theRepo.getScheduledSlots('Mixio Gaytan'));
   }
+
+    timeLoad = async () => {
+      let selecttime = document.getElementById('time');
+        selecttime.innerHTML = "";
+      let select = document.getElementById('tableBody');
+        select.innerHTML = "";
+        let selectHead = document.getElementById('tableHead');
+        selectHead.innerHTML = "";
+      let theRepo = await this.getRepo();
+      this.getTime();
+}
     
 
     
@@ -200,7 +228,7 @@ class Test extends React.Component {
                     <p>Appointments</p>
                   </a>
                   <br />
-                  <a className="nav-link" id="timeButton">
+                  <a className="nav-link" id="timeButton" onClick={() => this.timeLoad()}>
                     <i className="material-icons">dashboard</i>
                     <p>Time</p>
                   </a>
@@ -246,8 +274,9 @@ class Test extends React.Component {
                           <h4 className="card-title ">Shaves and Fades</h4>
                           <p className="card-category"> </p>
                         </div>
-                        <div className="card-body">
-                          <div className="table-responsive">
+                        <div className="card-body" id="card-body">
+                          <div id = "time"></div>
+                          <div className="table-responsive" >
                             <table className="table">
                               <thead className=" text-primary" id="tableHead">
                                 
