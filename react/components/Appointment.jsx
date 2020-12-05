@@ -47,7 +47,9 @@ export default class Appointment extends React.Component {
     }
 
     getData = (sessionId) => {
-        let data = {};
+        let data = {}
+
+        let date = new Date();
 
         data.barber = this.state.barber;
         data.date = this.state.date;
@@ -55,6 +57,7 @@ export default class Appointment extends React.Component {
         data.service = this.state.service;
         data.cost = this.state.cost;
         data.stripeId = sessionId;
+        data.creationDate = new Date(date.toISOString());
 
         return data;
     }

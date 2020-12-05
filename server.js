@@ -77,7 +77,7 @@ app.get('/cancelled', async (req, res) => {
 
   await connection.deleteData('PendingAppointments', sessionId);
 
-  res.sendFile('/private/index.html');
+  res.redirect('/schedule');
 })
 
 app.get('api/charge', async (req, res) => {

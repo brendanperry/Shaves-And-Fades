@@ -16,4 +16,7 @@ Dev:
 - Changes are merged to master
 - Production builds are pushed to the production branch with CI
 
+- Pending Appointments expire after 20 minutes 1200 seconds
+- Scheduled Appointments expire after 2419200 seconds
+
 note: loading indicator from https://loading.io/

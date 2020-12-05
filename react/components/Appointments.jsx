@@ -170,7 +170,7 @@ export default class Appointments extends React.Component {
             data.push(app.current.getData(sessionId));
         });
 
-        return JSON.stringify(data);
+        return data;
     }
 
     convertTime12to24 = (time12h) => {
