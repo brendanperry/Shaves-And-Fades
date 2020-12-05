@@ -148,12 +148,68 @@ class Test extends React.Component {
     console.log("test");
     let select = document.getElementById('time');
         
-      let dropdown = document.createElement('button');
+      let dropdownlabel = document.createElement("label");
+      dropdownlabel.innerHTML= "Select Barber:";
+
+      let submit = document.createElement("button");
+      submit.innerHTML = "Submit";
+
+      let dropdown = document.createElement("select");
+      dropdown.appendChild(new Option("Jeffrey Ortega", "Jeffrey Ortega"));
+      dropdown.appendChild(new Option("Mixio Gaytan", "Mixio Gaytan"));
+      dropdown.appendChild(new Option("David Nakasen", "David Nakasen"));
       
+      let dropdownlabeldate = document.createElement("label");
+      dropdownlabeldate.innerHTML= "Select Date:";
+
+      let dropdowndate = document.createElement("select");
+      dropdowndate.appendChild(new Option("5 Dec 2020", "5 Dec 2020"));
+      dropdowndate.appendChild(new Option("6 Dec 2020", "6 Dec 2020"));
+      dropdowndate.appendChild(new Option("7 Dec 2020", "7 Dec 2020"));
+
+      let dropdownlabelstarttime = document.createElement("label");
+      dropdownlabelstarttime.innerHTML= "Start Time:";
+
+      let dropdownstarttime = document.createElement("select");
+      dropdownstarttime.appendChild(new Option("07:00 AM", "07:00 AM"));
+      dropdownstarttime.appendChild(new Option("07:30 AM", "07:30 AM"));
+      dropdownstarttime.appendChild(new Option("08:00 AM", "08:00 AM"));
+
+      let dropdownlabelendtime = document.createElement("label");
+      dropdownlabelendtime.innerHTML= "End Time:";
+
+      let dropdownendtime = document.createElement("select");
+      dropdownendtime.appendChild(new Option("05:00 PM", "05:00 PM"));
+      dropdownendtime.appendChild(new Option("05:30 PM", "05:30 PM"));
+      dropdownendtime.appendChild(new Option("06:00 PM", "06:00 PM"));
+
       
-      dropdown.innerHTML = "Test";
-      
+      select.appendChild(dropdownlabel);
+      select.appendChild(document.createElement("br"));
       select.appendChild(dropdown);
+
+      select.appendChild(document.createElement("br"));
+
+      select.appendChild(dropdownlabeldate);
+      select.appendChild(document.createElement("br"));
+      select.appendChild(dropdowndate);
+
+      select.appendChild(document.createElement("br"));
+
+      select.appendChild(dropdownlabelstarttime);
+      select.appendChild(document.createElement("br"));
+      select.appendChild(dropdownstarttime);
+
+      select.appendChild(document.createElement("br"));
+
+      select.appendChild(dropdownlabelendtime);
+      select.appendChild(document.createElement("br"));
+      select.appendChild(dropdownendtime);
+
+      select.appendChild(document.createElement("br"));
+      select.appendChild(document.createElement("br"));
+
+      select.appendChild(submit);
 
     }
 
