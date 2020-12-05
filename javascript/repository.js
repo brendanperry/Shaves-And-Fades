@@ -97,7 +97,6 @@ class Repository
 
     getBarberNames()
     {   
-        console.log(this.barbers)
         let barberNames = [];
 
         this.barbers.forEach(barber => {

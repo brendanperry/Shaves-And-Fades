@@ -17,7 +17,7 @@ const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 const { stringify } = require('querystring');
 const { request } = require('http');
-const Connection = require('./DB/Connection');
+const Connection = require('./database/Connection');
 
 const connection = new Connection();
 
@@ -82,7 +82,7 @@ app.get('/cancelled', async (req, res) => {
 
 app.get('api/charge', async (req, res) => {
   try {
-    const stripe = require('stripe')('sk_test_51HsZ8ND4ypkbyKItVIuZGst4qJomJ4yb7P03zNOjv0gJm6XSlOvNIXTUYwy9xQ4KWFlwkfhTdzHiMMkoiYs56olv001o6kkat8');
+    const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
     const sessionId = req.query.session_id;
   
@@ -150,7 +150,7 @@ app.get('/api/scheduledappointments', async (req, res) => {
 app.get('/api/checkout', async (req, res) => {
   try 
   {
-    const stripe = require('stripe')('sk_test_51HsZ8ND4ypkbyKItVIuZGst4qJomJ4yb7P03zNOjv0gJm6XSlOvNIXTUYwy9xQ4KWFlwkfhTdzHiMMkoiYs56olv001o6kkat8');
+    const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -173,8 +173,4 @@ app.post('/api/pendingappointment', async(req, res) => {
   result = await connection.insertData('PendingAppointments', data);
 
   res.status(result).send();
-})
-
-app.post('/api/failedappointment', async(req, res) => {
-  // clear the pending mark on those times
 })

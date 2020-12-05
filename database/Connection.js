@@ -27,9 +27,14 @@ class Connection {
       let collection = client.db("testing").collection(collectionName);
 
       // ensures the dates are stored as dates and not strings
-      data.forEach(item => {
-        item.creationDate = new Date(item.creationDate);
-      });
+      try {
+        data.forEach(item => {
+          item.creationDate = new Date(item.creationDate);
+        });
+      }
+      catch (e) {
+        console.log(e);
+      }
       
       return collection.insertMany(data);
     }).then((result) => {
