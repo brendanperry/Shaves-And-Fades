@@ -23,6 +23,7 @@
     "express-flash": "0.0.2",
     "express-session": "1.17.1",
     "method-override": "3.0.0",
+    "mongodb": "3.6.3",
     "mongoose": "5.11.2",
     "nodemon": "1.18.9",
     "passport": "0.4.1",

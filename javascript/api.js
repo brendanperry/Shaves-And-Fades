@@ -17,6 +17,10 @@ class Api
         }
     }
 
+    getDomain() {
+        return this.domain;
+    }
+
     async get(uri) 
     {
         try 

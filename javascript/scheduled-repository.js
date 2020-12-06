@@ -4,17 +4,16 @@ const daysjs = require('dayjs');
 
 class ScheduledRepository 
 {
-    constructor(barberName, appointments) 
+    constructor(appointments) 
     {
         this.appointments = appointments;
-        this.barberName = barberName;
     }
 
-    getAppointments = () => {
+    getAppointments = (barberName) => {
         let barberApps = [];
 
         this.appointments.forEach(app => {
-            if (app.barber == this.barberName) {
+            if (app.barber == barberName) {
                 barberApps.push(app)
             }
         });
@@ -22,10 +21,10 @@ class ScheduledRepository
         return barberApps;
     }
 
-    getAppointmentTimes = () => {
+    getAppointmentTimes = (barberName) => {
         let times = []
 
-        let apps = this.getAppointments();
+        let apps = this.getAppointments(barberName);
 
         apps.forEach(app => {
             let time = app.time;
@@ -70,6 +69,10 @@ class ScheduledRepository
       
         if (modifier === 'PM') {
             hours = parseInt(hours, 10) + 12;
+        }
+
+        if(hours.length == 1) {
+            hours = '0' + hours;
         }
       
         return `${hours}:${minutes}`;

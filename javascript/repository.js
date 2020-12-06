@@ -8,6 +8,8 @@ class Repository
     constructor(data) 
     {
         this.barbers = data;
+        this.scheduledRepo = this.getScheduledRepo();
+        this.pendingRepo = this.getPendingRepo();
     }
 
     getBarbers()
@@ -150,33 +152,43 @@ class Repository
     }
 
     getScheduledSlots = async (barberName) => {
-        let api = new Api();
+        let scheduledRepo = await this.getScheduledRepo();
 
-        let response = await api.get('scheduledappointments');
-
-        if (response[0] != 200) {
-            alert("An error has occured. Please try again.");
-            return null;
-        }
-
-        let scheduledRepo = new ScheduledRepo(barberName, response[1]);
-
-        return scheduledRepo.getAppointmentTimes();
+        return scheduledRepo.getAppointmentTimes(barberName);
     }
 
-    getPendingSlots = async (barberName) => {
+    getPendingRepo = async () => {
+        if (this.pendingRepo) {
+            return this.pendingRepo;
+        }
+
         let api = new Api();
 
         let response = await api.get('pendingappointments');
 
-        if (response[0] != 200) {
-            alert("An error has occured. Please try again.");
-            return null;
+        this.pendingRepo = new ScheduledRepo(response[1]);
+
+        return this.pendingRepo;
+    }
+
+    getScheduledRepo = async () => {
+        if (this.scheduledRepo) {
+            return this.scheduledRepo;
         }
 
-        let pendingRepo = new ScheduledRepo(barberName, response[1]);
+        let api = new Api();
 
-        return pendingRepo.getAppointmentTimes();
+        let response = await api.get('scheduledappointments');
+
+        this.scheduledRepo = new ScheduledRepo(response[1]);
+
+        return this.scheduledRepo;
+    }
+
+    getPendingSlots = async (barberName) => {
+        let pendingRepo = await this.getPendingRepo();
+
+        return pendingRepo.getAppointmentTimes(barberName);
     }
 
     getTimeSlots = async (barberName, workingHours, service) =>
