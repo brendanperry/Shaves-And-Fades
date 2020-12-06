@@ -154,8 +154,6 @@ class Repository
     getScheduledSlots = async (barberName) => {
         let scheduledRepo = await this.getScheduledRepo();
 
-        console.log(scheduledRepo);
-
         return scheduledRepo.getAppointmentTimes(barberName);
     }
 
