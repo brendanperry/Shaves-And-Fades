@@ -20,6 +20,8 @@ steps:
     customCommand: 'run webpack'
   env:
     SESSION_SECRET: $(SESSION_SECRET)
+    DB_URI: $(DB_URI)
+    STRIPE_SECRET: $(STRIPE_SECRET)
 
 - task: Npm@1
   inputs:
@@ -27,6 +29,8 @@ steps:
     customCommand: 'test'
   env:
     SESSION_SECRET: $(SESSION_SECRET)
+    DB_URI: $(DB_URI)
+    STRIPE_SECRET: $(STRIPE_SECRET)
 
 - task: PublishBuildArtifacts@1
   displayName: 'send the build off to release'
