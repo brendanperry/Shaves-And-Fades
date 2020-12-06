@@ -3,7 +3,7 @@ module.exports = function(passport) {
     const router = express.Router();
     const path = require('path');
     const Connection = require('./database/Connection');
-    const Api = require('./javascript/api');
+    const stripeController = require('./controllers/stripe.controller');
 
     const connection = new Connection();
 
@@ -51,10 +51,10 @@ module.exports = function(passport) {
         result = await connection.insertData('ScheduledAppointments', deleteResult);
       
         if (result != 200) {
-         res.sendFile(path.resolve(__dirname + '/private/failure.html'))
+            res.sendFile(path.resolve(__dirname + '/private/failure.html'))
         }
      
-         res.sendFile(path.resolve(__dirname + '/private/success.html'))
+        res.sendFile(path.resolve(__dirname + '/private/success.html'))
      })
 
     router.post('/login', checkAlreadyAuthenticated, passport.authenticate('local', {
@@ -71,34 +71,9 @@ module.exports = function(passport) {
         res.sendFile(path.resolve(__dirname + '/private/admin-dash.html'))
     })
 
-    router.get('api/charge', async (req, res) => {
-        try {
-          const stripe = require('stripe')(process.env.STRIPE_SECRET);
-          const sessionId = req.query.session_id;
-          const session = await stripe.checkout.sessions.retrieve(sessionId);
-          const key = session.setup_intent;
-          const intent = await stripe.setupIntents.retrieve(key);
-          const payment_method = intent.payment_method;
-        
-          const customer = await stripe.customers.create({
-            payment_method: payment_method,
-            invoice_settings: {
-              default_payment_method: payment_method,
-            },
-          });
-        
-          const charge = await stripe.charges.create({
-            amount: 15,
-            currency: 'usd',
-            customer: customer.id,
-          });
-      
-          return 200;
-        } 
-        catch (error) {
-          return 500;
-        }
-      })
+    router.get('api/charge', stripeController.charge)
+
+    router.get('/api/checkout', stripeController.checkout)
       
     router.get('/api/barbers', async (req, res) => {
         let barberData = await connection.getData('Barbers');
@@ -113,29 +88,6 @@ module.exports = function(passport) {
     router.get('/api/scheduledappointments', async (req, res) => {
         let scheduledData = await connection.getData('ScheduledAppointments');
         res.json(scheduledData)
-    })
-    
-    router.get('/api/checkout', async (req, res) => {
-        try 
-        {
-            const stripe = require('stripe')(process.env.STRIPE_SECRET);
-        
-            let api = new Api();
-            let domain = api.getDomain();
-        
-            const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            mode: 'setup',
-            success_url: domain + 'success?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url: domain + 'cancelled?session_id={CHECKOUT_SESSION_ID}',
-            });
-        
-            res.send(session)
-        }
-        catch(error)
-        {
-            console.log(error)
-        }
     })
     
     router.post('/api/pendingappointment', async(req, res) => {
