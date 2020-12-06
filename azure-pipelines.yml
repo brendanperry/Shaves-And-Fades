@@ -13,6 +13,10 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
+  env:
+    SESSION_SECRET: $(SESSION_SECRET)
+    DB_URI: $(DB_URI)
+    STRIPE_SECRET: $(STRIPE_SECRET)
 
 - task: Npm@1
   inputs:
@@ -38,3 +42,7 @@ steps:
     PathtoPublish: '$(System.DefaultWorkingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+  env:
+    SESSION_SECRET: $(SESSION_SECRET)
+    DB_URI: $(DB_URI)
+    STRIPE_SECRET: $(STRIPE_SECRET)
