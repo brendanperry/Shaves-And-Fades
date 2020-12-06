@@ -5,11 +5,11 @@ const Api = require('./api');
 
 class Repository 
 {
-    constructor(data) 
+    constructor(data, scheduledData, pendingData) 
     {
         this.barbers = data;
-        this.scheduledRepo = this.getScheduledRepo();
-        this.pendingRepo = this.getPendingRepo();
+        this.scheduledRepo = this.getScheduledRepo(scheduledData);
+        this.pendingRepo = this.getPendingRepo(pendingData);
     }
 
     getBarbers()
@@ -157,30 +157,40 @@ class Repository
         return scheduledRepo.getAppointmentTimes(barberName);
     }
 
-    getPendingRepo = async () => {
+    getPendingRepo = async (pendingData) => {
         if (this.pendingRepo) {
             return this.pendingRepo;
         }
 
-        let api = new Api();
+        if (pendingData) {
+            this.pendingRepo = new ScheduledRepo(pendingData);
+        }
+        else {
+            let api = new Api();
 
-        let response = await api.get('pendingappointments');
+            let response = await api.get('pendingappointments');
 
-        this.pendingRepo = new ScheduledRepo(response[1]);
+            this.pendingRepo = new ScheduledRepo(response[1]);
+        }
 
         return this.pendingRepo;
     }
 
-    getScheduledRepo = async () => {
+    getScheduledRepo = async (scheduledData) => {
         if (this.scheduledRepo) {
             return this.scheduledRepo;
         }
 
-        let api = new Api();
+        if (scheduledData) {
+            this.scheduledRepo = new ScheduledRepo(scheduledData);
+        }
+        else {
+            let api = new Api();
 
-        let response = await api.get('scheduledappointments');
-
-        this.scheduledRepo = new ScheduledRepo(response[1]);
+            let response = await api.get('scheduledappointments');
+    
+            this.scheduledRepo = new ScheduledRepo(response[1]);
+        }
 
         return this.scheduledRepo;
     }

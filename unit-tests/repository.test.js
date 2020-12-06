@@ -1,5 +1,7 @@
 var assert = require('assert');
 const fakeData = require('../javascript/barber-data');
+const pendingFakeData = require('../javascript/pending-appointments-data');
+const scheduledFakeData = require('../javascript/scheduled-appointments-data');
 const Repository = require('../javascript/repository');
 
 describe('Repository', () => 
@@ -8,7 +10,7 @@ describe('Repository', () =>
     
   before(() => 
   {
-    repository = new Repository(fakeData);
+    repository = new Repository(fakeData, scheduledFakeData, pendingFakeData);
   })
 
   describe('Can get all data', () => 
