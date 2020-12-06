@@ -3,8 +3,8 @@
   "version": "1.0.1",
   "description": "",
   "scripts": {
-    "start": "nodemon server.js",
-    "webpack": "./node_modules/.bin/webpack -w",
+    "start": "node server.js",
+    "webpack": "./node_modules/.bin/webpack",
     "test": "mocha ./unit-tests/ --timeout 30000 --exit"
   },
   "author": "",
