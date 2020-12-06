@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "webpack": "./node_modules/.bin/webpack",
-    "test": "mocha ./unit-tests/ --timeout 30000 --exit"
+    "test": "mocha ./unit-tests/ --timeout 90000 --exit"
   },
   "author": "",
   "license": "ISC",
