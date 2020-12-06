@@ -3,13 +3,13 @@ const daysjs = require('dayjs')
 const fakeData = require('../javascript/scheduled-appointments-data');
 const ScheduledRepository = require('../javascript/scheduled-repository');
 
-describe('PendingRepository', () => 
+describe('ScheduledRepository', () => 
 {
   let repository;
     
   before(() => 
   {
-    repository = new ScheduledRepository('Mixio Gaytan', fakeData);
+    repository = new ScheduledRepository(fakeData);
   })
 
   describe('Can get all data', () => 
@@ -34,7 +34,7 @@ describe('PendingRepository', () =>
           },
         ]
 
-        assert.deepStrictEqual(repository.getAppointments(), appointments);
+        assert.deepStrictEqual(repository.getAppointments('Mixio Gaytan'), appointments);
     })
 
   })

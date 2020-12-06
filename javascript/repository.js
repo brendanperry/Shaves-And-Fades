@@ -8,8 +8,8 @@ class Repository
     constructor(data) 
     {
         this.barbers = data;
-        this.scheduledSlots = this.getScheduledSlots();
-        this.pendingSlots = this.getPendingSlots();
+        this.scheduledRepo = this.getScheduledRepo();
+        this.pendingRepo = this.getPendingRepo();
     }
 
     getBarbers()
@@ -152,43 +152,45 @@ class Repository
     }
 
     getScheduledSlots = async (barberName) => {
-        if (this.scheduledSlots) {
-            return this.scheduledSlots;
-        }
+        let scheduledRepo = await this.getScheduledRepo();
 
-        let api = new Api();
+        console.log(scheduledRepo);
 
-        let response = await api.get('scheduledappointments');
-
-        if (response[0] != 200) {
-            alert("An error has occured. Please try again.");
-            return null;
-        }
-
-        let scheduledRepo = new ScheduledRepo(barberName, response[1]);
-        this.scheduledSlots = scheduledRepo.getAppointmentTimes();
-
-        return this.scheduledSlots;
+        return scheduledRepo.getAppointmentTimes(barberName);
     }
 
-    getPendingSlots = async (barberName) => {
-        if (this.pendingSlots) {
-            return this.pendingSlots;
+    getPendingRepo = async () => {
+        if (this.pendingRepo) {
+            return this.pendingRepo;
         }
 
         let api = new Api();
 
         let response = await api.get('pendingappointments');
 
-        if (response[0] != 200) {
-            alert("An error has occured. Please try again.");
-            return null;
+        this.pendingRepo = new ScheduledRepo(response[1]);
+
+        return this.pendingRepo;
+    }
+
+    getScheduledRepo = async () => {
+        if (this.scheduledRepo) {
+            return this.scheduledRepo;
         }
 
-        let pendingRepo = new ScheduledRepo(barberName, response[1]);
-        this.pendingSlots = pendingRepo.getAppointmentTimes();
+        let api = new Api();
 
-        return this.pendingSlots;
+        let response = await api.get('scheduledappointments');
+
+        this.scheduledRepo = new ScheduledRepo(response[1]);
+
+        return this.scheduledRepo;
+    }
+
+    getPendingSlots = async (barberName) => {
+        let pendingRepo = await this.getPendingRepo();
+
+        return pendingRepo.getAppointmentTimes(barberName);
     }
 
     getTimeSlots = async (barberName, workingHours, service) =>
