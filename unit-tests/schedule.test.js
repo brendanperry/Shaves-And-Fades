@@ -1,6 +1,6 @@
 const Browser = require('zombie');
 let assert = require('assert');
-let app = require('../server');
+let server = require('../server');
 let request = require('supertest');
 
 describe('Schedule Page', () => 
@@ -9,7 +9,7 @@ describe('Schedule Page', () =>
     let browser = new Browser();
 
     // this will start the server so the test can access the UI *only for zombie*
-    request(app);
+    request(server.app);
 
     before((done) => 
     {

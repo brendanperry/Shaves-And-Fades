@@ -58,6 +58,10 @@ app.use(passport.session())
 app.use(methodOverride('_method'))
 app.use(bodyParser.json());
 
-module.exports = passport;
+module.exports = {
+  passport: passport,
+  app: app,
+}
+
 app.use('/', routes);
 app.listen(PORT);
