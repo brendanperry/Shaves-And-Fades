@@ -3,6 +3,9 @@
 let barbers = [
     {
         name: "Mixio Gaytan",
+        username: "Mixio",
+        password: "password",
+        id: Date.now().toString(),
         services: [
             {
                 name: "Regular Haircut",
@@ -65,6 +68,9 @@ let barbers = [
     },
     {
         name: "David Nakasen",
+        username: "David",
+        password: "password",
+        id: Date.now().toString(),
         services: [
             {
                 name: "Regular Haircut",
@@ -122,6 +128,9 @@ let barbers = [
     },
     {
         name: "Jeffrey Ortega",
+        username: "Jeff",
+        password: "password",
+        id: Date.now().toString(),
         services: [
             {
                 name: "Regular Haircut",
