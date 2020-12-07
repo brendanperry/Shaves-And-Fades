@@ -5,6 +5,7 @@ function initialize(passport, getUserByName, getUserById){
 
     const authenticateUser = async (username, password, done) => {
         const user = getUserByName(username)
+        let hashedPassword = user.password
 
         if(user == null){
             console.log("User doesnt exist");
@@ -17,14 +18,14 @@ function initialize(passport, getUserByName, getUserById){
                 throw err
             }
             else{
-                bcrypt.hash(user.password, salt, (err, hash) =>{
+                bcrypt.hash(hashedPassword, salt, (err, hash) =>{
                     if(err){
                         throw err
                     }
                     else{
-                        user.password = hash;
+                        hashedPassword = hash;
                         try{
-                            bcrypt.compare(password, user.password, (err, match) =>{
+                            bcrypt.compare(password, hashedPassword, (err, match) =>{
                                 if(err){
                                     console.log("Error 1 occured")
                                     throw err
