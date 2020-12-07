@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-const URI = process.env.DB_URI;
+const URI = "mongodb+srv://express:UMAggMRlhEyPso7x@cluster0.fyndo.gcp.mongodb.net/testing?retryWrites=true&w=majority";
 
 class Connection {
   constructor() {

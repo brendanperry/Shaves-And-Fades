@@ -7,7 +7,7 @@ module.exports = {
 
 async function charge(req, res) {
     try {
-        const stripe = require('stripe')(process.env.STRIPE_SECRET);
+        const stripe = require('stripe')("sk_test_51HsZ8ND4ypkbyKItVIuZGst4qJomJ4yb7P03zNOjv0gJm6XSlOvNIXTUYwy9xQ4KWFlwkfhTdzHiMMkoiYs56olv001o6kkat8");
         const sessionId = req.query.session_id;
         const session = await stripe.checkout.sessions.retrieve(sessionId);
         const key = session.setup_intent;
@@ -37,7 +37,7 @@ async function charge(req, res) {
 async function checkout(req, res) {
     try 
     {
-        const stripe = require('stripe')(process.env.STRIPE_SECRET);
+        const stripe = require('stripe')("sk_test_51HsZ8ND4ypkbyKItVIuZGst4qJomJ4yb7P03zNOjv0gJm6XSlOvNIXTUYwy9xQ4KWFlwkfhTdzHiMMkoiYs56olv001o6kkat8");
     
         let api = new Api();
         let domain = api.getDomain();

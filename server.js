@@ -22,7 +22,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({extended: false}));
 
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: "secret",
   resave: false, 
   saveUninitialized: false
 }))
