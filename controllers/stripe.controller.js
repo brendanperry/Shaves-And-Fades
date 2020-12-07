@@ -39,14 +39,11 @@ async function checkout(req, res) {
     {
         const stripe = require('stripe')("sk_test_51HsZ8ND4ypkbyKItVIuZGst4qJomJ4yb7P03zNOjv0gJm6XSlOvNIXTUYwy9xQ4KWFlwkfhTdzHiMMkoiYs56olv001o6kkat8");
     
-        let api = new Api();
-        let domain = api.getDomain();
-    
         const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         mode: 'setup',
-        success_url: domain + 'success?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url: domain + 'cancelled?session_id={CHECKOUT_SESSION_ID}',
+        success_url: 'https://shavesandfades.com/api/success?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url: 'https://shavesandfades.com/api/cancelled?session_id={CHECKOUT_SESSION_ID}',
         });
     
         res.send(session)
