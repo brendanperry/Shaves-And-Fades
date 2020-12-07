@@ -39,7 +39,7 @@ steps:
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-    includeRootFolder: true
+    includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
@@ -50,7 +50,3 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-  env:
-    SESSION_SECRET: $(SESSION_SECRET)
-    DB_URI: $(DB_URI)
-    STRIPE_SECRET: $(STRIPE_SECRET)
