@@ -151,17 +151,18 @@ class Repository
         }
     }
 
-    getScheduledSlots = async (barberName) => {
-        let scheduledRepo = await this.getScheduledRepo();
+    getScheduledSlots = async (barberName, forceUpdate) => {
+        let scheduledRepo = await this.getScheduledRepo(null, forceUpdate);
 
         return scheduledRepo.getAppointmentTimes(barberName);
     }
 
-    getPendingRepo = async (pendingData) => {
-        if (this.pendingRepo) {
+    getPendingRepo = async (pendingData, forceUpdate) => {
+        if (this.pendingRepo && !forceUpdate) {
             return this.pendingRepo;
         }
 
+        // pendingData should only exist for the testing and this is why forceUpdate is not checked here
         if (pendingData) {
             this.pendingRepo = new ScheduledRepo(pendingData);
         }
@@ -176,11 +177,12 @@ class Repository
         return this.pendingRepo;
     }
 
-    getScheduledRepo = async (scheduledData) => {
-        if (this.scheduledRepo) {
+    getScheduledRepo = async (scheduledData, forceUpdate) => {
+        if (this.scheduledRepo && !forceUpdate) {
             return this.scheduledRepo;
         }
 
+        // scheduledData should only exist for the testing and this is why forceUpdate is not checked here
         if (scheduledData) {
             this.scheduledRepo = new ScheduledRepo(scheduledData);
         }
@@ -195,13 +197,13 @@ class Repository
         return this.scheduledRepo;
     }
 
-    getPendingSlots = async (barberName) => {
-        let pendingRepo = await this.getPendingRepo();
+    getPendingSlots = async (barberName, forceUpdate) => {
+        let pendingRepo = await this.getPendingRepo(null, forceUpdate);
 
         return pendingRepo.getAppointmentTimes(barberName);
     }
 
-    getTimeSlots = async (barberName, workingHours, service) =>
+    getTimeSlots = async (barberName, workingHours, service, forceUpdate=false) =>
     {
         if (!service) {
             return;
@@ -210,8 +212,8 @@ class Repository
         let slots = [];
         let serviceLength = service.length;
 
-        let scheduled = await this.getScheduledSlots(barberName);
-        let pending = await this.getPendingSlots(barberName);
+        let scheduled = await this.getScheduledSlots(barberName, forceUpdate);
+        let pending = await this.getPendingSlots(barberName, forceUpdate);
 
         if (scheduled == null || pending == null) return;
 
