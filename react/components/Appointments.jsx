@@ -232,7 +232,7 @@ export default class Appointments extends React.Component {
             let endTime = this.convertTime12to24(time.split('-')[1].trim());
 
             let hours = this.state.repo.getWorkingHours(barberName, date);
-            let slots = await this.state.repo.getTimeSlots(barberName, hours, service, date);
+            let slots = await this.state.repo.getTimeSlots(barberName, hours, service, date, true);
 
             let timeStillOpen = false;
 
