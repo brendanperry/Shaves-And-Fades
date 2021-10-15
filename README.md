@@ -1,6 +1,7 @@
 A website for Shaves and Fades. 
 
-We have the landing page which is HTML and CSS, but we also spent a lot of time on a protoype scheduling system which included work using React, Mongo, Node, Azure Pipelines, and Azure Resources. 
+
+Our team worked using Azure DevOps (code is here for show on GitHub). We have the landing page which is HTML and CSS, but we also spent a lot of time on a protoype scheduling system which included work using React, Mongo, Node, Azure Pipelines, and Azure Resources. 
 
 Dev:
 - Clone the project
